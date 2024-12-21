@@ -1,35 +1,56 @@
-.main-visual-swiper{
-    .inner-slide{
-        height: 600px;
-        background-position: 50% 35%;
-        background-repeat: no-repeat;
-        background-size: cover;
-        display: flex;
-        justify-content: flex-end;
-    align-items: flex-end;
-    
-        .text-wrap{
-            width: 30%;
-            margin: 70px 90px;
-            .topic{
-                background-color: #fff;
-                color: #131313;
-                font-size: .9rem;
-                padding: 10px;
-                width: 60px;
-                text-align: center;
-                font-weight: 500;
-                border-radius: 999px;
-                margin-bottom: 20px;
-            }
-            .title-wrap{
-                span{
-                    display: block;
-                    color: #fff;
-                    font-weight: 500;
-                    font-size: 40px;
-                }
-            }
-        }
+.main-visual-swiper {
+
+    .swiper-button-next {
+        width: 3.5rem;
+        background: url(/images/arrow_forward.png) no-repeat;
+        background-position: center;
+        background-size: contain;
+        margin-right: 20rem;
     }
+    
+    .swiper-button-prev {
+        width: 3.5rem;
+        margin-left: 20rem;
+        background: url(/images/arrow_back.png) no-repeat;
+        background-position: center;
+        background-size: contain;
+    }
+
+  .swiper-button-next::after,
+  .swiper-button-prev::after {
+    display: none;
+  }
+  .inner-slide {
+    height: 600px;
+    background-position: 50% 35%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+
+    .text-wrap {
+      width: 30%;
+      margin: 70px 90px;
+      .topic {
+        background-color: #fff;
+        color: #131313;
+        font-size: 1.4rem;
+        padding: 10px;
+        width: fit-content;
+        text-align: center;
+        font-weight: 400;
+        border-radius: 999px;
+        margin-bottom: 20px;
+      }
+      .title-wrap {
+        span {
+          display: block;
+          color: #fff;
+          font-weight: 500;
+          font-size: 40px;
+        }
+      }
+    }
+  }
 }

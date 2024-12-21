@@ -1,9 +1,10 @@
-/* Pilot PJ 리셋 CSS - reset.css */
-
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable.css');
 /* html (ROOT) 의 글자크기설정(rem,em,% 상대단위의 기준) */
 html {
 
-    font-size: 16px;
+    font-size: 10px;
+    font-family: "Pretendard Variable",Pretendard, apple-system, system-ui, Roboto, sans-serif;
+    color: #131313;
   }
   
   html,
