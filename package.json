@@ -12,6 +12,7 @@
   "dependencies": {
     "@cloudinary/react": "^1.13.1",
     "@cloudinary/url-gen": "^1.21.0",
+    "@supabase/supabase-js": "^2.47.10",
     "@tanstack/react-query": "^5.62.8",
     "bcryptjs": "^2.4.3",
     "cloudinary": "^2.5.1",
