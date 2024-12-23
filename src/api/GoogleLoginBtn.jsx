@@ -2,6 +2,7 @@ import { GoogleLogin, GoogleOAuthProvider } from '@react-oauth/google';
 import { jwtDecode } from 'jwt-decode';
 import { saveUser } from '../utils/saveUser';
 const GoogleLoginButton = () => {
+    
   const clientId = import.meta.env.VITE_GOOGLE_CLIENT_ID;
   const handleLoginSuccess = async (credentialResponse) => {
     console.log('Google Login Success!', credentialResponse);
@@ -21,6 +22,7 @@ const GoogleLoginButton = () => {
     // Supabase에 저장
     await saveUser(user);
   };
+
   const handleLoginError = () => {
     console.error('Google Login Failed!');
   };
