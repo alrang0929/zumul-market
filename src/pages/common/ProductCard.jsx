@@ -1,5 +1,5 @@
 import React from 'react';
-import { addComma } from '../../utils/common_fn';
+import { addComma } from '../../utils/commonFn';
 import './style/product_card.scss';
 import { productData } from './dummyDb';
 export function ProductCard() {

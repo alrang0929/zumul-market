@@ -3,38 +3,40 @@ import { jwtDecode } from 'jwt-decode';
 import { saveUser } from '../utils/saveUser';
 import { useNavigate } from 'react-router-dom';
 const GoogleLoginButton = () => {
-
   const nav = useNavigate();
   const clientId = import.meta.env.VITE_GOOGLE_CLIENT_ID;
-
   const handleLoginSuccess = async (credentialResponse) => {
+    console.log('Google Login Success!', credentialResponse);
+
+    // JWT 디코딩
+    const decoded = jwtDecode(credentialResponse.credential);
+    console.log('Decoded User Info:', decoded);
+
+    // supabase 저장
+    // 유저 데이터 준비
+    const user = {
+      name: decoded.name,
+      email: decoded.email,
+      profileImage: decoded.picture,
+    };
+
     try {
-      // Google JWT 디코딩
-      const decoded = jwtDecode(credentialResponse.credential);
-      // console.log('Decoded JWT:', decoded);
-      const user = {
-        id: decoded.sub, // Google 사용자 ID
-        name: decoded.name,
-        email: decoded.email,
-        profile_image: decoded.picture,
-        created_at: new Date().toISOString(),
-      };
-
-      // Supabase에 사용자 상태 확인
-      const result = await saveUser(user.email);
-
+      const result = await saveUser(user);
+      if (!result) {
+        throw new Error('saveUser did not return any result.');
+      }
       if (result.isNewUser) {
-        console.log('New user registered.');
-        // 회원가입 완료 후 리다이렉션 (예: 추가 정보 입력 페이지)
+        console.log('New user registered successfully:', result.user);
         nav('/signup');
       } else {
         console.log('Existing user logged in:', result.user);
-        // 로그인 성공 후 리다이렉션 (예: 메인 대시보드)
-        nav('/');
+        nav('/home');
       }
     } catch (error) {
-      console.error('Error during login processing:', error);
+      console.error('An error occurred during user processing:', error);
     }
+    // Supabase에 저장
+    
   };
 
   const handleLoginError = () => {
@@ -45,7 +47,7 @@ const GoogleLoginButton = () => {
       <GoogleOAuthProvider clientId={clientId}>
         <GoogleLogin
           onSuccess={handleLoginSuccess}
-          onError={handleLoginError}
+          onFailure={handleLoginError}
         />
       </GoogleOAuthProvider>
     </>

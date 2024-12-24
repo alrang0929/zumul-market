@@ -11,6 +11,6 @@ padding: ${pxr(20)};
 border: 1px solid #EDEDED;
 
 &:focus {
-    border-color: ${mainColor};
+    outline: ${mainColor};
   }
 `;

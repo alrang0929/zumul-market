@@ -10,23 +10,25 @@ import ProductSetting from './pages/ProductSetting/index';
 import NotFound from './pages/NotFound/index';
 import './styles/index.scss';
 const App = () => {
+
   return (
     <>
-      <Router>
-        <Routes>
-          {/* MainLayout 아래에 자식 라우트 정의 */}
-          <Route path="/" element={<MainLayout />}>
-            <Route index element={<Home />} />
-            <Route path="login" element={<Login />} />
-            <Route path="signup" element={<Signup />} />
-            <Route path="cart" element={<Cart />} />
-            <Route path="product/:id" element={<ProductDetail />} />
-            <Route path="product/setting" element={<ProductSetting />} />
-          </Route>
-          {/* 404 페이지 */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </Router>
+
+        <Router>
+          <Routes>
+            {/* MainLayout 아래에 자식 라우트 정의 */}
+            <Route path="/" element={<MainLayout />}>
+              <Route index element={<Home />} />
+              <Route path="login" element={<Login />} />
+              <Route path="signup" element={<Signup />} />
+              <Route path="cart" element={<Cart />} />
+              <Route path="product/:id" element={<ProductDetail />} />
+              <Route path="product/setting" element={<ProductSetting />} />
+            </Route>
+            {/* 404 페이지 */}
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </Router>
     </>
   );
 };

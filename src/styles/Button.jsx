@@ -21,3 +21,16 @@ export const BasicBtn = styled.button`
   padding: 0.8rem 1.5rem;
   font-size: 1.2rem;
 `; //SingleIconBtn
+
+export const SubmitBtn = styled.button`
+  width: 100%;
+  height: 6rem;
+  font-size: 1.5rem;
+  cursor: pointer;
+  background-color: ${mainColor};
+  color: #fff;
+  border: transparent;
+  border-radius: 999px;
+  padding: 0.8rem 1.5rem;
+  font-size: 1.2rem;
+`
