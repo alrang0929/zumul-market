@@ -1,13 +1,13 @@
 import React from 'react';
 import EditProfileForm from './components/EditProfileForm';
 
-function EditProfilePage(props) {
+function ProfileEditPage(props) {
     
     return (
         <>
-            <EditProfileForm/>
+            <ProfileEditForm/>
         </>
     );
 }
 
-export default EditProfilePage;
+export default ProfileEditPage;

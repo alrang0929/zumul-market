@@ -22,8 +22,10 @@ export const StyledForm = styled.form`
     input {
       width: 65rem;
     }
-  } // input box
-
+    span{
+      white-space : nowrap;
+    }
+  }
   .profile-img-box {
     display: flex;
     gap: 4rem;

@@ -1,7 +1,11 @@
 import React from "react";
 
 const ProductSetting = () => {
-  return <div>Product List Page</div>;
+  return( 
+  <>
+    Product List Page
+    </>
+    );
 };
 
 export default ProductSetting;

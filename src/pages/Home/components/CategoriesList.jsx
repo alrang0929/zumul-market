@@ -1,5 +1,6 @@
 import React from 'react';
 import './style/categorieslist.scss';
+import {ContentBox} from "../../../styles/box";
 
 // icon
 import { MdEventAvailable } from 'react-icons/md';
@@ -12,7 +13,7 @@ import { FaRegFaceGrinStars } from 'react-icons/fa6';
 
 function CategoriesList(props) {
   return (
-    <section className="categories-list-wrap">
+    <ContentBox className="categories-list-wrap">
       <button className="category">
         <MdEventAvailable className="icon" />
         <span>이달의 작가</span>
@@ -37,7 +38,7 @@ function CategoriesList(props) {
         <FaRegFaceGrinStars className="icon" />
         <span>이벤트</span>
       </button>
-    </section>
+    </ContentBox>
   );
 }
 

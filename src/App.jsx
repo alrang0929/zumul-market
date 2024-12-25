@@ -9,6 +9,8 @@ import ProductDetail from './pages/ProductDetail/index';
 import ProductSetting from './pages/ProductSetting/index';
 import NotFound from './pages/NotFound/index';
 import './styles/index.scss';
+import ProfileUser from './pages/ProfileUser';
+import ProfileEditPage from './pages/ProfileEdit';
 const App = () => {
 
   return (
@@ -24,6 +26,8 @@ const App = () => {
               <Route path="cart" element={<Cart />} />
               <Route path="product/:id" element={<ProductDetail />} />
               <Route path="product/setting" element={<ProductSetting />} />
+              <Route path="user/:id" element={<ProfileUser />} />
+              <Route path="user/:id/edilt" element={<ProfileEditPage />} />
             </Route>
             {/* 404 페이지 */}
             <Route path="*" element={<NotFound />} />
