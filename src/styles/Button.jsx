@@ -10,7 +10,7 @@ export const SingleIconBtn = styled.button`
   border-radius: 999px;
   padding: 1rem;
   font-size: 2rem;
-`; //SingleIconBtn
+`; 
 
 export const BasicBtn = styled.button`
   cursor: pointer;
@@ -20,4 +20,12 @@ export const BasicBtn = styled.button`
   border-radius: 999px;
   padding: 0.8rem 1.5rem;
   font-size: 1.2rem;
-`; //SingleIconBtn
+`; 
+export const RectangleBtn = styled.button`
+  cursor: pointer;
+  background-color: ${mainColor};
+  color: #fff;
+  border: transparent;
+  padding: 0.8rem 1.5rem;
+  font-size: 1.2rem;
+`; 
