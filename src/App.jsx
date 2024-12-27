@@ -27,7 +27,8 @@ const App = () => {
               <Route path="product/:id" element={<ProductDetail />} />
               <Route path="product/setting" element={<ProductSetting />} />
               <Route path="user/:id" element={<ProfileUser />} />
-              <Route path="user/:id/edilt" element={<ProfileEditPage />} />
+              <Route path="user/edit" element={<ProfileEditPage />} />
+              {/* <Route path="user/:id/edilt" element={<ProfileEditPage />} /> */}
             </Route>
             {/* 404 페이지 */}
             <Route path="*" element={<NotFound />} />
