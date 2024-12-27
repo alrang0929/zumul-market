@@ -9,7 +9,7 @@ export const ContentBox = styled.div`
 export const InputBox = styled.input`
   padding: 1.5rem;
   border: 1px solid #ededed;
-  width: 100%;
+  /* width: 100%; */
 
 `; //InputBox
 

@@ -5,7 +5,6 @@ import { saveUser } from "../../api/users/saveUsers";
 const SignupPage = () => {
   const handleSignUp = async (formData) => {
    await saveUser(formData);
-
   };
   return (<>
    <div
