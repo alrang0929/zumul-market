@@ -17,7 +17,6 @@ function ProfileEditPage(props) {
   return (
     <>
       <div className="profile-edit-page">
-        <ProfileEditForm onSubmit={handleProfileSubmit} />
       </div>
     </>
   );
