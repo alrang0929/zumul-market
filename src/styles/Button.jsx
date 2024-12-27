@@ -35,4 +35,16 @@ export const SubmitBtn = styled.button`
   border-radius: 999px;
   padding: 0.8rem 1.5rem;
   font-size: 1.2rem;
+<<<<<<< HEAD
 `
+=======
+`; 
+export const RectangleBtn = styled.button`
+  cursor: pointer;
+  background-color: ${mainColor};
+  color: #fff;
+  border: transparent;
+  padding: 0.8rem 1.5rem;
+  font-size: 1.2rem;
+`; 
+>>>>>>> feature/supabase
