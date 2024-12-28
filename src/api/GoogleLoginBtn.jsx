@@ -3,7 +3,6 @@ import { jwtDecode } from 'jwt-decode';
 import { saveUser } from '../utils/saveUser';
 import { useNavigate } from 'react-router-dom';
 const GoogleLoginButton = () => {
-
   const nav = useNavigate();
   const clientId = import.meta.env.VITE_GOOGLE_CLIENT_ID;
 
@@ -13,7 +12,7 @@ const GoogleLoginButton = () => {
       // Google JWT 디코딩
       const decoded = jwtDecode(credentialResponse.credential);
       console.log('Decoded JWT:', decoded); // 디코딩된 JWT 확인
-  
+
       const user = {
         id: decoded.sub, // Google 사용자 ID
         name: decoded.name,
@@ -21,10 +20,10 @@ const GoogleLoginButton = () => {
         profile_image: decoded.picture,
         created_at: new Date().toISOString(),
       };
-  
+
       // Supabase에 사용자 상태 확인 및 저장
       const result = await saveUser(user); // user 전체 데이터 전달
-  
+
       if (result.isNewUser) {
         console.log('New user registered.');
         nav('/user/edit'); // 추가 정보 입력 페이지로 이동
@@ -36,7 +35,6 @@ const GoogleLoginButton = () => {
       console.error('Error during login processing:', error);
     }
   };
-  
 
   const handleLoginError = () => {
     console.error('Google Login Failed!');

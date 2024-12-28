@@ -36,7 +36,6 @@ const GoogleLoginButton = () => {
       console.error('An error occurred during user processing:', error);
     }
     // Supabase에 저장
-    
   };
 
   const handleLoginError = () => {

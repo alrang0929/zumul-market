@@ -22,7 +22,7 @@ const LoginPage = () => {
   return (
     <>
       <div className="login-page">
-        <LoginForm onSubmit={handleLogin}/>
+        <LoginForm onSubmit={handleLogin} />
       </div>
     </>
   );

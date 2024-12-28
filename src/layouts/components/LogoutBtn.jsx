@@ -14,7 +14,13 @@ const LogoutButton = () => {
     }
   };
 
-  return <StyleButton buttonType={"basic-main"} text={"로그아웃"} onClick={handleLogout}/>;
+  return (
+    <StyleButton
+      buttonType={'basic-main'}
+      text={'로그아웃'}
+      onClick={handleLogout}
+    />
+  );
 };
 
 export default LogoutButton;

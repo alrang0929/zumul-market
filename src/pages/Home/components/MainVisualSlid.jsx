@@ -4,7 +4,7 @@ import MainVisualSlider from '../plugin/SwiperMainVisual';
 function MainVisualSlid(props) {
   return (
     <>
-        <MainVisualSlider />
+      <MainVisualSlider />
     </>
   );
 }

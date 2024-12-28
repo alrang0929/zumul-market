@@ -26,7 +26,6 @@ export const saveUser = async (user) => {
     if (authError) {
       throw new Error(`Auth Error: ${authError.message}`);
     }
-
   } catch (error) {
     console.error('유저 저장 중 오류 발생:', error);
     // return { success: false, error: error.message };

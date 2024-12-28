@@ -13,7 +13,9 @@ export const loginUser = async ({ email, password }, setUser) => {
     });
 
     if (error) {
-      throw new Error(error.message || '로그인 실패: 인증에 문제가 발생했습니다.');
+      throw new Error(
+        error.message || '로그인 실패: 인증에 문제가 발생했습니다.'
+      );
     }
 
     console.log('로그인 성공:', data.user);

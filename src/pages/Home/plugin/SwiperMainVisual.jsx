@@ -11,7 +11,12 @@ import 'swiper/css/effect-coverflow';
 import './swiper_main_visual.scss';
 import { SliderData } from './db';
 // import required modules
-import { Autoplay, Pagination, Navigation, EffectFade, EffectCoverflow } from 'swiper/modules';
+import {
+  Autoplay,
+  Pagination,
+  Navigation,
+  EffectFade,
+} from 'swiper/modules';
 
 export default function MainVisualSlider() {
   return (
@@ -28,7 +33,7 @@ export default function MainVisualSlider() {
         // }}
         navigation={true}
         modules={[Autoplay, Pagination, Navigation, EffectFade]}
-        effect='fade'
+        effect="fade"
         className="main-visual-swiper"
       >
         {SliderData.map((item, i) => (

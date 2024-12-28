@@ -30,13 +30,13 @@
     gap: 1.5rem;
     align-items: center;
     font-size: 1.4rem;
-    
-    .price-box,.time-box{
-        color: #797979;
-        display: flex;
-        align-items: center;;
-        gap: .5rem;
 
+    .price-box,
+    .time-box {
+      color: #797979;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
     }
   }
 }

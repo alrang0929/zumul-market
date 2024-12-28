@@ -22,7 +22,10 @@ const App = () => {
             <Route path="signup" element={<SignupPage />} />
             <Route path="cart" element={<Cart />} />
             <Route path="product/:id" element={<ProductDetail />} />
-            <Route path="user/:id/productmanage" element={<ProductManagePage />} />
+            <Route
+              path="user/:id/productmanage"
+              element={<ProductManagePage />}
+            />
           </Route>
           {/* 404 페이지 */}
           <Route path="*" element={<NotFound />} />

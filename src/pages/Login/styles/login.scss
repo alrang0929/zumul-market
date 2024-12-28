@@ -2,23 +2,19 @@
   position: relative;
   height: 100vh;
 
-  
   background-image: url('../../../../public/images/img00.jpg');
   background-position: 50% 30%;
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed;
 
- &::after{
-    content: "";
-     position: absolute;
-     top: 0;
-     left: 0;
-     height: 100vh;
-     width: 100%;
-     background-color: #00000050;
-
- }
-
-
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100%;
+    background-color: #00000050;
+  }
 }

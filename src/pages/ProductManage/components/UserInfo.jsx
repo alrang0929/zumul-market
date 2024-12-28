@@ -10,11 +10,9 @@ export const UserInfoWrap = () => {
         <div className="date-wrap"></div>
       </div>
       {/* 2. profile edit btn */}
-        <StyleButton buttonType={"basic-main"}>프로필 수정하기</StyleButton>
+      <StyleButton buttonType={'basic-main'}>프로필 수정하기</StyleButton>
       {/* 3. info list */}
-      <div className="info-list-wrap">
-
-      </div>
+      <div className="info-list-wrap"></div>
     </>
   );
 };

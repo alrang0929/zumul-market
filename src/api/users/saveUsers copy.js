@@ -17,7 +17,7 @@ export const saveUser = async (user) => {
       password: data.password, // Supabase에서 비밀번호 처리
     });
     console.log('머냐', authData);
-    
+
     if (authError) {
       throw new Error(`Auth Error: ${authError.message}`);
     }
@@ -43,21 +43,20 @@ export const saveUser = async (user) => {
   }
 };
 
+// Supabase Users 테이블에 추가 정보 저장
+// const { data, error } = await supabase.from('users').insert(
+//   {
+//     email: user.email,
+//     password: user.password,
+//     name: user.name,
+//     type: user.type,
+//   }
+// );
 
-    // Supabase Users 테이블에 추가 정보 저장
-    // const { data, error } = await supabase.from('users').insert(
-    //   {
-    //     email: user.email,
-    //     password: user.password,
-    //     name: user.name,
-    //     type: user.type,
-    //   }
-    // );
+// console.log("data",data,"error",error)
 
-    // console.log("data",data,"error",error)
+//   if (error) {
+//     throw new Error(`Insert Error: ${error.message}`);
+//   }
 
-    //   if (error) {
-    //     throw new Error(`Insert Error: ${error.message}`);
-    //   }
-
-    //   return { success: true, data };
+//   return { success: true, data };

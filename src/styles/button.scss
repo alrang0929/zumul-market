@@ -1,18 +1,17 @@
-$mainColor:#1F17FF;
+$mainColor: #1f17ff;
 
-.single-icon
- { 
+.single-icon {
   cursor: pointer;
   background-color: #e9efff;
   color: $mainColor;
   border: transparent;
   border-radius: 999px;
   padding: 1rem;
-  font-size: 2rem;}
+  font-size: 2rem;
+}
 
-
-.basic-main
- { cursor: pointer;
+.basic-main {
+  cursor: pointer;
   background-color: $mainColor;
   color: #fff;
   width: fit-content;
@@ -20,11 +19,11 @@ $mainColor:#1F17FF;
   border-radius: 999px;
   padding: 0.8rem 1.5rem;
   font-size: 1.2rem;
-  white-space : nowrap;
+  white-space: nowrap;
 }
 
-.submit
-  {width: 100%;
+.submit {
+  width: 100%;
   height: 6rem;
   font-size: 1.5rem;
   cursor: pointer;
@@ -33,11 +32,11 @@ $mainColor:#1F17FF;
   border: transparent;
   border-radius: 999px;
   padding: 0.8rem 1.5rem;
-  font-size: 1.2rem;}
+  font-size: 1.2rem;
+}
 
-
-.rectangle-main
- { cursor: pointer;
+.rectangle-main {
+  cursor: pointer;
   background-color: $mainColor;
   color: #fff;
   border: transparent;
