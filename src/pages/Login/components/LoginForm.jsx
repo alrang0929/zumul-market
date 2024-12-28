@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { InputBox } from '../../../styles/box';
-import { BasicBtn } from '../../../styles/Button';
+import { StyleButton } from '../../../styles/Button';
 
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
@@ -65,7 +65,7 @@ const LoginForm = ({ onSubmit }) => {
               <p className="error">{errors.password.message}</p>
             )}
           </div>
-          <BasicBtn type="submit">로그인</BasicBtn>
+          <StyleButton buttonType={"submit"} type="submit">로그인</StyleButton>
         </form>
         <div className="signup-text">
           아직 계정이 없으신가요? <Link to="/signup">회원가입</Link>

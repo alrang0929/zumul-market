@@ -1,11 +1,15 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { RectangleBtn } from '../../../styles/Button';
+import { StyleButton } from '../../../styles/Button';
 import { FormBox, InputBox } from '../../../styles/box';
 
 const SignUpForm = ({ onSubmit }) => {
-  
-  const { register, handleSubmit, setError, formState: { errors } } = useForm();
+  const {
+    register,
+    handleSubmit,
+    setError,
+    formState: { errors },
+  } = useForm();
   const [loading, setLoading] = useState(false);
 
   const validateForm = (data) => {
@@ -62,7 +66,9 @@ const SignUpForm = ({ onSubmit }) => {
             {...register('password')}
             placeholder="최소 10자 이상"
           />
-          {errors.password && <p className="error">{errors.password.message}</p>}
+          {errors.password && (
+            <p className="error">{errors.password.message}</p>
+          )}
         </div>
 
         {/* 닉네임 */}
@@ -77,18 +83,23 @@ const SignUpForm = ({ onSubmit }) => {
           <span>창작자 확인:</span>
           <input type="radio" value="fan" {...register('type')} id="fan" />
           <label htmlFor="fan">팬</label>
-          <input type="radio" value="creator" {...register('type')} id="creator" />
+          <input
+            type="radio"
+            value="creator"
+            {...register('type')}
+            id="creator"
+          />
           <label htmlFor="creator">창작자</label>
           {errors.type && <p className="error">{errors.type.message}</p>}
         </div>
 
         {/* 제출 버튼 */}
-        <RectangleBtn className="submit-btn" type="submit" disabled={loading}>
+        <StyleButton buttonType={'submit'} type="submit" disabled={loading}>
           {loading ? '회원가입 중...' : '회원가입 완료'}
-        </RectangleBtn>
+        </StyleButton>
       </form>
     </FormBox>
   );
-}; 
+};
 
 export default SignUpForm;

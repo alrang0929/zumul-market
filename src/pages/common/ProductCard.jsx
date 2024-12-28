@@ -8,7 +8,7 @@ export function ProductCard() {
       {productData.slice(0, 4).map((data, i) => (
         <div className="product-card" key={i}>
           <div className="img-box">
-            <img src={data.isrc.thumb} alt="썸네일 이미지지" />
+            <img src={data.isrc.thumb} alt="썸네일 이미지" />
           </div>
           <div className="info-wrap">
             <div className="user-name">

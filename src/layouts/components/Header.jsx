@@ -1,5 +1,5 @@
 import React from 'react';
-import { BasicBtn, SingleIconBtn } from '../../styles/Button';
+import { StyleButton } from '../../styles/Button';
 import { Link, useNavigate } from 'react-router-dom';
 import './style/header.scss';
 // icon
@@ -28,12 +28,12 @@ function Header(props) {
 
       {/* 3. icon 버튼(faivorit, cart) */}
       <div className="icon-menu-wrap">
-        <SingleIconBtn>
+        <StyleButton buttonType={"single-icon"}>
           <IoHeart className="icon" />
-        </SingleIconBtn>
-        <SingleIconBtn>
+        </StyleButton>
+        <StyleButton buttonType={"single-icon"}>
           <IoCart className="icon" />
-        </SingleIconBtn>
+        </StyleButton>
       </div>
       {/* 4. user 메뉴 로그인 전: 회원가입, 로그인 || 로그인(일반): 마이페이지, 로그아웃 || 로그인(판매자): 판매관리 추가*/}
       <div className="user-menu-wrap">
@@ -43,14 +43,14 @@ function Header(props) {
           <LogoutButton/>
         ) : (
           <>
-          <BasicBtn onClick={() => nav('/login')}>로그인</BasicBtn>
-          <BasicBtn onClick={() => nav('/signup')}>회원가입</BasicBtn>
+          <StyleButton buttonType={"basic-main"} linkPath={"/login"}>로그인</StyleButton>
+          <StyleButton buttonType={"basic-main"} linkPath={"/signup"}>회원가입</StyleButton>
           </>
         )}
         {user?.type === 'creator' && (
-         <BasicBtn onClick={() => nav(`/user/${user.id}/product-setting`)}>
+         <StyleButton buttonType={"basic-main"} linkPath={`/user/${user.id}/product-setting`}>
          상품관리
-       </BasicBtn>
+       </StyleButton>
         )}
       </div>
     </header>

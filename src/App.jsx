@@ -9,7 +9,7 @@ import Cart from './pages/Cart/index';
 import ProductDetail from './pages/ProductDetail/index';
 import NotFound from './pages/NotFound/index';
 import LoginPage from './pages/Login';
-import { ProductSettingPage } from './pages/ProductSetting';
+import { ProductManagePage } from './pages/ProductManage';
 const App = () => {
   return (
     <>
@@ -22,7 +22,7 @@ const App = () => {
             <Route path="signup" element={<SignupPage />} />
             <Route path="cart" element={<Cart />} />
             <Route path="product/:id" element={<ProductDetail />} />
-            <Route path="user/:id/product-setting" element={<ProductSettingPage />} />
+            <Route path="user/:id/productmanage" element={<ProductManagePage />} />
           </Route>
           {/* 404 페이지 */}
           <Route path="*" element={<NotFound />} />
