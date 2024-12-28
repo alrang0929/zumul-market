@@ -4,6 +4,7 @@ import { pxr } from './pxTorem';
 export const ContentBox = styled.div`
   width: 110rem;
   margin: 0 auto;
+  margin-bottom: 10rem;
 `; //SingleIconBtn
 
 export const InputBox = styled.input`

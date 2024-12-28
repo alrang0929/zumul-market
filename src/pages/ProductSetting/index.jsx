@@ -1,11 +1,9 @@
 import React from "react";
 
-const ProductSetting = () => {
+export const ProductSettingPage = () => {
   return( 
   <>
     Product List Page
     </>
     );
 };
-
-export default ProductSetting;

@@ -7,9 +7,9 @@ import Home from './pages/Home/index';
 import SignupPage from './pages/Signup/index';
 import Cart from './pages/Cart/index';
 import ProductDetail from './pages/ProductDetail/index';
-import ProductSetting from './pages/ProductSetting/index';
 import NotFound from './pages/NotFound/index';
 import LoginPage from './pages/Login';
+import { ProductSettingPage } from './pages/ProductSetting';
 const App = () => {
   return (
     <>
@@ -22,7 +22,7 @@ const App = () => {
             <Route path="signup" element={<SignupPage />} />
             <Route path="cart" element={<Cart />} />
             <Route path="product/:id" element={<ProductDetail />} />
-            <Route path="product/setting" element={<ProductSetting />} />
+            <Route path="user/:id/product-setting" element={<ProductSettingPage />} />
           </Route>
           {/* 404 페이지 */}
           <Route path="*" element={<NotFound />} />

@@ -1,6 +1,7 @@
 import supabase from '../supabaseClient';
+import useUserStore from '../../stores/auth/useUserStore';
 
-export const loginUser = async ({ email, password }) => {
+export const loginUser = async ({ email, password }, setUser) => {
   try {
     if (!email || !password) {
       throw new Error('이메일과 비밀번호를 입력해주세요.');
@@ -16,6 +17,14 @@ export const loginUser = async ({ email, password }) => {
     }
 
     console.log('로그인 성공:', data.user);
+
+    // setUser를 통해 상태 업데이트
+    setUser({
+      id: data.user.id,
+      email: data.user.email,
+      type: data.user.user_metadata.type,
+    });
+
     return { success: true, user: data.user };
   } catch (err) {
     console.error('로그인 실패:', err.message);

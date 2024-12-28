@@ -1,11 +1,13 @@
 import React from 'react';
 import { BasicBtn, SingleIconBtn } from '../../styles/Button';
-import { Link, useNavigate } from 'react-router';
+import { Link, useNavigate } from 'react-router-dom';
 import './style/header.scss';
 // icon
 import { IoIosSearch } from 'react-icons/io';
 import { IoCart, IoHeart } from 'react-icons/io5';
+import useUserStore from '../../stores/auth/useUserStore';
 function Header(props) {
+  const user = useUserStore((state) => state.user);
   const nav = useNavigate();
   return (
     <header>
@@ -34,8 +36,20 @@ function Header(props) {
       </div>
       {/* 4. user 메뉴 로그인 전: 회원가입, 로그인 || 로그인(일반): 마이페이지, 로그아웃 || 로그인(판매자): 판매관리 추가*/}
       <div className="user-menu-wrap">
-        <BasicBtn onClick={() => nav('/signup')}>회원가입</BasicBtn>
-        <BasicBtn onClick={() => nav('/login')}>로그인</BasicBtn>
+        <BasicBtn 
+        style={user?{display:"none"}:{display:"block"}}
+        onClick={() => nav('/signup')}>회원가입</BasicBtn>
+
+        {user ? (
+          <BasicBtn onClick={() => nav('/login')}>로그아웃</BasicBtn>
+        ) : (
+          <BasicBtn onClick={() => nav('/login')}>로그인</BasicBtn>
+        )}
+        {user?.type === 'creator' && (
+         <BasicBtn onClick={() => nav(`/user/${user.id}/product-setting`)}>
+         상품관리
+       </BasicBtn>
+        )}
       </div>
     </header>
   );
