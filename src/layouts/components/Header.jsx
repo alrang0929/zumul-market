@@ -6,6 +6,7 @@ import './style/header.scss';
 import { IoIosSearch } from 'react-icons/io';
 import { IoCart, IoHeart } from 'react-icons/io5';
 import useUserStore from '../../stores/auth/useUserStore';
+import LogoutButton from './LogoutBtn';
 function Header(props) {
   const user = useUserStore((state) => state.user);
   const nav = useNavigate();
@@ -41,7 +42,7 @@ function Header(props) {
         onClick={() => nav('/signup')}>회원가입</BasicBtn>
 
         {user ? (
-          <BasicBtn onClick={() => nav('/login')}>로그아웃</BasicBtn>
+          <LogoutButton/>
         ) : (
           <BasicBtn onClick={() => nav('/login')}>로그인</BasicBtn>
         )}
