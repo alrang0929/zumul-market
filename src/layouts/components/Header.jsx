@@ -37,14 +37,15 @@ function Header(props) {
       </div>
       {/* 4. user 메뉴 로그인 전: 회원가입, 로그인 || 로그인(일반): 마이페이지, 로그아웃 || 로그인(판매자): 판매관리 추가*/}
       <div className="user-menu-wrap">
-        <BasicBtn 
-        style={user?{display:"none"}:{display:"block"}}
-        onClick={() => nav('/signup')}>회원가입</BasicBtn>
+        
 
         {user ? (
           <LogoutButton/>
         ) : (
+          <>
           <BasicBtn onClick={() => nav('/login')}>로그인</BasicBtn>
+          <BasicBtn onClick={() => nav('/signup')}>회원가입</BasicBtn>
+          </>
         )}
         {user?.type === 'creator' && (
          <BasicBtn onClick={() => nav(`/user/${user.id}/product-setting`)}>
