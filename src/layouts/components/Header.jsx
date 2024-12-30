@@ -30,17 +30,10 @@ function Header(props) {
 
       {/* 3. icon 버튼(faivorit, cart) */}
       <div className="icon-menu-wrap">
-<<<<<<< HEAD
-        <StyleButton buttonType={'single-icon'}>
-          <IoHeart className="icon" />
-        </StyleButton>
-        <StyleButton buttonType={'single-icon'}>
-=======
         <Button buttontype={'singleIcon'}>
           <IoHeart className="icon" />
         </Button>
         <Button buttontype={'singleIcon'}>
->>>>>>> feature/product
           <IoCart className="icon" />
         </Button>
       </div>
@@ -50,23 +43,6 @@ function Header(props) {
           <LogoutButton />
         ) : (
           <>
-<<<<<<< HEAD
-            <StyleButton buttonType={'basic-main'} linkPath={'/login'}>
-              로그인
-            </StyleButton>
-            <StyleButton buttonType={'basic-main'} linkPath={'/signup'}>
-              회원가입
-            </StyleButton>
-          </>
-        )}
-        {user?.type === 'creator' && (
-          <StyleButton
-            buttonType={'basic-main'}
-            linkPath={`/user/${user.id}/product-setting`}
-          >
-            상품관리
-          </StyleButton>
-=======
             <Button buttontype={'basic-main'} onClick={() => nav('/login')}>
               로그인
             </Button>
@@ -82,7 +58,6 @@ function Header(props) {
           >
             상품관리
           </Button>
->>>>>>> feature/product
         )}
       </div>
     </header>

@@ -65,13 +65,7 @@ const LoginForm = ({ onSubmit }) => {
               <p className="error">{errors.password.message}</p>
             )}
           </div>
-<<<<<<< HEAD
-          <StyleButton buttonType={'submit'} type="submit">
-            로그인
-          </StyleButton>
-=======
           <Button buttontype={"submit"} type="submit">로그인</Button>
->>>>>>> feature/product
         </form>
         <div className="signup-text">
           아직 계정이 없으신가요? <Link to="/signup">회원가입</Link>

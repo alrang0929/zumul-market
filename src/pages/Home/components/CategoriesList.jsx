@@ -1,10 +1,6 @@
 import React from 'react';
 import './style/categorieslist.scss';
-<<<<<<< HEAD
-import { ContentBox } from '../../../styles/box';
-=======
 import {DivBox} from "../../../styles/box";
->>>>>>> feature/product
 
 // icon
 import { MdEventAvailable } from 'react-icons/md';
