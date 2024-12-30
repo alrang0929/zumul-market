@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleButton } from '../../../styles/Button';
+// import StyleButton from '../../../styles/StyleButton';
 
 export const UserInfoWrap = () => {
   return (
@@ -10,7 +10,11 @@ export const UserInfoWrap = () => {
         <div className="date-wrap"></div>
       </div>
       {/* 2. profile edit btn */}
+<<<<<<< HEAD
       <StyleButton buttonType={'basic-main'}>프로필 수정하기</StyleButton>
+=======
+        {/* <StyleButton buttontype={"basic-main"}>프로필 수정하기</StyleButton> */}
+>>>>>>> feature/product
       {/* 3. info list */}
       <div className="info-list-wrap"></div>
     </>

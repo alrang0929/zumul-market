@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { StyleButton } from '../../../styles/Button';
 import { FormBox, InputBox } from '../../../styles/box';
+import { Button } from '../../../styles/StyleButton';
 
 const SignUpForm = ({ onSubmit }) => {
   const {
@@ -94,9 +94,9 @@ const SignUpForm = ({ onSubmit }) => {
         </div>
 
         {/* 제출 버튼 */}
-        <StyleButton buttonType={'submit'} type="submit" disabled={loading}>
+        <Button buttontype={'submit'} type="submit" disabled={loading}>
           {loading ? '회원가입 중...' : '회원가입 완료'}
-        </StyleButton>
+        </Button>
       </form>
     </FormBox>
   );
