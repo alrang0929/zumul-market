@@ -1,7 +1,7 @@
 import React from 'react';
 import { logoutUser } from '../../api/users/logoutUsers';
 import { useNavigate } from 'react-router-dom';
-import StyleButton from '../../styles/StyleButton';
+import { Button } from '../../styles/StyleButton';
 const LogoutButton = () => {
   const nev = useNavigate();
   const handleLogout = async () => {
@@ -14,7 +14,11 @@ const LogoutButton = () => {
     }
   };
 
-  return <StyleButton buttonType={"basic-main"} text={"로그아웃"} onClick={handleLogout}/>;
+  return (
+    <Button buttontype={'basic-main'} onClick={handleLogout}>
+      로그아웃
+    </Button>
+  );
 };
 
 export default LogoutButton;

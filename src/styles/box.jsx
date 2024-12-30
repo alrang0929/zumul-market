@@ -1,20 +1,29 @@
-import styled from 'styled-components';
-import { pxr } from './pxTorem';
+import styled, { css } from 'styled-components';
 
-export const ContentBox = styled.div`
-  width: 110rem;
-  margin: 0 auto;
-  margin-bottom: 10rem;
-`; //SingleIconBtn
+const mainColor = '#1F17FF';
 
-export const InputBox = styled.input`
-  padding: 1.5rem;
-  border: 1px solid #ededed;
-  /* width: 100%; */
+const Box = {
+  ContentBox: css`
+    width: 110rem;
+    margin: 0 auto;
+    margin-bottom: 10rem;
+  `,
+};
 
-`; //InputBox
+const Input = {
+  InputBox: css`
+    padding: 1.5rem;
+    border: 1px solid #ededed;
+  `,
+  MaxInputBox: css`
+    padding: 1.5rem;
+    border: 1px solid #ededed;
+    width: 100%;
+  `,
+};
 
-export const FormBox = styled.div`
+const Form = {
+  FormBox: css`
     h3 {
       font-size: 2rem;
       margin-bottom: 4rem;
@@ -32,7 +41,7 @@ export const FormBox = styled.div`
         display: flex;
         align-items: center;
         gap: 2rem;
-        input[type="radio"]{
+        input[type="radio"] {
           width: 3rem;
           padding-left: 1rem;
         }
@@ -41,9 +50,22 @@ export const FormBox = styled.div`
           font-size: 1.6rem;
         }
       }
-      .submit-btn{
+      .submit-btn {
         padding: 2rem;
         font-size: 1.4rem;
       }
     }
+  `,
+};
+
+export const DivBox = styled.div`
+  ${(props) => Box[props.divStyles] || Box.ContentBox}
+`;
+
+export const InputBox = styled.input`
+  ${(props) => Input[props.inputStyles] || Input.InputBox}
+`;
+
+export const FormBox = styled.form`
+  ${(props) => Form[props.FormStyles] || Form.FormBox}
 `;

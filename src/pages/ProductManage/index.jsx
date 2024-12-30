@@ -1,5 +1,5 @@
 import React from 'react';
-import { ContentBox } from '../../styles/box';
+import { DivBox } from '../../styles/box';
 import { UserInfoWrap } from './components/UserInfo';
 
 export const ProductManagePage = () => {
@@ -7,9 +7,9 @@ export const ProductManagePage = () => {
     <>
       <div className="product-Manage-page" style={{backgroundColor:"#F5F5F5"}}>
         <UserInfoWrap />
-        <ContentBox>
+        <DivBox>
           <SellProductList />
-        </ContentBox>
+        </DivBox>
       </div>
     </>
   );
