@@ -363,5 +363,24 @@ export const productData = [
       "userImg": "/images/img01.jpg"
     }
   ];
+
+
+  export const UserStatusDb = [
+    {
+      title:"판매상품",
+      isrc: "/images/icon_shipping.png",
+      counter: 20
+    },
+    {
+      title:"판매내역",
+      isrc: "/images/icon_bils.png",
+      counter: 168,
+    },
+    {
+      title:"팔로워",
+      isrc: "/images/icon_follower.png",
+      counter: 2000,
+    },
+  ];
   
   

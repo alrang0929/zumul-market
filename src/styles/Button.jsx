@@ -1,46 +1,50 @@
-import styled from 'styled-components';
-import { pxr } from './pxTorem';
+import styled, { css } from 'styled-components';
+
 const mainColor = '#1F17FF';
 
-export const SingleIconBtn = styled.button`
-  cursor: pointer;
-  background-color: #e9efff;
-  color: ${mainColor};
-  border: transparent;
-  border-radius: 999px;
-  padding: 1rem;
-  font-size: 2rem;
-`; 
+const buttonStyles = {
+  singleIcon: css`
+    cursor: pointer;
+    background-color: #e9efff;
+    color: ${mainColor};
+    border: transparent;
+    border-radius: 999px;
+    padding: 1rem;
+    font-size: 2rem;
+  `,
+  basicMain: css`
+    cursor: pointer;
+    background-color: ${mainColor};
+    color: #fff;
+    width: fit-content;
+    border: transparent;
+    border-radius: 999px;
+    padding: 0.8rem 1.5rem;
+    font-size: 1.2rem;
+    white-space: nowrap;
+  `,
+  submit: css`
+    width: 100%;
+    height: 6rem;
+    font-size: 1.5rem;
+    cursor: pointer;
+    background-color: ${mainColor};
+    color: #fff;
+    border: transparent;
+    border-radius: 999px;
+    padding: 0.8rem 1.5rem;
+    font-size: 1.2rem;
+  `,
+  rectangleMain: css`
+    cursor: pointer;
+    background-color: ${mainColor};
+    color: #fff;
+    border: transparent;
+    padding: 0.8rem 1.5rem;
+    font-size: 1.2rem;
+  `,
+};
 
-export const BasicBtn = styled.button`
-  cursor: pointer;
-  background-color: ${mainColor};
-  color: #fff;
-  width: fit-content;
-  border: transparent;
-  border-radius: 999px;
-  padding: 0.8rem 1.5rem;
-  font-size: 1.2rem;
-  white-space : nowrap
-`; 
-
-export const SubmitBtn = styled.button`
-  width: 100%;
-  height: 6rem;
-  font-size: 1.5rem;
-  cursor: pointer;
-  background-color: ${mainColor};
-  color: #fff;
-  border: transparent;
-  border-radius: 999px;
-  padding: 0.8rem 1.5rem;
-  font-size: 1.2rem;
-`; 
-export const RectangleBtn = styled.button`
-  cursor: pointer;
-  background-color: ${mainColor};
-  color: #fff;
-  border: transparent;
-  padding: 0.8rem 1.5rem;
-  font-size: 1.2rem;
-`; 
+export const Button = styled.button`
+  ${(props) => buttonStyles[props.buttonType] || buttonStyles.basicMain}
+`;
