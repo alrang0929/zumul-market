@@ -1,7 +1,7 @@
 import React from 'react';
-import CardList from '../../common/CardList';
-import SubTitle from '../../common/SubTitle';
 import { DivBox } from '../../../styles/box';
+import SubTitle from '../../../common/SubTitle';
+import CardList from '../../../common/CardList';
 function PopularProductList(props) {
     return (
         <>

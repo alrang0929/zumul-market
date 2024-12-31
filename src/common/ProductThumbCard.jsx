@@ -1,8 +1,8 @@
 import React from 'react';
-import { addComma } from '../../utils/commonFn';
 import './style/product_card.scss';
 import { productData } from './dummyDb';
-export function ProductCard() {
+import { addComma } from '../utils/commonFn';
+export function ProductThumbCard() {
   return (
     <>
       {productData.slice(0, 4).map((data, i) => (

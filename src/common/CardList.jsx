@@ -1,8 +1,9 @@
 import React from 'react';
-import { ProductCard } from './ProductCard';
 import BoardCard from './BoardCard';
+import { ProductThumbCard } from './ProductThumbCard';
 
 function CardList({ type }) {
+  const CARD_TYPE ={PRODUCT:'product', BOARD:'board'}; 
   return (
     <>
       <div
@@ -13,9 +14,9 @@ function CardList({ type }) {
           flexWrap: type === 'product' ? 'nowrap' : 'wrap',
         }}
       >
-        {type === 'product' ? (
-          <ProductCard />
-        ) : type === 'board' ? (
+        {type === CARD_TYPE.PRODUCT ? (
+          <ProductThumbCard />
+        ) : type === CARD_TYPE.BOARD ? (
           <BoardCard />
         ) : (
           <div>Invalid type</div>

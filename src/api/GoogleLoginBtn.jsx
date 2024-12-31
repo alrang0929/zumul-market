@@ -3,7 +3,7 @@ import { jwtDecode } from 'jwt-decode';
 import { saveUser } from '../utils/saveUser';
 import { useNavigate } from 'react-router-dom';
 const GoogleLoginButton = () => {
-  const nav = useNavigate();
+  const navigater = useNavigate();
   const clientId = import.meta.env.VITE_GOOGLE_CLIENT_ID;
 
   const handleLoginSuccess = async (credentialResponse) => {
@@ -26,10 +26,10 @@ const GoogleLoginButton = () => {
 
       if (result.isNewUser) {
         console.log('New user registered.');
-        nav('/user/edit'); // 추가 정보 입력 페이지로 이동
+        navigater('/user/edit'); // 추가 정보 입력 페이지로 이동
       } else {
         console.log('Existing user logged in:', result.user);
-        nav('/'); // 기존 사용자 메인 대시보드로 이동
+        navigater('/'); // 기존 사용자 메인 대시보드로 이동
       }
     } catch (error) {
       console.error('Error during login processing:', error);

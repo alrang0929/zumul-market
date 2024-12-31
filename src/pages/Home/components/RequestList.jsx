@@ -1,7 +1,7 @@
 import React from 'react';
-import SubTitle from '../../common/SubTitle';
-import CardList from '../../common/CardList';
 import { DivBox } from '../../../styles/box';
+import CardList from '../../../common/CardList';
+import SubTitle from '../../../common/SubTitle';
 
 function RequestList(props) {
   return (

@@ -1,0 +1,28 @@
+.user-status-list {
+  display: flex;
+  gap: 4rem;
+  li {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    .icon-box{
+        background-color: #F2F2F2;
+        padding: 2rem;
+        border-radius: 999px;
+    }
+    .text-wrap {
+      line-height: 1.4;
+      .title {
+        display: block;
+        font-size: 1.6rem;
+        font-weight: 200;
+      }
+      .count {
+        color: #1F17FF;
+        display: block;
+        font-weight: 800;
+        font-size: 2.5rem;
+      }
+    }
+  }
+}

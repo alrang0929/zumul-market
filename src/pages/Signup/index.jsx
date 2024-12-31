@@ -1,8 +1,9 @@
 import React from 'react';
 import SignUpForm from './components/SignUpForm';
-import { saveUser } from '../../api/users/saveUsers';
+import { saveUser } from '../../api/auth/saveUsers';
 
 const SignupPage = () => {
+  // 리엑트 쿼리 수장하는 부분분
   const handleSignUp = async (formData) => {
     await saveUser(formData);
   };

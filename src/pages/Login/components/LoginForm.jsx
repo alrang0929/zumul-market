@@ -54,7 +54,7 @@ const LoginForm = ({ onSubmit }) => {
         </h3>
         <form onSubmit={handleSubmit(onFormSubmit)}>
           <div className="input-wrap">
-            <InputBox  placeholder="이메일 주소" {...register('email')} />
+            <InputBox placeholder="이메일 주소" {...register('email')} />
             {errors.email && <p className="error">{errors.email.message}</p>}
             <InputBox
               placeholder={'비밀번호, 최소 10자 이상'}
@@ -65,7 +65,9 @@ const LoginForm = ({ onSubmit }) => {
               <p className="error">{errors.password.message}</p>
             )}
           </div>
-          <Button buttontype={"submit"} type="submit">로그인</Button>
+          <Button buttontype={'submit'} type="submit">
+            로그인
+          </Button>
         </form>
         <div className="signup-text">
           아직 계정이 없으신가요? <Link to="/signup">회원가입</Link>

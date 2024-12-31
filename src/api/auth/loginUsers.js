@@ -22,9 +22,11 @@ export const loginUser = async ({ email, password }, setUser) => {
 
     // setUser를 통해 상태 업데이트
     setUser({
-      id: data.user.id,
-      email: data.user.email,
-      type: data.user.user_metadata.type,
+      id: data.user.id,                    
+      email: data.user.email,              
+      type: data.user.user_metadata?.type, 
+      name: data.user.user_metadata?.name, 
+      created_at: data.user.created_at,
     });
 
     return { success: true, user: data.user };
