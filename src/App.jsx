@@ -11,9 +11,13 @@ import LoginPage from './pages/Login';
 import { ProductManagePage } from './pages/ProductManage';
 import NotFound from './NotFound';
 import SessionManager from './utils/SessionManager';
+import { ProductEditPage } from './pages/ProductEdit';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 const App = () => {
+  const queryClient = new QueryClient();
   return (
     <>
+     <QueryClientProvider client={queryClient}>
       <SessionManager>
         <Router>
           <Routes>
@@ -24,6 +28,7 @@ const App = () => {
               <Route path="signup" element={<SignupPage />} />
               <Route path="cart" element={<Cart />} />
               <Route path="product/:id" element={<ProductDetail />} />
+              <Route path="product/:id/edit" element={<ProductEditPage />} />
               <Route
                 path="user/productmanage"
                 element={<ProductManagePage />}
@@ -34,6 +39,7 @@ const App = () => {
           </Routes>
         </Router>
       </SessionManager>
+      </QueryClientProvider>
     </>
   );
 };

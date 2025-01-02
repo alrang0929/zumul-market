@@ -31,7 +31,7 @@ const buttonStyles = {
     background-color: ${mainColor};
     color: #fff;
     border: transparent;
-    border-radius: 999px;
+    /* border-radius: 999px; */
     padding: 0.8rem 1.5rem;
     font-size: 1.2rem;
   `,
@@ -42,6 +42,13 @@ const buttonStyles = {
     border: transparent;
     padding: 0.8rem 1.5rem;
     font-size: 1.2rem;
+  `,
+  iconButton: css`
+    cursor: pointer;
+    width: 1.5rem;
+    height: 1.5rem;
+    background-color:transparent;
+    border: transparent;
   `,
 };
 

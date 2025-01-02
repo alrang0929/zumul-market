@@ -6,7 +6,7 @@ const Box = {
   ContentBox: css`
     width: 110rem;
     margin: 0 auto;
-    padding: 10rem;
+    padding: 5rem 0;
   `,
 };
 
@@ -19,6 +19,13 @@ const Input = {
     padding: 1.5rem;
     border: 1px solid #ededed;
     width: 100%;
+  `,
+};
+
+const Select = {
+  SelectBox: css`
+    padding: 1.5rem;
+    border: 1px solid #ededed;
   `,
 };
 
@@ -41,7 +48,7 @@ const Form = {
         display: flex;
         align-items: center;
         gap: 2rem;
-        input[type="radio"] {
+        input[type='radio'] {
           width: 3rem;
           padding-left: 1rem;
         }
@@ -60,6 +67,9 @@ const Form = {
 
 export const DivBox = styled.div`
   ${(props) => Box[props.divStyles] || Box.ContentBox}
+`;
+export const SelectBox = styled.select`
+  ${(props) => Select[props.divStyles] || Select.SelectBox}
 `;
 
 export const InputBox = styled.input`

@@ -10,7 +10,7 @@ import LogoutButton from './LogoutBtn';
 
 function Header(props) {
   const user = useUserStore((state) => state.user);
-  const navigater = useNavigate();
+  const navigator = useNavigate();
   
   return (
     <header>
@@ -43,10 +43,10 @@ function Header(props) {
           <LogoutButton />
         ) : (
           <>
-            <Button buttontype={'basic-main'} onClick={() => navigater('/login')}>
+            <Button buttontype={'basic-main'} onClick={() => navigator('/login')}>
               로그인
             </Button>
-            <Button buttontype={'basic-main'} onClick={() => navigater('/signup')}>
+            <Button buttontype={'basic-main'} onClick={() => navigator('/signup')}>
               회원가입
             </Button>
           </>
@@ -54,7 +54,7 @@ function Header(props) {
         {user?.type === 'creator' && (
           <Button
             buttontype={'basicMain'}
-            onClick={() => navigater(`/user/productmanage`)}
+            onClick={() => navigator(`/user/productmanage`)}
           >
             상품관리
           </Button>

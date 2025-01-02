@@ -1,5 +1,4 @@
 import supabase from '../supabaseClient';
-import useUserStore from '../../stores/auth/useUserStore';
 
 export const loginUser = async ({ email, password }, setUser) => {
   try {

@@ -11,7 +11,7 @@
     border-radius: 2rem;
     gap: 2rem;
     .img-box {
-      border-radius: .4rem;
+      border-radius: 0.4rem;
       overflow: hidden;
       width: 12rem;
       height: 12rem;
@@ -27,32 +27,43 @@
       justify-content: space-between;
       width: 70%;
       gap: 1.5rem;
-      .status-wrap {
+      .status-box {
         display: flex;
-        gap: 1rem;
-        align-items: center;
-        .sell-date {
-          font-size: 1.4rem;
-          letter-spacing: -0.08rem;
-          .topic {
-            font-weight: 600;
-            padding-right: 1rem;
+        justify-content: space-between;
+        .button-wrap {
+          button {
+            padding-left: 2rem;
+          }
+        }
+        .status-wrap {
+          display: flex;
+          gap: 1rem;
+          align-items: center;
+
+          .sell-date {
+            font-size: 1.4rem;
+            letter-spacing: -0.08rem;
+
+            .topic {
+              font-weight: 600;
+              padding-right: 1rem;
+            }
           }
         }
       } //status-wrap
-      .desc-wrap{
-          height: 100%;
-          h3 {
-            line-height: 1.3;
-            letter-spacing: -.04rem;
-            font-size: 1.8rem;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-            text-overflow: ellipsis;
-          }
-
+      .desc-wrap {
+        height: 100%;
+        h3 {
+          line-height: 1.3;
+          letter-spacing: -.09rem;
+          font-size: 1.8rem;
+          font-weight: 600;
+          display: -webkit-box;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
       }
       .price-wrap {
         font-size: 1.6rem;
