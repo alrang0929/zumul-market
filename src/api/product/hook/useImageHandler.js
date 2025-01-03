@@ -3,7 +3,7 @@ import { useState, useRef, useEffect } from 'react';
 export const useImageHandler = (setValue) => {
   const [previewImage, setPreviewImage] = useState({
     title_image: '/images/wide_empty_img.png',
-    detail_image: '/images/empty_img.png',
+    detail_image: '/images/wide_empty_img.png',
   });
 
   const fileInputRef = useRef({ title_image: null, detail_image: null });

@@ -20,7 +20,10 @@ export const useOptionHandler = () => {
 
     setOptions((prevOptions) => [
       ...prevOptions,
-      { id: Date.now(), name: optionName, add_price: addPrice, stock },
+      { id: Date.now(), 
+        name: optionName, 
+        price: addPrice, stock
+       },
     ]);
 
     setOptionName('');
@@ -30,7 +33,9 @@ export const useOptionHandler = () => {
 
   // 옵션 삭제 핸들러
   const handleRemoveOption = (id) => {
-    setOptions((prevOptions) => prevOptions.filter((option) => option.id !== id));
+    setOptions((prevOptions) =>
+      prevOptions.filter((option) => option.id !== id)
+    );
   };
 
   return {

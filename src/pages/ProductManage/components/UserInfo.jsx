@@ -7,7 +7,7 @@ import UserStatusCard from '../../../common/UserStatusList';
 export const UserInfoWrap = () => {
   const user = useUserStore((state) => state.user);
   
-  console.log('user', user);
+  // console.log('user', user);
   return (
     <>
       {/* 1. UserInfo-wrap */}

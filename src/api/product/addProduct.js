@@ -1,26 +1,28 @@
-// import supabase from '../supabaseClient';
-import useUserStore from '../../stores/auth/useUserStore';
-import { saveProductOption } from '../productOption/SaveProductOption';
-import { saveProduct } from './saveProduct';
-import { uploadFile } from './uploadProductFile';
+import useUserStore from "../../stores/auth/useUserStore";
+import { saveProductOption } from "../productOption/SaveProductOption";
+import { saveProduct } from "./saveProduct";
+import { uploadFile } from "./uploadProductFile";
 
 export const onSubmit = async (data, navigator, options) => {
   const { user } = useUserStore.getState();
   const userId = user.id;
 
   try {
-    // 1. 대표 이미지 업로드
+    console.log('Form Data:', data); // 데이터 확인
+    console.log('Options:', options); // 전달된 options 확인
+
+    // 대표 이미지 업로드
     const imagePath = await uploadFile(data.title_image);
     if (!imagePath) throw new Error('대표 이미지 업로드 실패');
 
-    // 2. 상세 이미지 업로드
+    // 상세 이미지 업로드
     const detailImagesPath = [];
     if (data.detail_image) {
       const path = await uploadFile(data.detail_image);
       if (path) detailImagesPath.push(path);
     }
 
-    // 3. product 테이블에 데이터 추가
+    // product 테이블에 데이터 추가
     const productData = {
       title: data.title,
       category: data.category,
@@ -31,16 +33,21 @@ export const onSubmit = async (data, navigator, options) => {
       price: data.price,
       owner_id: userId,
       document: data.document,
-
-      title_image: imagePath, // 대표 이미지 경로
-      detail_image: detailImagesPath, // 상세 이미지 경로 배열
+      title_image: imagePath,
+      detail_image: detailImagesPath,
     };
-    console.log(productData);
+
+    console.log('Saving Product:', productData);
 
     const savedProduct = await saveProduct(productData);
+    if (!savedProduct || !savedProduct[0]?.id) {
+      throw new Error('상품 저장에 실패했습니다.');
+    }
+
     const productId = savedProduct[0].id;
 
-    if (options.length > 0) {
+    // 옵션 데이터 추가
+    if (Array.isArray(options) && options.length > 0) {
       const optionData = options.map((option) => ({
         product_id: productId,
         name: option.name,
@@ -49,17 +56,19 @@ export const onSubmit = async (data, navigator, options) => {
           stock: option.stock,
         },
       }));
-      
+
+      console.log('Saving Options:', optionData);
+
       const savedOptions = await Promise.all(
         optionData.map((opt) => saveProductOption(opt))
       );
       console.log('Saved Options:', savedOptions);
+    } else {
+      console.log('No options to save.');
     }
 
-    if (savedProduct) {
-      alert('상품이 성공적으로 등록되었습니다!');
-      navigator('/user/productmanage');
-    }
+    alert('상품이 성공적으로 등록되었습니다!');
+    // navigator('/user/productmanage');
   } catch (error) {
     console.error('Error submitting product:', error);
     alert('상품 등록에 실패했습니다.');
