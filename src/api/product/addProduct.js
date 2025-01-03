@@ -49,9 +49,11 @@ export const onSubmit = async (data, navigator, options) => {
           stock: option.stock,
         },
       }));
-      const savedOption = await Promise.all(
+      
+      const savedOptions = await Promise.all(
         optionData.map((opt) => saveProductOption(opt))
       );
+      console.log('Saved Options:', savedOptions);
     }
 
     if (savedProduct) {
