@@ -1,10 +1,12 @@
 import React from 'react';
-import { useForm, Controller } from 'react-hook-form';
 import { FormBox, InputBox, SelectBox } from '../../../styles/box';
 import { Button } from '../../../styles/StyleButton';
 import './styles/product_edit_form.scss';
+
+import { useForm, Controller } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import { onSubmit } from '../../../api/product/addProduct';
+
 import { useOptionHandler } from '../../../api/productOption/hook/useOptionHandler';
 import { useImageHandler } from '../../../api/product/hook/useImageHandler';
 import { useStatusHandler } from '../../../api/product/hook/useStatusHandler';
@@ -40,14 +42,16 @@ export const ProductEditForm = () => {
   } = useOptionHandler();
 
   const { previewImage, fileInputRef, handleImageUpload, handleLinkClick } =
-  useImageHandler(setValue);
+    useImageHandler(setValue);
   const { sellStatus, handleStatusChange } = useStatusHandler(setValue);
-
 
   return (
     <FormBox
       className="product-edit-form"
-      onSubmit={handleSubmit((data) => onSubmit(data, navigator))}
+      onSubmit={handleSubmit((data) => {
+        onSubmit(data, navigator, options), console.log(data);
+        console.log(options);
+      })}
     >
       <h3>상품 등록</h3>
 
@@ -55,20 +59,21 @@ export const ProductEditForm = () => {
       <div className="input-wrap">
         <div className="text-box">
           <h6>대표 이미지</h6>
-          <span>1200x420px</span>
+          <span>가로 1200px 이상</span>
         </div>
+
         <Link
           className="title-img"
           onClick={() => handleLinkClick('title_image')}
           aria-label="대표 이미지 업로드"
         >
-          <img src={previewImage.title_image} alt="대표 이미지 미리보기기" />
+          <img src={previewImage.title_image} alt="상세 이미지 미리보기기" />
         </Link>
         <input
           type="file"
-          ref={(el) => (fileInputRef.current.title_image = el)}
+          ref={(el) => (fileInputRef.current.title_image = el)} // 상세 이미지 파일 입력 참조 저장
           style={{ display: 'none' }}
-          onChange={() => handleImageUpload('title_image')}
+          onChange={(e) => handleImageUpload(e, 'title_image')}
         />
       </div>
 
@@ -205,7 +210,15 @@ export const ProductEditForm = () => {
         <Controller
           name="document"
           control={control}
-          render={({ field }) => <InputBox {...field} type="text" />}
+          render={({ field }) => (
+            <textarea
+              {...field}
+              cols={100}
+              rows={10}
+              className="discription"
+              style={{ padding: '1rem' }}
+            />
+          )}
         />
       </div>
 
@@ -235,55 +248,61 @@ export const ProductEditForm = () => {
           <h6>상품 옵션</h6>
           <span>최대 10개 까지 추가 가능</span>
         </div>
-        <div className="input-wrap">
-          <InputBox
-            type="text"
-            value={optionName}
-            onChange={(e) => setOptionName(e.target.value)}
-            placeholder="옵션명을 입력하세요"
-          />
-          <span>옵션 금액</span>
-          <InputBox
-            type="number"
-            value={addPrice}
-            onChange={(e) => setAddPrice(parseInt(e.target.value, 10) || 0)}
-            placeholder="0"
-          />
-          <span>옵션 수량</span>
-          <InputBox
-            type="number"
-            value={stock}
-            onChange={(e) => setStock(parseInt(e.target.value, 10) || 0)}
-            placeholder="0"
-          />
+        <div className="option-wrap">
+          <div className="input-wrap">
+            <InputBox
+              type="text"
+              value={optionName}
+              onChange={(e) => setOptionName(e.target.value)}
+              placeholder="옵션명을 입력하세요"
+            />
+            <span>옵션 금액</span>
+            <InputBox
+              className="option-number"
+              type="number"
+              value={addPrice}
+              onChange={(e) => setAddPrice(parseInt(e.target.value, 10) || 0)}
+              placeholder="옵션 금액"
+            />
+            <span>옵션 수량</span>
+            <InputBox
+              className="option-number"
+              type="number"
+              value={stock}
+              onChange={(e) => setStock(parseInt(e.target.value, 10) || 0)}
+              placeholder="0"
+            />
+            <Button
+              buttontype="rectangleMain"
+              onClick={(e) => {
+                e.preventDefault();
+                handleAddOption();
+              }}
+            >
+              옵션 추가
+            </Button>
+          </div>
+          {console.log(options)}
+              <ul style={options.length == 0 ? {display:"none"} : {display:"block"}}>
+                {options.map((option) => (
+                  <li key={option.id}>
+                    <span>{option.name}</span>
+                    <span>{option.price}</span>
+                    <span>{option.stock}</span>
+                    <button
+                      onClick={() => handleRemoveOption(option.id)}
+                      style={{
+                        background: 'none',
+                        border: 'none',
+                        cursor: 'pointer',
+                      }}
+                    >
+                      <img src="/images/icon_delete.png" alt="삭제버튼" />
+                    </button>
+                  </li>
+                ))}
+              </ul>
         </div>
-        <Button
-          onClick={(e) => {
-            e.preventDefault();
-            handleAddOption();
-          }}
-        >
-          옵션 추가
-        </Button>
-        <ul>
-          {options.map((option) => (
-            <li key={option.id}>
-              <span>{option.name}</span>
-              <span>{option.add_price}</span>
-              <span>{option.stock}</span>
-              <button
-                onClick={() => handleRemoveOption(option.id)}
-                style={{
-                  background: 'none',
-                  border: 'none',
-                  cursor: 'pointer',
-                }}
-              >
-                <img src="/images/icon_delete.png" alt="삭제버튼" />
-              </button>
-            </li>
-          ))}
-        </ul>
       </div>
 
       {/* 제출 버튼 */}
