@@ -1,28 +1,17 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { FormBox, InputBox, SelectBox } from '../../../styles/box';
 import { Button } from '../../../styles/StyleButton';
 import './styles/product_edit_form.scss';
 import { Link, useNavigate } from 'react-router-dom';
 import { onSubmit } from '../../../api/product/addProduct';
-import {
-  handleInputChange,
-  useOptionManagement,
-} from '../../../api/productOption/hook/useOptionManagement';
+import { useOptionHandler } from '../../../api/productOption/hook/useOptionHandler';
+import { useImageHandler } from '../../../api/product/hook/useImageHandler';
+import { useStatusHandler } from '../../../api/product/hook/useStatusHandler';
 
 export const ProductEditForm = () => {
   const navigator = useNavigate();
-  const [sellStatus, setSellStatus] = useState(false);
-  const [optionName, setOptionName] = useState('');
-  const [addPrice, setAddPrice] = useState(0);
-  const [stock, setStock] = useState(0);
-
-  const productId = '3b76a969-42d0-4e99-a1d5-70774905e6f3';
-
-  const { options, isLoading, handleAddOption, handleRemoveOption } =
-    useOptionManagement(productId);
-
-  const { handleSubmit, control, register, setValue } = useForm({
+  const { handleSubmit, setValue, control, register } = useForm({
     defaultValues: {
       title: '',
       category: 'handmade',
@@ -32,55 +21,28 @@ export const ProductEditForm = () => {
       price: 0,
       shipping_fee: 0,
       document: '',
-      options: '',
       title_image: null,
       detail_image: null,
       sellStatus: false,
     },
   });
-  const [previewImage, setPreviewImage] = useState({
-    title_image: '/images/wide_empty_img.png',
-    detail_image: '/images/empty_img.png',
-  });
 
-  const fileInputRef = useRef({ title_image: null, detail_image: null }); //파일 입력요소 참조
+  const {
+    options,
+    optionName,
+    setOptionName,
+    addPrice,
+    setAddPrice,
+    stock,
+    setStock,
+    handleAddOption,
+    handleRemoveOption,
+  } = useOptionHandler();
 
-  const handleImageUpload = (e, type) => {
-    const file = e.target.files?.[0];
-    if (!file) {
-      console.error('파일이 선택되지 않았습니다.');
-      return;
-    }
+  const { previewImage, fileInputRef, handleImageUpload, handleLinkClick } =
+  useImageHandler(setValue);
+  const { sellStatus, handleStatusChange } = useStatusHandler(setValue);
 
-    const imageUrl = URL.createObjectURL(file);
-
-    if (type === 'title_image') {
-      setValue('title_image', file); // React Hook Form에 저장
-      setPreviewImage((prev) => ({ ...prev, title_image: imageUrl })); // 대표 이미지 업데이트
-    } else if (type === 'detail_image') {
-      setValue('detail_image', file); // React Hook Form에 저장
-      setPreviewImage((prev) => ({ ...prev, detail_image: imageUrl })); // 상세 이미지 업데이트
-    }
-  };
-
-  const handleLinkClick = (e, type) => {
-    e.preventDefault();
-    if (fileInputRef.current[type]) {
-      fileInputRef.current[type].click(); // 해당 파일 입력 요소 클릭
-    }
-  };
-
-  const handleStatusChange = (status) => {
-    setSellStatus(status);
-    setValue('sellStatus', status); // react-hook-form 상태 값도 동기화
-  };
-
-  useEffect(() => {
-    return () => {
-      URL.revokeObjectURL(previewImage.title_image);
-      URL.revokeObjectURL(previewImage.detail_image);
-    };
-  }, [previewImage]);
 
   return (
     <FormBox
@@ -97,18 +59,16 @@ export const ProductEditForm = () => {
         </div>
         <Link
           className="title-img"
-          onClick={(e) => handleLinkClick(e, 'title_image')}
+          onClick={() => handleLinkClick('title_image')}
           aria-label="대표 이미지 업로드"
         >
-          <img src={previewImage.title_image} alt="이미지 업로드" />
+          <img src={previewImage.title_image} alt="대표 이미지 미리보기기" />
         </Link>
         <input
           type="file"
-          ref={(el) => {
-            fileInputRef.current.title_image = el;
-          }}
+          ref={(el) => (fileInputRef.current.title_image = el)}
           style={{ display: 'none' }}
-          onChange={(e) => handleImageUpload(e, 'title_image')}
+          onChange={() => handleImageUpload('title_image')}
         />
       </div>
 
@@ -160,7 +120,7 @@ export const ProductEditForm = () => {
           control={control}
           rules={{ required: '판매 시작 날짜를 입력해주세요' }}
           render={({ field }) => (
-            <InputBox {...field} type="date" placeholder="0000-00-00" />
+            <InputBox {...field} type="date" placeholder="판매 시작 날짜" />
           )}
         />
         <span>~</span>
@@ -169,7 +129,7 @@ export const ProductEditForm = () => {
           control={control}
           rules={{ required: '판매 종료 날짜를 입력해주세요' }}
           render={({ field }) => (
-            <InputBox {...field} type="date" placeholder="0000-00-00" />
+            <InputBox {...field} type="date" placeholder="판매 종료 날짜" />
           )}
         />
       </div>
@@ -223,23 +183,18 @@ export const ProductEditForm = () => {
         </div>
         <input
           type="radio"
-          {...register('sellStatus', { required: '판매 상태를 선택해주세요.' })}
           value={true}
-          name="sellStatus"
           checked={sellStatus === true}
           onChange={() => handleStatusChange(true)}
         />
         <label>판매중</label>
         <input
           type="radio"
-          {...register('sellStatus', { required: '판매 상태를 선택해주세요.' })}
           value={false}
-          name="sellStatus"
           checked={sellStatus === false}
           onChange={() => handleStatusChange(false)}
         />
-
-        <label>판매종료/예정</label>
+        <label>판매 종료/예정</label>
       </div>
 
       {/* 상세 설명 */}
@@ -253,6 +208,7 @@ export const ProductEditForm = () => {
           render={({ field }) => <InputBox {...field} type="text" />}
         />
       </div>
+
       <div className="input-wrap">
         <div className="text-box">
           <h6>상세 이미지</h6>
@@ -260,10 +216,10 @@ export const ProductEditForm = () => {
         </div>
         <Link
           className="detail-img"
-          onClick={(e) => handleLinkClick(e, 'detail_image')}
+          onClick={() => handleLinkClick('detail_image')}
           aria-label="대표 이미지 업로드"
         >
-          <img src={previewImage.detail_image} alt="상세 이미지 업로드" />
+          <img src={previewImage.detail_image} alt="상세 이미지 미리보기기" />
         </Link>
         <input
           type="file"
@@ -286,46 +242,31 @@ export const ProductEditForm = () => {
             onChange={(e) => setOptionName(e.target.value)}
             placeholder="옵션명을 입력하세요"
           />
-          <Controller
-            name="add_price"
-            control={control}
-            render={({ field }) => (
-              <>
-                <span>옵션 금액</span>
-                <InputBox {...field} type="number" placeholder="0" value={addPrice} onChange={(e)=>setAddPrice(e.target.value)}/>
-              </>
-            )}
+          <span>옵션 금액</span>
+          <InputBox
+            type="number"
+            value={addPrice}
+            onChange={(e) => setAddPrice(parseInt(e.target.value, 10) || 0)}
+            placeholder="0"
           />
-          <Controller
-            name="stock"
-            control={control}
-            render={({ field }) => (
-              <>
-                <span>옵션 수량</span>
-                <InputBox {...field} type="number" placeholder="0" value={stock} onChange={(e)=>setStock(e.target.value)}/>
-              </>
-            )}
+          <span>옵션 수량</span>
+          <InputBox
+            type="number"
+            value={stock}
+            onChange={(e) => setStock(parseInt(e.target.value, 10) || 0)}
+            placeholder="0"
           />
         </div>
         <Button
           onClick={(e) => {
             e.preventDefault();
-
-            handleAddOption({
-              name: optionName,
-              add_price: addPrice,
-              stock: stock,
-            });
-
-            setOptionName('');
-            setAddPrice(0);
-            setStock(0);
+            handleAddOption();
           }}
         >
           옵션 추가
         </Button>
         <ul>
-          {options?.map((option) => (
+          {options.map((option) => (
             <li key={option.id}>
               <span>{option.name}</span>
               <span>{option.add_price}</span>

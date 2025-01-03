@@ -1,11 +1,11 @@
 // import supabase from '../supabaseClient';
 import useUserStore from '../../stores/auth/useUserStore';
+import { saveProductOption } from '../productOption/SaveProductOption';
 import { saveProduct } from './saveProduct';
 import { uploadFile } from './uploadProductFile';
 
-export const onSubmit = async (data ,navigator) => {
-
-  const { user } = useUserStore.getState(); 
+export const onSubmit = async (data, navigator, options) => {
+  const { user } = useUserStore.getState();
   const userId = user.id;
 
   try {
@@ -35,12 +35,28 @@ export const onSubmit = async (data ,navigator) => {
       title_image: imagePath, // 대표 이미지 경로
       detail_image: detailImagesPath, // 상세 이미지 경로 배열
     };
-
     console.log(productData);
+
     const savedProduct = await saveProduct(productData);
+    const productId = savedProduct[0].id;
+
+    if (options.length > 0) {
+      const optionData = options.map((option) => ({
+        product_id: productId,
+        name: option.name,
+        add_cost: {
+          price: option.price,
+          stock: option.stock,
+        },
+      }));
+      const savedOption = await Promise.all(
+        optionData.map((opt) => saveProductOption(opt))
+      );
+    }
+
     if (savedProduct) {
       alert('상품이 성공적으로 등록되었습니다!');
-      navigator("/user/productmanage");
+      navigator('/user/productmanage');
     }
   } catch (error) {
     console.error('Error submitting product:', error);
