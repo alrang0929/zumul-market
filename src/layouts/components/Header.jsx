@@ -39,6 +39,14 @@ function Header(props) {
       </div>
       {/* 4. user 메뉴 로그인 전: 회원가입, 로그인 || 로그인(일반): 마이페이지, 로그아웃 || 로그인(판매자): 판매관리 추가*/}
       <div className="user-menu-wrap">
+      {user?.type === 'creator' && (
+          <Button
+            buttontype={'basicMain'}
+            onClick={() => navigator(`/user/productmanage`)}
+          >
+            상품관리
+          </Button>
+        )}
         {user ? (
           <LogoutButton />
         ) : (
@@ -51,14 +59,7 @@ function Header(props) {
             </Button>
           </>
         )}
-        {user?.type === 'creator' && (
-          <Button
-            buttontype={'basicMain'}
-            onClick={() => navigator(`/user/productmanage`)}
-          >
-            상품관리
-          </Button>
-        )}
+     
       </div>
     </header>
   );

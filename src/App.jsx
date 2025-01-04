@@ -10,15 +10,14 @@ import ProductDetail from './pages/ProductDetail/index';
 import LoginPage from './pages/Login';
 import { ProductManagePage } from './pages/ProductManage';
 import NotFound from './NotFound';
-import SessionManager from './utils/SessionManager';
 import { ProductEditPage } from './pages/ProductEdit';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+
 const App = () => {
   const queryClient = new QueryClient();
   return (
     <>
      <QueryClientProvider client={queryClient}>
-      <SessionManager>
         <Router>
           <Routes>
             {/* MainLayout 아래에 자식 라우트 정의 */}
@@ -38,7 +37,6 @@ const App = () => {
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Router>
-      </SessionManager>
       </QueryClientProvider>
     </>
   );

@@ -5,17 +5,24 @@ import './style/product_edit_card.scss';
 import { addComma } from '../utils/commonFn';
 import { DeleteButton } from './DeleteButton';
 import { EditButton } from './EditButton';
+import { ImageLoader } from '../utils/ImageLoder';
 
-const ProductEditCard = ({data, linktext}) => {
+const ProductEditCard = ({ key, data, linktext }) => {
+  console.log('data', data);
   // const data = ProductEditDb;
-  const STATUS_TEXT = { TURE: '판매중', FALSE: '판매종료/예정정' };
+  const STATUS_TEXT = { TURE: '판매중', FALSE: '판매종료/예정' };
   return (
     <>
       <ul className="product-edit-list">
         {data.map((item, i) => (
           <li key={i} className="product-edit-card">
             <div className="img-box">
-              <img src={item.image_url} alt={item.title + '썸네일'} />
+              <ImageLoader
+                imagePath={item.title_image}
+                altText={item.title_image + '썸네일'}
+                buckit={'product_img'}
+              />
+              {/* <img src={item.title_image} alt={item.title + '썸네일'} /> */}
             </div>
             <div className="info-wrap">
               <div className="status-box">
@@ -27,13 +34,13 @@ const ProductEditCard = ({data, linktext}) => {
                   />
                   <div className="sell-date">
                     <span className="topic">판매기간</span>
-                    <span>{item.sall_start}</span>
-                    <span>~</span>
-                    <span>{item.sall_end}</span>
+                    <span>{item.sell_start}</span>
+                    <span style={{padding:"0 .5rem"}}>~</span>
+                    <span>{item.sell_end}</span>
                   </div>
                 </div>
                 <div className="button-wrap">
-                  <EditButton linktext={linktext}/>
+                  <EditButton linktext={linktext} />
                   <DeleteButton />
                 </div>
               </div>

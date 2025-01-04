@@ -1,13 +1,34 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import ProductEditCard from '../../../common/ProductEditCard';
-import { ProductEditDb } from '../../../common/dummyDb';
 import useUserStore from '../../../stores/auth/useUserStore';
+import { fetchProduct } from '../../../api/product/fetchProduct';
 
 const SellProductList = () => {
   const user = useUserStore((state) => state.user);
-  return <div className='sell-list'>
-    <ProductEditCard data={ProductEditDb} linktext={`product/${user.id}/edit`}/>
-  </div>;
+  const [products, setProducts] = useState([]);
+console.log("user",user);
+  useEffect(() => {
+    const loadProducts = async () => {
+      try {
+        const data = await fetchProduct(user.id); // Supabase에서 데이터 가져오기
+        setProducts(data);
+      } catch (error) {
+        console.error('Error fetching products:', error);
+      }
+    };
+
+    loadProducts();
+  }, [user.id]);
+
+  return (
+    <div className="sell-list">
+      <ProductEditCard
+        key={products.id}
+        data={products}
+        linktext={`product/${user.id}/edit`}
+      />
+    </div>
+  );
 };
 
 export default SellProductList;

@@ -31,8 +31,8 @@
         display: flex;
         justify-content: space-between;
         .button-wrap {
-          button {
-            padding-left: 2rem;
+          a{
+            width: fit-content;
           }
         }
         .status-wrap {

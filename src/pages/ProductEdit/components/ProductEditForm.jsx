@@ -8,8 +8,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import { onSubmit } from '../../../api/product/addProduct';
 
 import { useOptionHandler } from '../../../api/productOption/hook/useOptionHandler';
-import { useImageHandler } from '../../../api/product/hook/useImageHandler';
 import { useStatusHandler } from '../../../api/product/hook/useStatusHandler';
+import { useImageHandler } from '../../../utils/useImageHandler';
 
 export const ProductEditForm = () => {
   const navigator = useNavigate();
@@ -232,7 +232,7 @@ export const ProductEditForm = () => {
           onClick={() => handleLinkClick('detail_image')}
           aria-label="대표 이미지 업로드"
         >
-          <img src={previewImage.detail_image} alt="상세 이미지 미리보기기" />
+          <img src={previewImage.detail_image} alt="상세 이미지 미리보기" />
         </Link>
         <input
           type="file"

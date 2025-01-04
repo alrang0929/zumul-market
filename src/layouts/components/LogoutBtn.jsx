@@ -1,7 +1,7 @@
 import React from 'react';
-import { logoutUser } from '../../api/auth/logoutUsers';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '../../styles/StyleButton';
+import { logoutUser } from '../../api/auth/api';
 const LogoutButton = () => {
   const navigator = useNavigate();
   const handleLogout = async () => {

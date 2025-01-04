@@ -39,8 +39,8 @@ const Form = {
     background-color: #fff;
     margin: 0 auto;
     padding: 4rem;
-    form {
-      display: flex;
+
+    display: flex;
       flex-direction: column;
       gap: 4rem 0;
       .input-wrap {
@@ -61,7 +61,6 @@ const Form = {
         padding: 2rem;
         font-size: 1.4rem;
       }
-    }
   `,
 };
 
