@@ -67,7 +67,7 @@ export const ProductEditForm = () => {
           onClick={() => handleLinkClick('title_image')}
           aria-label="대표 이미지 업로드"
         >
-          <img src={previewImage.title_image} alt="상세 이미지 미리보기기" />
+          <img src={previewImage.title_image} alt="상세 이미지 미리보기" />
         </Link>
         <input
           type="file"
@@ -128,7 +128,7 @@ export const ProductEditForm = () => {
             <InputBox {...field} type="date" placeholder="판매 시작 날짜" />
           )}
         />
-        <span>~</span>
+        <span style={{width: "fit-content"}}>~</span>
         <Controller
           name="sell_end"
           control={control}

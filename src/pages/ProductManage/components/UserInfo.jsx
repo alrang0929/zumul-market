@@ -4,25 +4,19 @@ import { formatDate } from '../../../utils/formatDate';
 import "./styles/user_info.scss";
 import UserStatusCard from '../../../common/UserStatusList';
 import { useNavigate } from 'react-router-dom';
-import { useUserQuery } from '../../../api/auth/api';
+import useUserStore from '../../../stores/auth/useUserStore';
+import { ImageLoader } from '../../../utils/ImageLoder';
 
 export const UserInfoWrap = () => {
-  const { data: user, isLoading, isError } = useUserQuery();
+  const user = useUserStore((state) => state.user);
   const navigator = useNavigate();
 
-  if (isLoading) {
-    return <div>로딩 중...</div>;
-  }
-
-  if (isError || !user) {
-    return <div>유저 정보를 불러오는 데 실패했습니다.</div>;
-  }
-
+  console.log("user",user);
   return (
     <div className="userinfo-wrap">
       <div className="profile">
         <div className="profile-img">
-          <img src="/images/img03.jpg" alt="프로필 이미지" />
+          <ImageLoader imagePath={user.profile_image} buckit={"profile_img"} altText={"프로필 이미지지"}/>
         </div>
         <h3>{user.name}</h3>
         <div className="date-wrap">
