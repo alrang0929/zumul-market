@@ -1,7 +1,7 @@
 import useUserStore from "../../stores/auth/useUserStore";
 import { saveProductOption } from "../productOption/SaveProductOption";
 import { saveProduct } from "./saveProduct";
-import { uploadFile } from "./uploadProductFile";
+import { uploadFile } from "../../utils/uploadFile";
 
 export const onSubmit = async (data, navigator, options) => {
   const { user } = useUserStore.getState();
@@ -12,13 +12,22 @@ export const onSubmit = async (data, navigator, options) => {
     console.log('Options:', options); // 전달된 options 확인
 
     // 대표 이미지 업로드
-    const imagePath = await uploadFile(data.title_image);
+    const imagePath = await uploadFile({
+      file: data.title_image, // 업로드할 파일
+      type: 'product',          // 파일 타입
+      buckit: 'product_img',        // 버킷 이름
+    });
+    
     if (!imagePath) throw new Error('대표 이미지 업로드 실패');
 
     // 상세 이미지 업로드
     const detailImagesPath = [];
     if (data.detail_image) {
-      const path = await uploadFile(data.detail_image);
+      const path = await uploadFile({
+        file: data.detail_image, // 업로드할 파일
+        type: 'product',          // 파일 타입
+        buckit: 'product_img',        // 버킷 이름
+      });
       if (path) detailImagesPath.push(path);
     }
 
@@ -68,7 +77,7 @@ export const onSubmit = async (data, navigator, options) => {
     }
 
     alert('상품이 성공적으로 등록되었습니다!');
-    // navigator('/user/productmanage');
+    navigator('/user/productmanage');
   } catch (error) {
     console.error('Error submitting product:', error);
     alert('상품 등록에 실패했습니다.');

@@ -54,9 +54,14 @@ const LoginForm = ({ onSubmit }) => {
         </h3>
         <form onSubmit={handleSubmit(onFormSubmit)}>
           <div className="input-wrap">
-            <InputBox placeholder="이메일 주소" {...register('email')} />
+            <InputBox
+              value={'sellbell07@gmail.com'}
+              placeholder="이메일 주소"
+              {...register('email')}
+            />
             {errors.email && <p className="error">{errors.email.message}</p>}
             <InputBox
+              value={'aaaa123456!'}
               placeholder={'비밀번호, 최소 10자 이상'}
               type="password"
               {...register('password', { required: true })}

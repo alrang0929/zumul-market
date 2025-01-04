@@ -2,15 +2,26 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormBox, InputBox } from '../../../styles/box';
 import { Button } from '../../../styles/StyleButton';
+import { useImageHandler } from '../../../utils/useImageHandler';
+import { Link } from 'react-router-dom';
+import './styles/sign_up_form.scss';
+import { uploadFile } from '../../../utils/uploadFile';
 
 const SignUpForm = ({ onSubmit }) => {
   const {
     register,
     handleSubmit,
     setError,
+    setValue,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    profile_image: null,
+  });
+
   const [loading, setLoading] = useState(false);
+
+  const { previewImage, fileInputRef, handleImageUpload, handleLinkClick } =
+    useImageHandler(setValue);
 
   const validateForm = (data) => {
     const errors = {};
@@ -42,62 +53,97 @@ const SignUpForm = ({ onSubmit }) => {
       return;
     }
 
-    // 성공적으로 검증된 데이터를 부모 컴포넌트로 전달
-    await onSubmit(data);
-    setLoading(false);
+    try {
+      // 프로필 이미지 업로드
+      const imagePath = await uploadFile({
+        file: data.profile_image[0], // React Hook Form에 저장된 파일
+        type: 'profile', // 파일 타입
+        buckit: 'profile_img', // 버킷 이름
+      });
+      console.log('이미지 경로:', imagePath);
+      if (!imagePath) {
+        throw new Error('이미지 업로드 실패');
+      }
+
+      // 이미지 경로와 함께 부모 컴포넌트로 데이터 전달
+      await onSubmit({ ...data, profile_image: imagePath });
+
+    } catch (error) {
+      console.error('회원가입 중 에러 발생:', error.message);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
-    <FormBox className="form-wrap">
+    <FormBox className="profile-form" onSubmit={handleSubmit(onFormSubmit)}>
       <h3>회원가입</h3>
-      <form onSubmit={handleSubmit(onFormSubmit)}>
-        {/* 이메일 */}
-        <div className="input-wrap">
-          <span>아이디(이메일):</span>
-          <InputBox {...register('email')} placeholder="이메일 주소" />
-          {errors.email && <p className="error">{errors.email.message}</p>}
+      {/* 이메일 */}
+      <div className="input-wrap">
+        <span>아이디(이메일):</span>
+        <InputBox {...register('email')} placeholder="이메일 주소" />
+        {errors.email && <p className="error">{errors.email.message}</p>}
+      </div>
+
+      {/* 비밀번호 */}
+      <div className="input-wrap">
+        <span>비밀번호:</span>
+        <InputBox
+          type="password"
+          {...register('password')}
+          placeholder="최소 10자 이상"
+        />
+        {errors.password && <p className="error">{errors.password.message}</p>}
+      </div>
+
+      {/* 닉네임 */}
+      <div className="input-wrap">
+        <span>닉네임:</span>
+        <InputBox {...register('name')} placeholder="닉네임 입력" />
+        {errors.name && <p className="error">{errors.name.message}</p>}
+      </div>
+
+      {/* 창작자 여부 */}
+      <div className="input-wrap">
+        <span>창작자 확인:</span>
+        <input type="radio" value="fan" {...register('type')} id="fan" />
+        <label htmlFor="fan">팬</label>
+        <input
+          type="radio"
+          value="creator"
+          {...register('type')}
+          id="creator"
+        />
+        <label htmlFor="creator">창작자</label>
+        {errors.type && <p className="error">{errors.type.message}</p>}
+      </div>
+      {/* 대표 이미지 */}
+      <div className="input-wrap">
+        <div className="text-box">
+          <h6>프로필 이미지</h6>
+          <span>가로 800px 이하</span>
         </div>
 
-        {/* 비밀번호 */}
-        <div className="input-wrap">
-          <span>비밀번호:</span>
-          <InputBox
-            type="password"
-            {...register('password')}
-            placeholder="최소 10자 이상"
-          />
-          {errors.password && (
-            <p className="error">{errors.password.message}</p>
-          )}
-        </div>
+        <Link
+          className="profile-img"
+          onClick={() => handleLinkClick('profile_image')}
+          aria-label="프로필 이미지 업로드"
+        >
+          <img src={previewImage.profile_image} alt="프로필 이미지 미리보기" />
+        </Link>
+        <input
+          type="file"
+          ref={(el) => (fileInputRef.current.profile_image = el)}
+          style={{ display: 'none' }}
+          onChange={(e) => handleImageUpload(e, 'profile_image')}
+          {...register('profile_image')}
+        />
+      </div>
 
-        {/* 닉네임 */}
-        <div className="input-wrap">
-          <span>닉네임:</span>
-          <InputBox {...register('name')} placeholder="닉네임 입력" />
-          {errors.name && <p className="error">{errors.name.message}</p>}
-        </div>
-
-        {/* 창작자 여부 */}
-        <div className="input-wrap">
-          <span>창작자 확인:</span>
-          <input type="radio" value="fan" {...register('type')} id="fan" />
-          <label htmlFor="fan">팬</label>
-          <input
-            type="radio"
-            value="creator"
-            {...register('type')}
-            id="creator"
-          />
-          <label htmlFor="creator">창작자</label>
-          {errors.type && <p className="error">{errors.type.message}</p>}
-        </div>
-
-        {/* 제출 버튼 */}
-        <Button buttontype={'submit'} type="submit" disabled={loading}>
-          {loading ? '회원가입 중...' : '회원가입 완료'}
-        </Button>
-      </form>
+      {/* 제출 버튼 */}
+      <Button buttontype={'submit'} type="submit" disabled={loading}>
+        {loading ? '회원가입 중...' : '회원가입 완료'}
+      </Button>
     </FormBox>
   );
 };
