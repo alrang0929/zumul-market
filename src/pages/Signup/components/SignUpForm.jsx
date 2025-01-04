@@ -15,7 +15,13 @@ const SignUpForm = ({ onSubmit }) => {
     setValue,
     formState: { errors },
   } = useForm({
-    profile_image: null,
+    defaultValues: {
+      name: '', // 닉네임 기본값
+      profile_image: null, // 프로필 이미지 기본값
+      email: '', // 이메일 기본값
+      password: '', // 비밀번호 기본값
+      type: 'fan', // 창작자 여부 기본값 ('fan' 또는 'creator')
+    },
   });
 
   const [loading, setLoading] = useState(false);
@@ -52,22 +58,10 @@ const SignUpForm = ({ onSubmit }) => {
       setLoading(false);
       return;
     }
-
+    // console.log('유효성 검사 통과:', data);
     try {
-      // 프로필 이미지 업로드
-      const imagePath = await uploadFile({
-        file: data.profile_image[0], // React Hook Form에 저장된 파일
-        type: 'profile', // 파일 타입
-        buckit: 'profile_img', // 버킷 이름
-      });
-      console.log('이미지 경로:', imagePath);
-      if (!imagePath) {
-        throw new Error('이미지 업로드 실패');
-      }
-
       // 이미지 경로와 함께 부모 컴포넌트로 데이터 전달
-      await onSubmit({ ...data, profile_image: imagePath });
-
+      await onSubmit( data );
     } catch (error) {
       console.error('회원가입 중 에러 발생:', error.message);
     } finally {
@@ -136,7 +130,7 @@ const SignUpForm = ({ onSubmit }) => {
           ref={(el) => (fileInputRef.current.profile_image = el)}
           style={{ display: 'none' }}
           onChange={(e) => handleImageUpload(e, 'profile_image')}
-          {...register('profile_image')}
+          // {...register('profile_image')}
         />
       </div>
 
