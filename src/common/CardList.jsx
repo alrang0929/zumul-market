@@ -2,7 +2,7 @@ import React from 'react';
 import BoardCard from './BoardCard';
 import { ProductThumbCard } from './ProductThumbCard';
 
-function CardList({ type }) {
+function CardList({ type, discript }) {
   const CARD_TYPE ={PRODUCT:'product', BOARD:'board'}; 
   return (
     <>
@@ -10,8 +10,8 @@ function CardList({ type }) {
         className="card-list"
         style={{
           display: 'flex',
-          gap: type === 'product' ? '2.5rem' : '1rem',
-          flexWrap: type === 'product' ? 'nowrap' : 'wrap',
+          gap: type === CARD_TYPE.PRODUCT ? '2.5rem' : '1rem',
+          flexWrap: type === CARD_TYPE.PRODUCT ? 'nowrap' : 'wrap',
         }}
       >
         {type === CARD_TYPE.PRODUCT ? (

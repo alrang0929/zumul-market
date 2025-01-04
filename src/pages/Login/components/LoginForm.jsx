@@ -55,7 +55,7 @@ const LoginForm = ({ onSubmit }) => {
         <form onSubmit={handleSubmit(onFormSubmit)}>
           <div className="input-wrap">
             <InputBox
-              value={'sellbell07@gmail.com'}
+              // value={'sellbell07@gmail.com'}
               placeholder="이메일 주소"
               {...register('email')}
             />

@@ -1,21 +1,36 @@
 import React from 'react';
 import './style/product_card.scss';
-import { productData } from './dummyDb';
 import { addComma } from '../utils/commonFn';
-export function ProductThumbCard() {
+import { useProducts } from '../api/product/hook/useProducts';
+import { ImageLoader } from '../utils/ImageLoder';
+export function ProductThumbCard({discript}) {
+  const {products} = useProducts();
+
+  const productData = products;
+  const PRODUCT_BUCKIT = 'product_img';
+  const PROFILE_BUCKIT = 'profile_img';
+  
   return (
     <>
-      {productData.slice(0, 4).map((data, i) => (
+      {productData.map((data, i) => (
         <div className="product-card" key={i}>
           <div className="img-box">
-            <img src={data.isrc.thumb} alt="썸네일 이미지" />
+            <ImageLoader
+              imagePath={data.title_image}
+              buckit={PRODUCT_BUCKIT}
+              altText={data.title + '썸네일'}
+            />
           </div>
           <div className="info-wrap">
             <div className="user-name">
               <div className="profile-img">
-                <img src={data.isrc.userImg} alt="프로필 이미지" />
+                <ImageLoader
+                  imagePath={data.users.profile_image}
+                  buckit={PROFILE_BUCKIT}
+                  altText={data.users.name + '썸네일'}
+                />
               </div>
-              <span>{data.name}</span>
+              <span>{data.users.name}</span>
             </div>
             <div className="title">{data.title}</div>
             <div className="docs">{data.docs}</div>

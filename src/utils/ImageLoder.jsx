@@ -9,7 +9,7 @@ export const ImageLoader = ({ imagePath, altText, buckit }) => {
     return <p>이미지를 불러올 수 없습니다.</p>;
   }
 
-  console.log("publicUrl",publicUrl);
+  // console.log("publicUrl",publicUrl);
   return <img src={publicUrl} alt={altText} />;
 };
 

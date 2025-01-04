@@ -1,10 +1,11 @@
 import React from 'react';
 import './style/sub_title.scss';
-function SubTitle({ subTitle, linkText }) {
+import { Link } from 'react-router-dom';
+function SubTitle({ subTitle, linkText, link }) {
   return (
     <div className="sub-title-wrap">
       <span className="sub-title">{subTitle}</span>
-      <a href="">{linkText}</a>
+      <Link to ={link}>{linkText}</Link>
     </div>
   );
 }

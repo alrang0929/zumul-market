@@ -16,7 +16,7 @@ export const UserInfoWrap = () => {
     <div className="userinfo-wrap">
       <div className="profile">
         <div className="profile-img">
-          <ImageLoader imagePath={user.profile_image} buckit={"profile_img"} altText={"프로필 이미지지"}/>
+          <ImageLoader imagePath={user.profile_image} buckit={"profile_img"} altText={"프로필 이미지"}/>
         </div>
         <h3>{user.name}</h3>
         <div className="date-wrap">

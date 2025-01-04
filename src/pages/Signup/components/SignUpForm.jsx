@@ -3,11 +3,11 @@ import { useForm } from 'react-hook-form';
 import { FormBox, InputBox } from '../../../styles/box';
 import { Button } from '../../../styles/StyleButton';
 import { useImageHandler } from '../../../utils/useImageHandler';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './styles/sign_up_form.scss';
-import { uploadFile } from '../../../utils/uploadFile';
 
 const SignUpForm = ({ onSubmit }) => {
+  const navigator = useNavigate();
   const {
     register,
     handleSubmit,
@@ -61,7 +61,7 @@ const SignUpForm = ({ onSubmit }) => {
     // console.log('유효성 검사 통과:', data);
     try {
       // 이미지 경로와 함께 부모 컴포넌트로 데이터 전달
-      await onSubmit( data );
+      await onSubmit( data, navigator );
     } catch (error) {
       console.error('회원가입 중 에러 발생:', error.message);
     } finally {
@@ -136,7 +136,7 @@ const SignUpForm = ({ onSubmit }) => {
 
       {/* 제출 버튼 */}
       <Button buttontype={'submit'} type="submit" disabled={loading}>
-        {loading ? '회원가입 중...' : '회원가입 완료'}
+        {loading ? '회원가입 중...' : '회원가입 완료' + navigator('/')}
       </Button>
     </FormBox>
   );

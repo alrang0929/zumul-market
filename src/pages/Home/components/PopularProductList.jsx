@@ -6,7 +6,7 @@ function PopularProductList(props) {
     return (
         <>
         <DivBox className="pupular-product-list">
-        <SubTitle subTitle={"오늘의 인기 작품"} linkText={"더 보기+"}/>
+        <SubTitle subTitle={"오늘의 인기 작품"} linkText={"더 보기+"} link={'/product'}/>
         <CardList type={"product"}/>
         </DivBox>
         </>

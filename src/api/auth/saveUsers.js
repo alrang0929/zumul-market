@@ -2,9 +2,9 @@ import { uploadFile } from '../../utils/uploadFile';
 import supabase from '../supabaseClient';
 import bcrypt from 'bcryptjs';
 
-export const saveUser = (user) => {
-  console.log('입력된 유저 정보:', user);
 
+export const saveUser = (user, navigator) => {
+  console.log('입력된 유저 정보:', user);
   // 필수 필드 검증
   if (!user.email || !user.password || !user.name || !user.type) {
     console.error('필수 필드 (email, password, name, type)가 누락되었습니다.');
@@ -45,6 +45,7 @@ export const saveUser = (user) => {
       }
 
       console.log('사용자 등록 성공:', data);
+      alert('쭈물마켓의 회원이 되신 것을 환영합니다!');
     })
     .catch((error) => {
       console.error('유저 저장 중 오류 발생:', error.message || error);
