@@ -1,10 +1,10 @@
 import React from 'react'
-import { ProductEditForm } from './components/ProductEditForm'
+import { ProductAddForm } from './components/ProductAddForm'
 
 export const ProductEditPage = () => {
   return (
     <>
-    <ProductEditForm/>
+    <ProductAddForm/>
     </>
   )
 }

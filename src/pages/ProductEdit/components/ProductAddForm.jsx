@@ -8,10 +8,9 @@ import { Link, useNavigate } from 'react-router-dom';
 import { onSubmit } from '../../../api/product/addProduct';
 
 import { useOptionHandler } from '../../../api/productOption/hook/useOptionHandler';
-import { useStatusHandler } from '../../../api/product/hook/useStatusHandler';
 import { useImageHandler } from '../../../utils/useImageHandler';
 
-export const ProductEditForm = () => {
+export const ProductAddForm = () => {
   const navigator = useNavigate();
   const { handleSubmit, setValue, control, register } = useForm({
     defaultValues: {
@@ -43,14 +42,12 @@ export const ProductEditForm = () => {
 
   const { previewImage, fileInputRef, handleImageUpload, handleLinkClick } =
     useImageHandler(setValue);
-  const { sellStatus, handleStatusChange } = useStatusHandler(setValue);
 
   return (
     <FormBox
       className="product-edit-form"
       onSubmit={handleSubmit((data) => {
-        onSubmit(data, navigator, options), console.log(data);
-        console.log(options);
+        onSubmit(data, navigator, options);
       })}
     >
       <h3>상품 등록</h3>
@@ -128,7 +125,7 @@ export const ProductEditForm = () => {
             <InputBox {...field} type="date" placeholder="판매 시작 날짜" />
           )}
         />
-        <span style={{width: "fit-content"}}>~</span>
+        <span style={{ width: 'fit-content' }}>~</span>
         <Controller
           name="sell_end"
           control={control}
@@ -186,20 +183,28 @@ export const ProductEditForm = () => {
         <div className="text-box">
           <h6>상품 판매 상태</h6>
         </div>
-        <input
-          type="radio"
-          value={true}
-          checked={sellStatus === true}
-          onChange={() => handleStatusChange(true)}
+        <Controller
+          name="sellStatus"
+          control={control}
+          render={({ field }) => (
+            <>
+              <input
+                type="radio"
+                value={true}
+                checked={field.value === true}
+                onChange={() => field.onChange(true)}
+              />
+              <label>판매중</label>
+              <input
+                type="radio"
+                value={false}
+                checked={field.value === false}
+                onChange={() => field.onChange(false)}
+              />
+              <label>판매 종료/예정</label>
+            </>
+          )}
         />
-        <label>판매중</label>
-        <input
-          type="radio"
-          value={false}
-          checked={sellStatus === false}
-          onChange={() => handleStatusChange(false)}
-        />
-        <label>판매 종료/예정</label>
       </div>
 
       {/* 상세 설명 */}
@@ -283,25 +288,29 @@ export const ProductEditForm = () => {
             </Button>
           </div>
           {console.log(options)}
-              <ul style={options.length == 0 ? {display:"none"} : {display:"block"}}>
-                {options.map((option) => (
-                  <li key={option.id}>
-                    <span>{option.name}</span>
-                    <span>{option.price}</span>
-                    <span>{option.stock}</span>
-                    <button
-                      onClick={() => handleRemoveOption(option.id)}
-                      style={{
-                        background: 'none',
-                        border: 'none',
-                        cursor: 'pointer',
-                      }}
-                    >
-                      <img src="/images/icon_delete.png" alt="삭제버튼" />
-                    </button>
-                  </li>
-                ))}
-              </ul>
+          <ul
+            style={
+              options.length == 0 ? { display: 'none' } : { display: 'block' }
+            }
+          >
+            {options.map((option) => (
+              <li key={option.id}>
+                <span>{option.name}</span>
+                <span>{option.price}</span>
+                <span>{option.stock}</span>
+                <button
+                  onClick={() => handleRemoveOption(option.id)}
+                  style={{
+                    background: 'none',
+                    border: 'none',
+                    cursor: 'pointer',
+                  }}
+                >
+                  <img src="/images/icon_delete.png" alt="삭제버튼" />
+                </button>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
 

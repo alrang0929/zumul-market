@@ -1,10 +1,10 @@
-import useUserStore from "../../stores/auth/useUserStore";
 import { saveProductOption } from "../productOption/SaveProductOption";
 import { saveProduct } from "./saveProduct";
 import { uploadFile } from "../../utils/uploadFile";
+import useUserStore from "../../stores/auth/useUserStore";
 
 export const onSubmit = async (data, navigator, options) => {
-  const { user } = useUserStore.getState();
+  const user = useUserStore((state) => state.user);
   const userId = user.id;
 
   try {
