@@ -4,7 +4,7 @@ export const fetchAllProduct = async () => {
   try {
     const { data, error } = await supabase
       .from('product') // product 테이블
-      .select('*, users(profile_image, type, name)'); 
+      .select('*, users(profile_image, type, name), product_option(*)'); 
 
     if (error) {
       throw new Error(`상품 데이터 가져오기 실패: ${error.message}`);

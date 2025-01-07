@@ -3,10 +3,11 @@ import supabase from '../api/supabaseClient';
 export const uploadFile = async ({ file, type, buckit }) => {
   console.log(type);
   console.log(file);
+  const { data: user} = await supabase.auth.getUser();
 
   try {
     // 파일 이름에 타임스탬프 추가
-    const uniqueName = `${Date.now()}_${file.name}`;
+    const uniqueName = `${user.id}_${Date.now()}_${file.name}`;
     const filePath = `${type}/${uniqueName}`;
     const { data, error } = await supabase.storage
       .from(buckit) // 실제 버킷 이름으로 대체

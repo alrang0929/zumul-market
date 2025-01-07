@@ -1,7 +1,8 @@
 import React from 'react';
 import { DivBox } from '../../../styles/box';
-import CardList from '../../../common/CardList';
 import SubTitle from '../../../common/SubTitle';
+import BoardCard from '../../../common/BoardCard';
+import { cardData } from '../../../common/dummyDb';
 
 function RequestList(props) {
   return (
@@ -11,7 +12,7 @@ function RequestList(props) {
           subTitle={'지금 사람을 구하고 있어요!'}
           linkText={'더 보기+'}
         />
-        <CardList type={'board'} />
+        <BoardCard selelcdata={cardData} slice={true} slicecount={6}/>
       </DivBox>
     </>
   );

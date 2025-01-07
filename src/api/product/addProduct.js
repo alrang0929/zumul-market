@@ -1,32 +1,37 @@
-import { saveProductOption } from "../productOption/SaveProductOption";
-import { saveProduct } from "./saveProduct";
-import { uploadFile } from "../../utils/uploadFile";
-import useUserStore from "../../stores/auth/useUserStore";
+import { uploadFile } from '../../utils/uploadFile';
+import { saveProduct } from '../product/saveProduct';
+import { saveProductOption } from '../productOption/SaveProductOption';
 
-export const onSubmit = async (data, navigator, options) => {
-  const user = useUserStore((state) => state.user);
-  const userId = user.id;
+export const onSubmit = async (
+  data,
+  navigator,
+  options,
+  uploadedPaths,
+  user
+) => {
+  const userId = user.id; // user 정보를 통해 userId 가져오기
 
   try {
     console.log('Form Data:', data); // 데이터 확인
     console.log('Options:', options); // 전달된 options 확인
+    console.log('Uploaded Paths:', uploadedPaths); // 업로드된 파일 경로 확인
 
     // 대표 이미지 업로드
     const imagePath = await uploadFile({
-      file: data.title_image, // 업로드할 파일
-      type: 'product',          // 파일 타입
-      buckit: 'product_img',        // 버킷 이름
+      file: data.title_image,
+      type: 'product',
+      buckit: 'product_img',
     });
-    
+
     if (!imagePath) throw new Error('대표 이미지 업로드 실패');
 
     // 상세 이미지 업로드
     const detailImagesPath = [];
     if (data.detail_image) {
       const path = await uploadFile({
-        file: data.detail_image, // 업로드할 파일
-        type: 'product',          // 파일 타입
-        buckit: 'product_img',        // 버킷 이름
+        file: data.detail_image,
+        type: 'product',
+        buckit: 'product_img',
       });
       if (path) detailImagesPath.push(path);
     }
@@ -44,6 +49,7 @@ export const onSubmit = async (data, navigator, options) => {
       document: data.document,
       title_image: imagePath,
       detail_image: detailImagesPath,
+      thumb: uploadedPaths,
     };
 
     console.log('Saving Product:', productData);

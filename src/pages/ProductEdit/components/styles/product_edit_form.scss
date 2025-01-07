@@ -9,6 +9,9 @@
     gap: 1rem;
     padding: 1rem 0;
     .option-wrap {
+      span{
+        width: fit-content;
+      }
       display: flex;
       flex-direction: column;
       ul {
@@ -31,7 +34,7 @@
       }
     }
     .option-number {
-      width: 6rem;
+      width: 4rem;
     }
     .title-img {
       width: 38rem;
@@ -54,14 +57,18 @@
 
     .text-box {
       line-height: 1.6;
-      width: 20rem;
+      width: 10vw;
       
       h6 {
         font-size: 1.4rem;
       }
       span {
         font-size: 1.2rem;
+        width: fit-content;
       }
+    }
+    textarea{
+      width: 70%;
     }
   } //input-wrap
 }

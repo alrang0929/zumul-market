@@ -9,15 +9,10 @@ import { onSubmit } from '../../../api/product/addProduct';
 
 import { useOptionHandler } from '../../../api/productOption/hook/useOptionHandler';
 import { useImageHandler } from '../../../utils/useImageHandler';
-import { MultiImageForm } from './MultiImageForm';
-
-import  useUserStore from '../../../stores/auth/useUserStore';
+// import { ThumbnailHandler } from './ThumnailHandler';
 
 export const ProductAddForm = () => {
-  const user = useUserStore((state) => state.user);
-  console.log("user",user);
   const navigator = useNavigate();
-  const [uploadedPaths, setUploadedPaths] = useState([]);
   const { handleSubmit, setValue, control, register } = useForm({
     defaultValues: {
       title: '',
@@ -35,6 +30,15 @@ export const ProductAddForm = () => {
     },
   });
 
+  const handleAddThumbnail = (e) => {
+    const files = Array.from(e.target.files);
+    const updatedThumbnails = [...thumbnails, ...files];
+    setThumbnails(updatedThumbnails);
+    setValue('thumbnails', updatedThumbnails);
+  };
+
+
+
   const {
     options,
     optionName,
@@ -50,11 +54,13 @@ export const ProductAddForm = () => {
   const { previewImage, fileInputRef, handleImageUpload, handleLinkClick } =
     useImageHandler(setValue);
 
+  const [thumbnails, setThumbnails] = useState([]);
+
   return (
     <FormBox
       className="product-edit-form"
       onSubmit={handleSubmit((data) => {
-        onSubmit(data, navigator, options, uploadedPaths, user);
+        onSubmit(data, navigator, options);
       })}
     >
       <h3>상품 등록</h3>
@@ -82,12 +88,45 @@ export const ProductAddForm = () => {
       </div>
 
       {/* 썸네일 등록 */}
-      <MultiImageForm
-        setValue={setValue}
-        control={control}
-        setUploadedPaths={setUploadedPaths} // 상태 전달
-        uploadedPaths={uploadedPaths} // 현재 값 전달
+      <div className="input-wrap">
+        <div className="text-box">
+          <h6>썸네일 이미지</h6>
+          <span>여러 이미지를 추가할 수 있습니다.</span>
+        </div>
+        <div className="thumbnail-handler">
+      <input
+        type="file"
+        multiple
+        ref={(el) => (fileInputRef.current.thumbnails = el)}
+        onChange={handleAddThumbnail}
+        style={{ display: 'none' }}
       />
+      <Button
+        onClick={(e) => {
+          e.preventDefault();
+          fileInputRef.current.thumbnails.click();
+        }}
+      >
+        썸네일 추가
+      </Button>
+      <ul className="thumbnail-preview">
+        {thumbnails.map((file, index) => (
+          <li key={index} className="thumbnail-item">
+            <div className="img-box">
+            <img
+              src={URL.createObjectURL(file)}
+              alt={`썸네일 ${index + 1}`}
+              className="thumbnail-image"
+            />
+            </div>
+
+          
+          </li>
+        ))}
+      </ul>
+    </div>
+      </div>
+
       {/* 상품명 */}
       <div className="input-wrap">
         <div className="text-box">

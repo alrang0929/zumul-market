@@ -1,42 +1,47 @@
-.board-card {
-  cursor: pointer;
-  flex: 1 1 calc(40% - 1rem);
+.board-card-wrap {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
   gap: 1rem;
-  border-radius: 2rem;
-  background-color: #f9f9f9;
-  padding: 2rem;
-  .title {
-    font-size: 1.8rem;
-    font-weight: 600;
-
-    display: -webkit-box; /* Flexbox 대신 Webkit 기반의 box model 사용 */
-    -webkit-line-clamp: 2; /* 표시할 줄 수 */
-    -webkit-box-orient: vertical; /* 박스 방향을 수직으로 설정 */
-    overflow: hidden; /* 넘치는 텍스트를 숨김 */
-    text-overflow: ellipsis; /* 넘치는 텍스트에 ... 추가 */
-  }
-  .docs {
-    font-size: 1.6rem;
-    display: -webkit-box; /* Flexbox 대신 Webkit 기반의 box model 사용 */
-    -webkit-line-clamp: 2; /* 표시할 줄 수 */
-    -webkit-box-orient: vertical; /* 박스 방향을 수직으로 설정 */
-    overflow: hidden; /* 넘치는 텍스트를 숨김 */
-    text-overflow: ellipsis; /* 넘치는 텍스트에 ... 추가 */
-  }
-  .info-wrap {
+  .board-card {
+    cursor: pointer;
+    flex: 1 1 calc(40% - 1rem);
     display: flex;
-    gap: 1.5rem;
-    align-items: center;
-    font-size: 1.4rem;
+    flex-direction: column;
+    gap: 1rem;
+    border-radius: 2rem;
+    background-color: #f9f9f9;
+    padding: 2rem;
+    .title {
+      font-size: 1.8rem;
+      font-weight: 600;
 
-    .price-box,
-    .time-box {
-      color: #797979;
+      display: -webkit-box; /* Flexbox 대신 Webkit 기반의 box model 사용 */
+      -webkit-line-clamp: 2; /* 표시할 줄 수 */
+      -webkit-box-orient: vertical; /* 박스 방향을 수직으로 설정 */
+      overflow: hidden; /* 넘치는 텍스트를 숨김 */
+      text-overflow: ellipsis; /* 넘치는 텍스트에 ... 추가 */
+    }
+    .docs {
+      font-size: 1.6rem;
+      display: -webkit-box; /* Flexbox 대신 Webkit 기반의 box model 사용 */
+      -webkit-line-clamp: 2; /* 표시할 줄 수 */
+      -webkit-box-orient: vertical; /* 박스 방향을 수직으로 설정 */
+      overflow: hidden; /* 넘치는 텍스트를 숨김 */
+      text-overflow: ellipsis; /* 넘치는 텍스트에 ... 추가 */
+    }
+    .info-wrap {
       display: flex;
+      gap: 1.5rem;
       align-items: center;
-      gap: 0.5rem;
+      font-size: 1.4rem;
+
+      .price-box,
+      .time-box {
+        color: #797979;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
     }
   }
 }
