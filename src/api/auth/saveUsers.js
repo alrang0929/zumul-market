@@ -19,6 +19,7 @@ export const saveUser = (user, navigator) => {
     .then((hashedPassword) => {
       // 이미지 업로드
       return uploadFile({
+        userId: user.id,
         file: user.profile_image, // 업로드할 파일
         type: 'profile', // 파일 타입
         buckit: 'profile_img', // 버킷 이름

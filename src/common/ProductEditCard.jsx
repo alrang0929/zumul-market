@@ -7,7 +7,7 @@ import { DeleteButton } from './DeleteButton';
 import { EditButton } from './EditButton';
 import { ImageLoader } from '../utils/ImageLoder';
 
-const ProductEditCard = ({ key, data, linktext }) => {
+const ProductEditCard = ({ data, linktext }) => {
   console.log('data', data);
   // const data = ProductEditDb;
   const STATUS_TEXT = { TURE: '판매중', FALSE: '판매종료/예정' };

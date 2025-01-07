@@ -15,10 +15,9 @@ import  useUserStore from '../../../stores/auth/useUserStore';
 
 export const ProductAddForm = () => {
   const user = useUserStore((state) => state.user);
-  console.log("user",user);
+  // console.log("user",user);
   const navigator = useNavigate();
-  const [uploadedPaths, setUploadedPaths] = useState([]);
-  const { handleSubmit, setValue, control, register } = useForm({
+  const { handleSubmit, setValue,getValues , control, register } = useForm({
     defaultValues: {
       title: '',
       category: 'handmade',
@@ -31,7 +30,7 @@ export const ProductAddForm = () => {
       title_image: null,
       detail_image: null,
       sellStatus: false,
-      thumbnails: [],
+      uploadedPaths: [],
     },
   });
 
@@ -54,7 +53,9 @@ export const ProductAddForm = () => {
     <FormBox
       className="product-edit-form"
       onSubmit={handleSubmit((data) => {
+        const uploadedPaths = getValues('uploadedPaths');
         onSubmit(data, navigator, options, uploadedPaths, user);
+        console.log('Uploaded Paths:', uploadedPaths); // 확인
       })}
     >
       <h3>상품 등록</h3>
@@ -84,9 +85,8 @@ export const ProductAddForm = () => {
       {/* 썸네일 등록 */}
       <MultiImageForm
         setValue={setValue}
+        getValues={getValues}
         control={control}
-        setUploadedPaths={setUploadedPaths} // 상태 전달
-        uploadedPaths={uploadedPaths} // 현재 값 전달
       />
       {/* 상품명 */}
       <div className="input-wrap">
@@ -301,7 +301,6 @@ export const ProductAddForm = () => {
               옵션 추가
             </Button>
           </div>
-          {console.log(options)}
           <ul
             style={
               options.length == 0 ? { display: 'none' } : { display: 'block' }

@@ -18,6 +18,7 @@ export const onSubmit = async (
 
     // 대표 이미지 업로드
     const imagePath = await uploadFile({
+      userId:userId,
       file: data.title_image,
       type: 'product',
       buckit: 'product_img',
@@ -35,7 +36,17 @@ export const onSubmit = async (
       });
       if (path) detailImagesPath.push(path);
     }
-
+    const thumbnailPath = [];
+    if (uploadedPaths && uploadedPaths.length > 0) {
+      for (const file of uploadedPaths) {
+        const path = await uploadFile({
+          file,
+          type: 'product',
+          buckit: 'product_img',
+        });
+        if (path) thumbnailPath.push(path); // 업로드된 파일 경로 저장
+      }
+    }
     // product 테이블에 데이터 추가
     const productData = {
       title: data.title,
@@ -49,7 +60,7 @@ export const onSubmit = async (
       document: data.document,
       title_image: imagePath,
       detail_image: detailImagesPath,
-      thumb: uploadedPaths,
+      thumb: thumbnailPath,
     };
 
     console.log('Saving Product:', productData);

@@ -22,7 +22,7 @@ const ProductDetail = () => {
     <>
       <DivBox className="product-info-wrap">
         <ThumbSlider selectdata={selectedProduct} />
-        <ProductInfo selecdata={selectedProduct} />
+        <ProductInfo selectdata={selectedProduct} />
       </DivBox>
     </>
   );

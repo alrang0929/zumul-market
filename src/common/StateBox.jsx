@@ -10,7 +10,6 @@ const StateBox = ({ truetext, falsetext, status }) => {
     fontWeight: 600,
     fontSize: '1.1rem',
   };
-  console.log('status', status);
 
   return (
     <>
