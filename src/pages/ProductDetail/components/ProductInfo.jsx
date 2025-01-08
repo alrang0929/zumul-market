@@ -51,7 +51,7 @@ export const ProductInfo = ({ selectdata }) => {
             <MdOutlineFavorite className="icon" />
           ) : (
             <MdOutlineFavoriteBorder
-              className={`icon activ-favorite}`}
+              className={`icon activ-favorit}`}
             />
           )}
         </Button>

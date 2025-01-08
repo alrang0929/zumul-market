@@ -1,5 +1,4 @@
 .option-form {
-
   .price {
     display: flex;
   }
@@ -14,16 +13,16 @@
       align-items: center;
       gap: 2rem;
       font-size: 1.4rem;
-      div{
+      div {
         width: 13rem;
       }
-      .price-wrap{
+      .price-wrap {
         font-size: 1.4rem;
-        .price{
+        .price {
           font-size: 1.6rem;
         }
       }
-      input{
+      input {
         width: 3rem;
       }
       button {
@@ -32,15 +31,15 @@
       }
     }
   }
-  .total-price{
+  .total-price {
     padding: 1rem;
 
     display: flex;
     align-items: center;
-    gap: 2rem;
+    gap: 1rem;
     justify-content: flex-end;
     font-size: 1.4rem;
-    span{
+    span {
       font-size: 1.4rem;
     }
   }

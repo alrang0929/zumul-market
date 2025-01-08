@@ -7,9 +7,11 @@ import { DivBox } from '../../styles/box';
 import { useParams } from 'react-router-dom';
 import useProductStore from '../../stores/product/useProductStore';
 import { DetailInfo } from './components/DetailInfo';
+import { ProductPickList } from './components/ProductPickList';
 const ProductDetail = () => {
   const { id } = useParams(); // URL 파라미터로부터 productId 가져오기
-  const { selectedProduct, fetchProductDetail, clearSelectedProduct } = useProductStore();
+  const { selectedProduct, fetchProductDetail, clearSelectedProduct } =
+    useProductStore();
 
   useEffect(() => {
     console.log('id', id);
@@ -18,7 +20,8 @@ const ProductDetail = () => {
   }, [id, fetchProductDetail, clearSelectedProduct]);
 
   if (!selectedProduct) return <p>Loading...</p>;
-  console.log('디테일 페이지 selectedProduct', selectedProduct);
+  // console.log('디테일 페이지 selectedProduct', selectedProduct);
+
   return (
     <>
       <DivBox className="product-info-wrap">
@@ -26,7 +29,10 @@ const ProductDetail = () => {
         <ProductInfo selectdata={selectedProduct} />
       </DivBox>
       <DivBox className="detail-image-wrap">
-      <DetailInfo selectdata={selectedProduct}/>
+        <DetailInfo selectdata={selectedProduct} />
+      </DivBox>
+      <DivBox className="userpick-list">
+        <ProductPickList />
       </DivBox>
     </>
   );

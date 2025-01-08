@@ -6,7 +6,7 @@ const Box = {
   ContentBox: css`
     width: 110rem;
     margin: 0 auto;
-    padding: 5rem 0;
+    padding-bottom: 10rem;
   `,
 };
 
