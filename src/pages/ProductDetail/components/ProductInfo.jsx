@@ -1,26 +1,35 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from '../../../styles/StyleButton';
 import { addComma } from '../../../utils/commonFn';
 
 import ProductOptions from './OptionSelect';
-import { useForm } from 'react-hook-form';
+import { useForm, Controller } from 'react-hook-form';
 
 import { MdOutlineFavorite, MdOutlineFavoriteBorder } from 'react-icons/md';
 import { IoShareSocialOutline } from 'react-icons/io5';
-import { CiCreditCard2 } from 'react-icons/ci';
+import { IoCardOutline } from 'react-icons/io5';
 import { BsCart3 } from 'react-icons/bs';
 import './style/product_info.scss';
 
 export const ProductInfo = ({ selectdata }) => {
   const [activeClick, setActiveClick] = useState(false);
+  const { setValue, getValues, control, watch } = useForm({
+    defaultValues: {
+      totalPrice: 0,
+    },
+  });
+
+  const totalPrice = watch('totalPrice');
 
   const handleClick = () => {
     setActiveClick((prev) => !prev);
   };
 
-  console.log('selectdata', selectdata);
+  useEffect(() => {
+    console.log('Total Price:', totalPrice);
+  }, [totalPrice]);
 
-  const { setValue, getValues, control } = useForm(ProductOptions);
+  console.log('selectdata', selectdata);
 
   return (
     <div className="product-info">
@@ -42,7 +51,7 @@ export const ProductInfo = ({ selectdata }) => {
             <MdOutlineFavorite className="icon" />
           ) : (
             <MdOutlineFavoriteBorder
-              className={`icon ${activeClick ? 'activ-favorit' : ''}`}
+              className={`icon activ-favorite}`}
             />
           )}
         </Button>
@@ -55,16 +64,14 @@ export const ProductInfo = ({ selectdata }) => {
           getValues={getValues}
           control={control}
         />
-        <div className="button-wrap">
-          <Button buttontype={'rectangleMain'}  className='buy-button'>
-            <span>
-              구매하기
-              <CiCreditCard2 />
-            </span>
+        <div className="button-wrap" style={{display: 'flex', gap:'1rem', marginTop: '4rem'}}>
+          <Button buttontype={'mainBasicIcon'} className="buy-button">
+            <span>구매하기</span>
+            <IoCardOutline className="icon" />
           </Button>
-          <Button buttontype={'rectangleMain'} className='cart-button'>
+          <Button buttontype={'subBasicIcon'} className="cart-button">
             <span>장바구니</span>
-            <BsCart3 />
+            <BsCart3 className="icon" />
           </Button>
         </div>
       </form>

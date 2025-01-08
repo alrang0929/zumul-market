@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { SelectBox } from '../../../styles/box';
 import { Button } from '../../../styles/StyleButton';
 import './style/option_select.scss';
@@ -6,7 +6,7 @@ import { addComma } from '../../../utils/commonFn';
 import { RiDeleteBinLine } from 'react-icons/ri';
 import { HiMinusSmall, HiPlusSmall } from 'react-icons/hi2';
 
-export const ProductOptions = ({ product }) => {
+export const ProductOptions = ({ product, setValue }) => {
   console.log('optionpabe product', product);
 
   const [selectedOption, setSelectedOption] = useState('');
@@ -29,6 +29,10 @@ export const ProductOptions = ({ product }) => {
     }, 0);
     return basePrice + optionsPrice;
   };
+
+  useEffect(() => {
+    setValue('totalPrice', calculateTotalPrice());
+  }, [count, optionList, setValue]);
 
   const handleAddOption = (optionId) => {
     const selected = options.find((opt) => opt.id === optionId);
@@ -54,7 +58,6 @@ export const ProductOptions = ({ product }) => {
       <SelectBox
         className="option-select"
         value={selectedOption}
-        selectStyles={'SelectBox'}
         onChange={(e) => {
           handleAddOption(e.target.value);
         }}

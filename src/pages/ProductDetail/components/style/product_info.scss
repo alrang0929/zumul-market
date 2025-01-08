@@ -34,10 +34,12 @@
     gap: 3rem;
     .icon {
       font-size: 2.4rem;
-      color: #B3B3B3;
-      &.activ-favorit{
-          color: #FF008C;
-      }
+      color: #b3b3b3;
+    }
+  }
+  .button-wrap {
+    button {
+      width: 100%;
     }
   }
 }

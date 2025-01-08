@@ -6,6 +6,7 @@ import './style/product_detail.scss';
 import { DivBox } from '../../styles/box';
 import { useParams } from 'react-router-dom';
 import useProductStore from '../../stores/product/useProductStore';
+import { DetailInfo } from './components/DetailInfo';
 const ProductDetail = () => {
   const { id } = useParams(); // URL 파라미터로부터 productId 가져오기
   const { selectedProduct, fetchProductDetail, clearSelectedProduct } = useProductStore();
@@ -23,6 +24,9 @@ const ProductDetail = () => {
       <DivBox className="product-info-wrap">
         <ThumbSlider selectdata={selectedProduct} />
         <ProductInfo selectdata={selectedProduct} />
+      </DivBox>
+      <DivBox className="detail-image-wrap">
+      <DetailInfo selectdata={selectedProduct}/>
       </DivBox>
     </>
   );

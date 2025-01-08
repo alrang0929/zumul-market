@@ -28,6 +28,7 @@ export const onSubmit = async (
 
     // 상세 이미지 업로드
     const detailImagesPath = [];
+    console.log('Detail Image:', data.detail_image);
     if (data.detail_image) {
       const path = await uploadFile({
         file: data.detail_image,
