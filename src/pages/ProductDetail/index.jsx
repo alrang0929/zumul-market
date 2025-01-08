@@ -17,7 +17,7 @@ const ProductDetail = () => {
   }, [id, fetchProductDetail, clearSelectedProduct]);
 
   if (!selectedProduct) return <p>Loading...</p>;
-
+  console.log('디테일 페이지 selectedProduct', selectedProduct);
   return (
     <>
       <DivBox className="product-info-wrap">

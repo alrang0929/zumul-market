@@ -6,6 +6,7 @@ import { ProductThumbCard } from '../../../common/ProductThumbCard';
 function PopularProductList(props) {
   const { products } = useProducts();
 
+
   return (
     <>
       <DivBox className="pupular-product-list">

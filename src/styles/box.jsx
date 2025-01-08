@@ -24,6 +24,7 @@ const Input = {
 
 const Select = {
   SelectBox: css`
+    width: 100%;
     padding: 1.5rem;
     border: 1px solid #ededed;
   `,
@@ -68,7 +69,7 @@ export const DivBox = styled.div`
   ${(props) => Box[props.divStyles] || Box.ContentBox}
 `;
 export const SelectBox = styled.select`
-  ${(props) => Select[props.divStyles] || Select.SelectBox}
+  ${(props) => Select[props.selectStyles] || Select.SelectBox}
 `;
 
 export const InputBox = styled.input`

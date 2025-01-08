@@ -4,7 +4,7 @@ export const fetchDetailProduct = async (productId) => {
   try {
     const { data, error } = await supabase
       .from('product') // 테이블 이름
-      .select('*') // 필요한 컬럼 지정
+      .select('*, users(profile_image, type, name), product_option(*)')
       .eq('id', productId); // id로 데이터 필터링
 
     if (error) {
