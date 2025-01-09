@@ -7,8 +7,10 @@ import { IoIosSearch } from 'react-icons/io';
 import { IoCart, IoHeart } from 'react-icons/io5';
 import useUserStore from '../../stores/auth/useUserStore';
 import LogoutButton from './LogoutBtn';
+import { useCartStore } from '../../stores/cart/useCartStore';
 
 function Header(props) {
+  const { toggleCart } = useCartStore();
   const user = useUserStore((state) => state.user);
   const navigator = useNavigate();
   
@@ -33,7 +35,11 @@ function Header(props) {
         <Button buttontype={'singleIcon'}>
           <IoHeart className="icon" />
         </Button>
-        <Button buttontype={'singleIcon'}>
+
+        <Button 
+        buttontype={'singleIcon'}
+        onClick = {toggleCart}
+        >
           <IoCart className="icon" />
         </Button>
       </div>
