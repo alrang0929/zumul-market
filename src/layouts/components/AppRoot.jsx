@@ -5,10 +5,10 @@ import { CartModal } from './CartModal';
 function AppRoot(props) {
   return (
     <>
-      <main>
+      <main style={{ position: 'relative' }}>
         <Outlet />
-      </main>
       <CartModal />
+      </main>
     </>
   );
 }

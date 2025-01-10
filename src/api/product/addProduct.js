@@ -36,6 +36,7 @@ export const onSubmit = async (
         buckit: 'product_img',
       });
       if (path) detailImagesPath.push(path);
+      console.log("path",path); //여기서 부터 추적
     }
     const thumbnailPath = [];
     if (uploadedPaths && uploadedPaths.length > 0) {
@@ -59,6 +60,7 @@ export const onSubmit = async (
       price: data.price,
       owner_id: userId,
       document: data.document,
+      shipping_fee: data.shipping_fee,
       title_image: imagePath,
       detail_image: detailImagesPath,
       thumb: thumbnailPath,

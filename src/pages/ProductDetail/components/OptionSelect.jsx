@@ -7,44 +7,41 @@ import { RiDeleteBinLine } from 'react-icons/ri';
 import { HiMinusSmall, HiPlusSmall } from 'react-icons/hi2';
 
 export const ProductOptions = ({ product, setValue }) => {
-  console.log('optionpabe product', product);
-
   const [selectedOption, setSelectedOption] = useState('');
   const [optionList, setOptionList] = useState([]);
-  const [count, setCount] = useState(1);
+  const [count, setCount] = useState(1); // 현재 상품의 수량
 
   const options = product.product_option;
 
-  const plusCount = () => {
-    setCount(count + 1);
-  };
-  const minusCount = () => {
-    setCount(count - 1);
-  };
+  // 현재 상품 수량 증가
+  const plusCount = () => setCount((prev) => prev + 1);
 
+  // 현재 상품 수량 감소
+  const minusCount = () => setCount((prev) => Math.max(1, prev - 1));
+
+  // 옵션 수량 계산
   const calculateTotalPrice = () => {
-    const basePrice = product.price * count;
+    const basePrice = product.price * count; // 현재 상품 가격
     const optionsPrice = optionList.reduce((total, option) => {
-      return total + option.add_cost.price * option.count; // 이미 계산된 값을 활용
+      return total + option.add_cost.price * option.count;
     }, 0);
     return basePrice + optionsPrice;
   };
 
-  useEffect(() => {
-    setValue('totalPrice', calculateTotalPrice());
-  }, [count, optionList, setValue]);
-
+  // 선택된 옵션 추가
   const handleAddOption = (optionId) => {
     const selected = options.find((opt) => opt.id === optionId);
     if (selected && !optionList.find((opt) => opt.id === optionId)) {
-      setOptionList((prev) => [...prev, { ...selected, count: 1 }]); // count 초기값 1로 설정
+      setOptionList((prev) => [...prev, { ...selected, count: 1 }]);
     }
   };
 
+  // 옵션 제거
   const handleRemoveOption = (optionId) => {
     setOptionList((prev) => prev.filter((item) => item.id !== optionId));
   };
 
+  // 옵션 수량 변경
   const handleCountChange = (optionId, newCount) => {
     setOptionList((prev) =>
       prev.map((opt) =>
@@ -53,14 +50,18 @@ export const ProductOptions = ({ product, setValue }) => {
     );
   };
 
+  // useEffect로 현재 상품과 옵션 데이터를 useForm에 전달
+  useEffect(() => {
+    setValue('productCount', count); // 현재 상품 수량 전달
+    setValue('options', optionList); // 옵션 리스트 전달
+  }, [count, optionList, setValue]);
+
   return (
     <>
       <SelectBox
         className="option-select"
         value={selectedOption}
-        onChange={(e) => {
-          handleAddOption(e.target.value);
-        }}
+        onChange={(e) => handleAddOption(e.target.value)}
       >
         <option value="" disabled>
           옵션 선택
@@ -76,12 +77,16 @@ export const ProductOptions = ({ product, setValue }) => {
         <li>
           <div className="name">{product.title}</div>
           <div className="quantity">
-            <input type="number" value={count} />
+            <input
+              type="number"
+              value={count}
+              onChange={(e) => setCount(Number(e.target.value))}
+            />
             <Button
               type="button"
               buttontype={'iconButton'}
               className="plus"
-              onClick={(e) => plusCount(e.target.value)}
+              onClick={plusCount}
             >
               <HiPlusSmall />
             </Button>
@@ -89,7 +94,7 @@ export const ProductOptions = ({ product, setValue }) => {
               type="button"
               buttontype={'iconButton'}
               className="minus"
-              onClick={(e) => minusCount(e.target.value)}
+              onClick={minusCount}
             >
               <HiMinusSmall />
             </Button>
@@ -101,11 +106,9 @@ export const ProductOptions = ({ product, setValue }) => {
         </li>
         {optionList.map((option) => (
           <li key={option.id}>
-            {/* 옵션명 */}
             <div className="name">
               <span>{option.name}</span>
             </div>
-            {/* 수량 */}
             <div className="quantity">
               <input
                 type="number"
@@ -130,7 +133,6 @@ export const ProductOptions = ({ product, setValue }) => {
               >
                 <HiMinusSmall />
               </Button>
-              {/* 옵션 가격 */}
             </div>
             <div className="price-wrap">
               <span className="price">
@@ -139,7 +141,7 @@ export const ProductOptions = ({ product, setValue }) => {
               <span>원</span>
             </div>
             <Button
-              type="button" // 기본 동작 방지
+              type="button"
               buttontype={'iconButton'}
               onClick={() => handleRemoveOption(option.id)}
             >
@@ -148,14 +150,13 @@ export const ProductOptions = ({ product, setValue }) => {
           </li>
         ))}
       </ul>
-        <div className="total-price">
-          <span>총 가격</span>
-          <div className="price-wrap">
-            <span className='price'>{addComma(calculateTotalPrice())}</span>
-            <span>원</span>
-          </div>
-
+      <div className="total-price">
+        <span>총 가격</span>
+        <div className="price-wrap">
+          <span className="price">{addComma(calculateTotalPrice())}</span>
+          <span>원</span>
         </div>
+      </div>
     </>
   );
 };

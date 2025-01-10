@@ -1,35 +1,51 @@
-import React, { useState, useEffect } from 'react';
-import { Button } from '../../../styles/StyleButton';
+import React from 'react';
+import { useForm } from 'react-hook-form';
+import { saveCartItem } from '../../../api/cart/cart';
+import useUserStore from '../../../stores/auth/useUserStore';
+import ProductOptions from './OptionSelect';
 import { addComma } from '../../../utils/commonFn';
 
-import ProductOptions from './OptionSelect';
-import { useForm, Controller } from 'react-hook-form';
-
-import { MdOutlineFavorite, MdOutlineFavoriteBorder } from 'react-icons/md';
-import { IoShareSocialOutline } from 'react-icons/io5';
-import { IoCardOutline } from 'react-icons/io5';
+import { Button } from '../../../styles/StyleButton';
+import { FaRegCreditCard } from 'react-icons/fa6';
 import { BsCart3 } from 'react-icons/bs';
 import './style/product_info.scss';
 
 export const ProductInfo = ({ selectdata }) => {
-  const [activeClick, setActiveClick] = useState(false);
-  const { setValue, getValues, control, watch } = useForm({
+  const user = useUserStore((state) => state.user);
+  const {
+    handleSubmit,
+    setValue,
+    control,
+    formState: { errors },
+  } = useForm({
     defaultValues: {
-      totalPrice: 0,
+      basicProductCount: 1, // 기본 상품 수량
+      options: [], // 옵션 리스트
+      totalPrice: 0, // 총 가격
     },
   });
 
-  const totalPrice = watch('totalPrice');
+  const onSubmit = (data) => {
+    const { basicProductCount, options, totalPrice } = data;
 
-  const handleClick = () => {
-    setActiveClick((prev) => !prev);
+    const cartData = {
+      user_id: user.id, // 실제 로그인 사용자 ID
+      product: selectdata,
+      basicProductCount,
+      options,
+      totalPrice,
+    };
+
+    saveCartItem(cartData).then((result) => {
+      if (result.error) {
+        console.error('Failed to save cart item:', result.error);
+      } else {
+        console.log('Cart item saved successfully:', result.data);
+      }
+    });
+
+    console.log('장바구니 데이터:', cartData);
   };
-
-  useEffect(() => {
-    console.log('Total Price:', totalPrice);
-  }, [totalPrice]);
-
-  console.log('selectdata', selectdata);
 
   return (
     <div className="product-info">
@@ -42,34 +58,36 @@ export const ProductInfo = ({ selectdata }) => {
         <span className="price">{addComma(selectdata.price)}</span>
         <span>원</span>
       </div>
-      <div className="icon-wrap">
-        <Button buttontype={'iconButton'}>
-          <IoShareSocialOutline className="icon" />
-        </Button>
-        <Button buttontype={'iconButton'} onClick={handleClick}>
-          {activeClick ? (
-            <MdOutlineFavorite className="icon" />
-          ) : (
-            <MdOutlineFavoriteBorder
-              className={`icon activ-favorit}`}
-            />
-          )}
-        </Button>
-      </div>
 
-      <form className="option-form">
+      {/* 옵션 폼 */}
+      <form onSubmit={handleSubmit(onSubmit)} className="option-form">
         <ProductOptions
           product={selectdata}
           setValue={setValue}
-          getValues={getValues}
           control={control}
         />
-        <div className="button-wrap" style={{display: 'flex', gap:'1rem', marginTop: '4rem'}}>
-          <Button buttontype={'mainBasicIcon'} className="buy-button">
+
+        {/* 에러 메시지 */}
+        {errors.options && <p className="error">{errors.options.message}</p>}
+
+        {/* 버튼 */}
+        <div
+          className="button-wrap"
+          style={{ display: 'flex', gap: '1rem', marginTop: '4rem' }}
+        >
+          <Button
+            type="submit"
+            buttontype={'mainBasicIcon'}
+            className="buy-button"
+          >
             <span>구매하기</span>
-            <IoCardOutline className="icon" />
+            <FaRegCreditCard className="icon" />
           </Button>
-          <Button buttontype={'subBasicIcon'} className="cart-button">
+          <Button
+            type="submit"
+            buttontype={'subBasicIcon'}
+            className="cart-button"
+          >
             <span>장바구니</span>
             <BsCart3 className="icon" />
           </Button>

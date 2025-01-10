@@ -5,7 +5,9 @@ import { ImageLoader } from '../utils/ImageLoder';
 import { useNavigate } from 'react-router-dom';
 
 export function ProductThumbCard({ selectdata, slice, slicecount }) {
-  console.log(selectdata);
+  
+  // console.log(selectdata);
+
   const SELECT_DATA = selectdata;
   const PRODUCT_BUCKIT = 'product_img';
   const PROFILE_BUCKIT = 'profile_img';

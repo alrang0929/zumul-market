@@ -1,9 +1,8 @@
 import supabase from '../api/supabaseClient';
 
-export const uploadFile = async ({ file, type, buckit, userId }) => {
+export const uploadFile = async ({ file, type, buckit,}) => {
   console.log(type);
   console.log(file);
-  // console.log(userId);
 
   try {
     // 파일 이름에 타임스탬프 추가

@@ -18,7 +18,7 @@ import {
 import { ImageLoader } from '../../../utils/ImageLoder';
 
 export default function ThumbSlider({selectdata}) {
-  console.log("selectdata",typeof selectdata);
+  // console.log("selectdata",typeof selectdata);
   const SELECT_DATA = selectdata.thumb;
   return (
     <>

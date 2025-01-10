@@ -1,13 +1,15 @@
 .cart-modal {
   position: absolute;
   left: 71%;
-  top: 2%;
+  top: 0%;
   z-index: 9;
   border-radius: 0 0 2rem 2rem;
   width: 20%;
   padding: 2rem;
   background-color: #fff;
   .cart-wrap {
+    overflow: auto;
+    height: 43rem;
     .title {
         display: flex;
         justify-content: space-between;

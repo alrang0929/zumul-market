@@ -8,7 +8,9 @@ import { useParams } from 'react-router-dom';
 import useProductStore from '../../stores/product/useProductStore';
 import { DetailInfo } from './components/DetailInfo';
 import { ProductPickList } from './components/ProductPickList';
+import { useCartStore } from '../../stores/cart/useCartStore';
 const ProductDetail = () => {
+  const { addToCart } = useCartStore();
   const { id } = useParams(); // URL 파라미터로부터 productId 가져오기
   const { selectedProduct, fetchProductDetail, clearSelectedProduct } =
     useProductStore();
