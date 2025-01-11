@@ -7,14 +7,19 @@ import './style/cart_modal.scss';
 import { BuyButton } from './BuyButton';
 import useUserStore from '../../stores/auth/useUserStore';
 import { ImageLoader } from '../../utils/ImageLoder';
+import { useNavigate } from 'react-router-dom';
 export const CartModal = () => {
   const { isCartOpen, cartItems, toggleCart, loadCartItems } = useCartStore();
   const { user } = useUserStore((state) => state);
-
+  const navigator = useNavigate();
   useEffect(() => {
     if (user?.id) {
       console.log('Calling loadCartItems with userId:', user.id);
       loadCartItems(user.id);
+    }
+    else{
+      alert('로그인이 필요한 서비스입니다.');
+      navigator('/login');
     }
   }, [user?.id, loadCartItems]);
 
