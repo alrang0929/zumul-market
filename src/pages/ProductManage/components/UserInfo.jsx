@@ -5,7 +5,6 @@ import "./styles/user_info.scss";
 import UserStatusCard from '../../../common/UserStatusList';
 import { useNavigate } from 'react-router-dom';
 import useUserStore from '../../../stores/auth/useUserStore';
-import { ImageLoader } from '../../../utils/ImageLoder';
 
 export const UserInfoWrap = () => {
   const user = useUserStore((state) => state.user);
@@ -16,7 +15,7 @@ export const UserInfoWrap = () => {
     <div className="userinfo-wrap">
       <div className="profile">
         <div className="profile-img">
-          <ImageLoader imagePath={user.profile_image} buckit={"profile_img"} altText={"프로필 이미지"}/>
+          <img src={user.profile_image} alt={"프로필 이미지"} />
         </div>
         <h3>{user.name}</h3>
         <div className="date-wrap">
