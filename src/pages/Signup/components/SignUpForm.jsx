@@ -66,6 +66,7 @@ const SignUpForm = ({ onSubmit }) => {
       console.error('회원가입 중 에러 발생:', error.message);
     } finally {
       setLoading(false);
+      navigator('/');
     }
   };
 
@@ -136,7 +137,7 @@ const SignUpForm = ({ onSubmit }) => {
 
       {/* 제출 버튼 */}
       <Button buttontype={'submit'} type="submit" disabled={loading}>
-        {loading ? '회원가입 중...' : '회원가입 완료' + navigator('/')}
+        {loading ? '회원가입 중...' : '회원가입 완료'}
       </Button>
     </FormBox>
   );
