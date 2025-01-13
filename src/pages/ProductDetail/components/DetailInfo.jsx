@@ -3,13 +3,14 @@ import './style/detail_image.scss';
 import { Button } from '../../../styles/StyleButton';
 import SubTitle from '../../../common/SubTitle';
 export const DetailInfo = ({ selectdata }) => {
+  console.log('selectdata', selectdata);
   const [clickActive, setClickActive] = useState(false);
   const handlerViewAllImages = () => {
     setClickActive(true);
   };
   return (
     <>
-    <SubTitle subTitle={"상세 이미지"}/>
+      <SubTitle subTitle={'상세 이미지'} />
       <div
         className="detail-image-box"
         style={clickActive ? { height: 'fit-content' } : { height: '20rem' }}
@@ -26,7 +27,9 @@ export const DetailInfo = ({ selectdata }) => {
             더 보기{' '}
           </Button>
         </div>
-        <img src="/images/img04.jpg" alt="디테일 이미지" />
+        {selectdata.detail_image.map((img, index) => (
+          <img src={img} alt={'상세이미지' + index} />
+        ))}
       </div>
     </>
   );

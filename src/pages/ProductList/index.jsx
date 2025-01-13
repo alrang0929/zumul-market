@@ -14,7 +14,7 @@ export const ProductListPage = () => {
   
   return (
     <>
-      <DivBox className="product-list">
+      <DivBox className="product-list" style={{padding:"10rem 0"}}>
         <div className="title-wrap" style={{ display: 'flex', justifyContent:"space-between"}}>
           <CountSubTitle
             selectdata={products}

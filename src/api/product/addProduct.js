@@ -1,6 +1,7 @@
 import { uploadFile } from '../../utils/uploadFile';
 import { saveProduct } from '../product/saveProduct';
 import { saveProductOption } from '../productOption/SaveProductOption';
+import supabase from '../supabaseClient';
 
 export const onSubmit = async (
   data,
@@ -12,13 +13,13 @@ export const onSubmit = async (
   const userId = user.id; // user 정보를 통해 userId 가져오기
 
   try {
-    console.log('Form Data:', data); // 데이터 확인
-    console.log('Options:', options); // 전달된 options 확인
-    console.log('Uploaded Paths:', uploadedPaths); // 업로드된 파일 경로 확인
+    console.log('Form Data:', data);
+    console.log('Options:', options);
+    console.log('Uploaded Paths:', uploadedPaths);
 
     // 대표 이미지 업로드
     const imagePath = await uploadFile({
-      userId:userId,
+      userId: userId,
       file: data.title_image,
       type: 'product',
       buckit: 'product_img',
@@ -26,18 +27,31 @@ export const onSubmit = async (
 
     if (!imagePath) throw new Error('대표 이미지 업로드 실패');
 
+    // 대표 이미지 Public URL 생성
+    const { data: publicData } = supabase.storage
+      .from('product_img')
+      .getPublicUrl(imagePath);
+    const publicImagePath = publicData?.publicUrl;
+
+    if (!publicImagePath) throw new Error('대표 이미지 URL 생성 실패');
+
     // 상세 이미지 업로드
     const detailImagesPath = [];
-    console.log('Detail Image:', data.detail_image);
     if (data.detail_image) {
       const path = await uploadFile({
         file: data.detail_image,
         type: 'product',
         buckit: 'product_img',
       });
-      if (path) detailImagesPath.push(path);
-      console.log("path",path); //여기서 부터 추적
+      if (path) {
+        const { data: detailPublicData } = supabase.storage
+          .from('product_img')
+          .getPublicUrl(path);
+        detailImagesPath.push(detailPublicData?.publicUrl);
+      }
     }
+
+    // 썸네일 이미지 업로드
     const thumbnailPath = [];
     if (uploadedPaths && uploadedPaths.length > 0) {
       for (const file of uploadedPaths) {
@@ -46,9 +60,15 @@ export const onSubmit = async (
           type: 'product',
           buckit: 'product_img',
         });
-        if (path) thumbnailPath.push(path); // 업로드된 파일 경로 저장
+        if (path) {
+          const { data: thumbPublicData } = supabase.storage
+            .from('product_img')
+            .getPublicUrl(path);
+          thumbnailPath.push(thumbPublicData?.publicUrl);
+        }
       }
     }
+
     // product 테이블에 데이터 추가
     const productData = {
       title: data.title,
@@ -61,7 +81,7 @@ export const onSubmit = async (
       owner_id: userId,
       document: data.document,
       shipping_fee: data.shipping_fee,
-      title_image: imagePath,
+      title_image: publicImagePath, // 변환된 URL 사용
       detail_image: detailImagesPath,
       thumb: thumbnailPath,
     };

@@ -17,9 +17,9 @@ export function ProductThumbCard({ selectdata, slice, slicecount }) {
   return (
     <>
       {slice ? (
-        <div className="product-card-wrap">
+        <ul className="product-card-wrap">
           {SELECT_DATA.slice(0, slicecount).map((data, index) => (
-            <div
+            <li
               className="product-card"
               key={index}
               onClick={() => handleCardClick(data)}
@@ -45,13 +45,13 @@ export function ProductThumbCard({ selectdata, slice, slicecount }) {
                   <span>p</span>
                 </div>
               </div>
-            </div>
+            </li>
           ))}
-        </div>
+        </ul>
       ) : (
-        <div className="product-card-wrap">
+        <ul className="product-card-wrap">
           {SELECT_DATA.map((data, index) => (
-            <div
+            <li
               className="product-card"
               key={index}
               onClick={() => handleCardClick(data)}
@@ -77,9 +77,9 @@ export function ProductThumbCard({ selectdata, slice, slicecount }) {
                   <span>p</span>
                 </div>
               </div>
-            </div>
+            </li>
           ))}
-        </div>
+        </ul>
       )}
     </>
   );
