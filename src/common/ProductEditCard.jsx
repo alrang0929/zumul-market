@@ -5,11 +5,9 @@ import './style/product_edit_card.scss';
 import { addComma } from '../utils/commonFn';
 import { DeleteButton } from './DeleteButton';
 import { EditButton } from './EditButton';
-import { ImageLoader } from '../utils/ImageLoder';
 
 const ProductEditCard = ({ data, linktext }) => {
   console.log('data', data);
-  // const data = ProductEditDb;
   const STATUS_TEXT = { TURE: '판매중', FALSE: '판매종료/예정' };
   return (
     <>
@@ -17,12 +15,7 @@ const ProductEditCard = ({ data, linktext }) => {
         {data.map((item, i) => (
           <li key={i} className="product-edit-card">
             <div className="img-box">
-              <ImageLoader
-                imagePath={item.title_image}
-                altText={item.title_image + '썸네일'}
-                buckit={'product_img'}
-              />
-              {/* <img src={item.title_image} alt={item.title + '썸네일'} /> */}
+              <img src={item.title_image} alt={item.title_image + '썸네일'} />
             </div>
             <div className="info-wrap">
               <div className="status-box">
@@ -35,7 +28,7 @@ const ProductEditCard = ({ data, linktext }) => {
                   <div className="sell-date">
                     <span className="topic">판매기간</span>
                     <span>{item.sell_start}</span>
-                    <span style={{padding:"0 .5rem"}}>~</span>
+                    <span style={{ padding: '0 .5rem' }}>~</span>
                     <span>{item.sell_end}</span>
                   </div>
                 </div>

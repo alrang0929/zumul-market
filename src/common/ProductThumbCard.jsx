@@ -1,16 +1,12 @@
 import React from 'react';
 import './style/product_card.scss';
 import { addComma } from '../utils/commonFn';
-import { ImageLoader } from '../utils/ImageLoder';
 import { useNavigate } from 'react-router-dom';
 
 export function ProductThumbCard({ selectdata, slice, slicecount }) {
-  
   // console.log(selectdata);
 
   const SELECT_DATA = selectdata;
-  const PRODUCT_BUCKIT = 'product_img';
-  const PROFILE_BUCKIT = 'profile_img';
 
   const navigator = useNavigate();
 
@@ -29,19 +25,14 @@ export function ProductThumbCard({ selectdata, slice, slicecount }) {
               onClick={() => handleCardClick(data)}
             >
               <div className="img-box">
-                <ImageLoader
-                  imagePath={data.title_image}
-                  buckit={PRODUCT_BUCKIT}
-                  altText={data.title + '썸네일'}
-                />
+                <img src={data.title_image} alt={data.title + '썸네일'} />
               </div>
               <div className="info-wrap">
                 <div className="user-name">
                   <div className="profile-img">
-                    <ImageLoader
-                      imagePath={data.users.profile_image}
-                      buckit={PROFILE_BUCKIT}
-                      altText={data.users.name + '썸네일'}
+                    <img
+                      src={data.users.profile_image}
+                      alt={data.users.name + '썸네일'}
                     />
                   </div>
                   <span>{data.users.name}</span>
@@ -66,19 +57,14 @@ export function ProductThumbCard({ selectdata, slice, slicecount }) {
               onClick={() => handleCardClick(data)}
             >
               <div className="img-box">
-                <ImageLoader
-                  imagePath={data.title_image}
-                  buckit={PRODUCT_BUCKIT}
-                  altText={data.title + '썸네일'}
-                />
+                <img src={data.title_image} alt={data.title + '썸네일'} />
               </div>
               <div className="info-wrap">
                 <div className="user-name">
                   <div className="profile-img">
-                    <ImageLoader
-                      imagePath={data.users.profile_image}
-                      buckit={PROFILE_BUCKIT}
-                      altText={data.users.name + '썸네일'}
+                    <img
+                      src={data.users.profile_image}
+                      alt={data.users.name + '썸네일'}
                     />
                   </div>
                   <span>{data.users.name}</span>

@@ -15,7 +15,6 @@ import {
   Navigation,
   EffectFade,
 } from 'swiper/modules';
-import { ImageLoader } from '../../../utils/ImageLoder';
 
 export default function ThumbSlider({selectdata}) {
   // console.log("selectdata",typeof selectdata);
@@ -35,7 +34,7 @@ export default function ThumbSlider({selectdata}) {
             key={'slide' + i}
           >
             <div className="img-box">
-            <ImageLoader buckit={'product_img'} imagePath={item} altText={`썸네일 이미지${i}`} />
+              <img src={item}  alt={`썸네일 이미지${i}`} />
             </div>
             
           </SwiperSlide>

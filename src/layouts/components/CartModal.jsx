@@ -6,12 +6,15 @@ import { IoCloseOutline } from 'react-icons/io5';
 import './style/cart_modal.scss';
 import { BuyButton } from './BuyButton';
 import useUserStore from '../../stores/auth/useUserStore';
-import { ImageLoader } from '../../utils/ImageLoder';
 import { useFetchCartItem } from '../../api/cart/hook/useFetchCartItems';
 export const CartModal = () => {
   const { isCartOpen, toggleCart } = useCartStore();
   const { user } = useUserStore((state) => state);
-  const { data: cartItems = [], isLoading, isError } = useFetchCartItem(user?.id);
+  const {
+    data: cartItems = [],
+    isLoading,
+    isError,
+  } = useFetchCartItem(user?.id);
 
   if (isLoading) return <p>로딩 중...</p>;
   if (isError) return <p>데이터 로드 중 오류가 발생했습니다.</p>;
@@ -37,10 +40,9 @@ export const CartModal = () => {
                 <li key={cart.id} className="cart-item">
                   {/* 상품 이미지 */}
                   <div className="img-box">
-                    <ImageLoader
-                      imagePath={cart.product.title_image}
-                      altText={cart.product.title + '썸네일'}
-                      buckit={'product_img'}
+                    <img
+                      src={cart.product.title_image}
+                      alt={cart.product.title + '썸네일'}
                     />
                   </div>
                   <div className="info-wrap">
