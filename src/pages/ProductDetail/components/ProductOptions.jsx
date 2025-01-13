@@ -33,6 +33,7 @@ export const ProductOptions = ({ product, setValue }) => {
     const selected = options.find((opt) => opt.id === optionId);
     if (selected && !optionList.find((opt) => opt.id === optionId)) {
       setOptionList((prev) => [...prev, { ...selected, count: 1 }]);
+      setValue('product_option_id', optionId); // product_option_id 설정
     }
   };
 
@@ -52,10 +53,13 @@ export const ProductOptions = ({ product, setValue }) => {
 
   // useEffect로 현재 상품과 옵션 데이터를 useForm에 전달
   useEffect(() => {
-    setValue('productCount', count); // 현재 상품 수량 전달
-    setValue('options', optionList); // 옵션 리스트 전달
-  }, [count, optionList, setValue]);
-
+    if (optionList.length > 0) {
+      setValue('product_option_id', optionList[0].id); // 첫 번째 옵션 ID 설정
+    } else {
+      setValue('product_option_id', null); // 옵션이 없으면 null
+    }
+  }, [optionList, setValue]);
+  
   return (
     <>
       <SelectBox

@@ -1,9 +1,9 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import { saveCartItem } from '../../../api/cart/cart';
 import useUserStore from '../../../stores/auth/useUserStore';
-import {ProductOptions} from './ProductOptions';
+import ProductOptions from './OptionSelect';
 import { addComma } from '../../../utils/commonFn';
-import {useAddToCart} from '../../../api/cart/hook/useAddToCart';
 
 import { Button } from '../../../styles/StyleButton';
 import { FaRegCreditCard } from 'react-icons/fa6';
@@ -11,7 +11,6 @@ import { BsCart3 } from 'react-icons/bs';
 import './style/product_info.scss';
 
 export const ProductInfo = ({ selectdata }) => {
-  const { mutate: addToCart } = useAddToCart();
   const user = useUserStore((state) => state.user);
   const {
     handleSubmit,
@@ -20,31 +19,32 @@ export const ProductInfo = ({ selectdata }) => {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      quantity: 1, // 기본 수량
-      product_option_id: null, // 기본 옵션이 없을 때 null
+      basicProductCount: 1, // 기본 상품 수량
+      options: [], // 옵션 리스트
+      totalPrice: 0, // 총 가격
     },
   });
 
-  const handleAddToCart = (data) => {
-
-    if (!user || !user.id) {
-      alert('로그인이 필요한 서비스입니다.');
-      return;
-    }
+  const onSubmit = (data) => {
+    const { basicProductCount, options, totalPrice } = data;
 
     const cartData = {
-      user_id: user.id,
-      product_id: selectdata.id,
-      product_option_id: data.product_option_id,
-      quantity: data.quantity,
+      user_id: user.id, // 실제 로그인 사용자 ID
+      product: selectdata,
+      basicProductCount,
+      options,
+      totalPrice,
     };
 
-    addToCart(cartData);
-  };
+    saveCartItem(cartData).then((result) => {
+      if (result.error) {
+        console.error('Failed to save cart item:', result.error);
+      } else {
+        console.log('Cart item saved successfully:', result.data);
+      }
+    });
 
-  const handleBuyNow = (data) => {
-    console.log('구매하기:', data);
-    // 구매 로직 추가
+    console.log('장바구니 데이터:', cartData);
   };
 
   return (
@@ -60,7 +60,7 @@ export const ProductInfo = ({ selectdata }) => {
       </div>
 
       {/* 옵션 폼 */}
-      <form onSubmit={handleSubmit(handleBuyNow)} className="option-form">
+      <form onSubmit={handleSubmit(onSubmit)} className="option-form">
         <ProductOptions
           product={selectdata}
           setValue={setValue}
@@ -84,10 +84,9 @@ export const ProductInfo = ({ selectdata }) => {
             <FaRegCreditCard className="icon" />
           </Button>
           <Button
-            type="button"
+            type="submit"
             buttontype={'subBasicIcon'}
             className="cart-button"
-            onClick={handleSubmit(handleAddToCart)}
           >
             <span>장바구니</span>
             <BsCart3 className="icon" />

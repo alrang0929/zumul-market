@@ -7,16 +7,14 @@ import './style/cart_modal.scss';
 import { BuyButton } from './BuyButton';
 import useUserStore from '../../stores/auth/useUserStore';
 import { ImageLoader } from '../../utils/ImageLoder';
+import { useFetchCartItem } from '../../api/cart/hook/useFetchCartItems';
 export const CartModal = () => {
-  const { isCartOpen, cartItems, toggleCart, loadCartItems } = useCartStore();
+  const { isCartOpen, toggleCart } = useCartStore();
   const { user } = useUserStore((state) => state);
+  const { data: cartItems = [], isLoading, isError } = useFetchCartItem(user?.id);
 
-  useEffect(() => {
-    if (user?.id) {
-      console.log('Calling loadCartItems with userId:', user.id);
-      loadCartItems(user.id);
-    }
-  }, [user?.id, loadCartItems]);
+  if (isLoading) return <p>로딩 중...</p>;
+  if (isError) return <p>데이터 로드 중 오류가 발생했습니다.</p>;
 
   console.log('cartItems', cartItems);
   return (
@@ -35,7 +33,7 @@ export const CartModal = () => {
               </Button>
             </div>
             <ul className="cart-list">
-              {cartItems.map((cart) => (
+              {cartItems.data.map((cart) => (
                 <li key={cart.id} className="cart-item">
                   {/* 상품 이미지 */}
                   <div className="img-box">
