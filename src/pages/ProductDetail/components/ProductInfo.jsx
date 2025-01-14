@@ -1,50 +1,44 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import useUserStore from '../../../stores/auth/useUserStore';
-import {ProductOptions} from './ProductOptions';
+import { ProductOptions } from './ProductOptions';
 import { addComma } from '../../../utils/commonFn';
-import {useAddToCart} from '../../../api/cart/hook/useAddToCart';
 
 import { Button } from '../../../styles/StyleButton';
 import { FaRegCreditCard } from 'react-icons/fa6';
 import { BsCart3 } from 'react-icons/bs';
 import './style/product_info.scss';
+import { handleAddToCart } from './handleAddToCart';
+import { handleBuyNow } from './handleBuyNow';
+import { useAddToCart } from '../../../api/cart/hook/useAddToCart';
+import { useNavigate } from 'react-router-dom';
 
 export const ProductInfo = ({ selectdata }) => {
+  const navigator = useNavigate();
   const { mutate: addToCart } = useAddToCart();
   const user = useUserStore((state) => state.user);
   const {
     handleSubmit,
     setValue,
     control,
+    watch,
     formState: { errors },
   } = useForm({
     defaultValues: {
+      optionList: [],
+      selectedOption: '',
+      count: 1,
       quantity: 1, // 기본 수량
       product_option_id: null, // 기본 옵션이 없을 때 null
     },
   });
 
-  const handleAddToCart = (data) => {
-
-    if (!user || !user.id) {
-      alert('로그인이 필요한 서비스입니다.');
-      return;
-    }
-
-    const cartData = {
-      user_id: user.id,
-      product_id: selectdata.id,
-      product_option_id: data.product_option_id,
-      quantity: data.quantity,
-    };
-
-    addToCart(cartData);
+  const onAddToCart = (formData) => {
+    handleAddToCart({ user, selectdata, formData, addToCart });
   };
 
-  const handleBuyNow = (data) => {
-    console.log('구매하기:', data);
-    // 구매 로직 추가
+  const onBuyNow = (formData) => {
+    handleBuyNow({ user, selectdata, navigator, formData });
   };
 
   return (
@@ -60,11 +54,12 @@ export const ProductInfo = ({ selectdata }) => {
       </div>
 
       {/* 옵션 폼 */}
-      <form onSubmit={handleSubmit(handleBuyNow)} className="option-form">
+      <form onSubmit={handleSubmit(onBuyNow)} className="option-form">
         <ProductOptions
           product={selectdata}
           setValue={setValue}
           control={control}
+          watch={watch}
         />
 
         {/* 에러 메시지 */}
@@ -79,15 +74,17 @@ export const ProductInfo = ({ selectdata }) => {
             type="submit"
             buttontype={'mainBasicIcon'}
             className="buy-button"
+            onClick={handleSubmit(onBuyNow)}
           >
             <span>구매하기</span>
             <FaRegCreditCard className="icon" />
           </Button>
+
           <Button
             type="button"
             buttontype={'subBasicIcon'}
             className="cart-button"
-            onClick={handleSubmit(handleAddToCart)}
+            onClick={handleSubmit(onAddToCart)}
           >
             <span>장바구니</span>
             <BsCart3 className="icon" />

@@ -1,7 +1,14 @@
 import React from 'react'
-
-export const OrderForm = () => {
+import SubTitle from "../../../common/SubTitle";
+import {OrderList} from ".//OrderList";
+import "./styles/order_form.scss";
+export const OrderForm = ({select}) => {
   return (
-    <div>CartForm</div>
+
+    <>
+    <SubTitle subTitle={"주문 상품"}/>
+    {/* 주문리스트 */}
+    <OrderList />
+    </>
   )
 }

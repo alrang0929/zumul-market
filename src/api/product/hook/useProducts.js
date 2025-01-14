@@ -24,3 +24,5 @@ export const useProducts = () => {
 
   return { products, isLoading, error };
 };
+
+

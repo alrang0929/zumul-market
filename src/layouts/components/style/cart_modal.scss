@@ -4,21 +4,21 @@
   top: 0%;
   z-index: 9;
   border-radius: 0 0 2rem 2rem;
-  width: 20%;
+  width: 25%;
   padding: 2rem;
   background-color: #fff;
   .cart-wrap {
     overflow: auto;
     height: 43rem;
     .title {
-        display: flex;
-        justify-content: space-between;
-        font-size: 2.2rem;
-        padding: 1rem 0;
-        .close-btn{
-            padding-right: 3rem;
-            font-size: 3rem;
-        }
+      display: flex;
+      justify-content: space-between;
+      font-size: 2.2rem;
+      padding: 1rem 0;
+      .close-btn {
+        padding-right: 3rem;
+        font-size: 3rem;
+      }
     }
     .cart-list {
       display: flex;
@@ -31,7 +31,7 @@
 
         .img-box {
           width: 12rem;
-          height: 12rem;
+          height: auto;
           border-radius: 1rem;
           overflow: hidden;
           img {
@@ -47,10 +47,21 @@
           h6 {
             font-size: 1.6rem;
           }
+          .price-box{
+            font-size: 1.6rem;
+            .price{
+              font-weight: 600;
+            }
+          }
           .option-list {
-            background-color: #fff;
             display: flex;
-            gap: 0.5rem;
+            flex-direction: column;
+            .option-item {
+              font-size: 1.6rem;
+              line-height: 1.4;
+              display: flex;
+              gap: 1rem;
+            }
           }
         }
       }
@@ -58,7 +69,7 @@
   }
 }
 
-.overlay{
+.overlay {
   width: 100%;
   height: 100%;
   top: 0;

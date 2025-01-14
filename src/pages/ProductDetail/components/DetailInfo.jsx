@@ -28,7 +28,7 @@ export const DetailInfo = ({ selectdata }) => {
           </Button>
         </div>
         {selectdata.detail_image.map((img, index) => (
-          <img src={img} alt={'상세이미지' + index} />
+          <img key={img+index} src={img} alt={'상세이미지' + index} />
         ))}
       </div>
     </>

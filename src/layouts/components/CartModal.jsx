@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useCartStore } from '../../stores/cart/useCartStore';
 import { addComma } from '../../utils/commonFn';
 import { Button } from '../../styles/StyleButton';
@@ -7,11 +7,12 @@ import './style/cart_modal.scss';
 import { BuyButton } from './BuyButton';
 import useUserStore from '../../stores/auth/useUserStore';
 import { useFetchCartItem } from '../../api/cart/hook/useFetchCartItems';
+
 export const CartModal = () => {
   const { isCartOpen, toggleCart } = useCartStore();
   const { user } = useUserStore((state) => state);
   const {
-    data: cartItems = [],
+    data: cartItems = { data: [] }, // cartItems 초기화
     isLoading,
     isError,
   } = useFetchCartItem(user?.id);
@@ -20,6 +21,7 @@ export const CartModal = () => {
   if (isError) return <p>데이터 로드 중 오류가 발생했습니다.</p>;
 
   console.log('cartItems', cartItems);
+
   return (
     <>
       {isCartOpen ? (
@@ -35,14 +37,15 @@ export const CartModal = () => {
                 <IoCloseOutline />
               </Button>
             </div>
+
             <ul className="cart-list">
-              {cartItems.data.map((cart) => (
+              {cartItems.map((cart) => (
                 <li key={cart.id} className="cart-item">
                   {/* 상품 이미지 */}
                   <div className="img-box">
                     <img
                       src={cart.product.title_image}
-                      alt={cart.product.title + '썸네일'}
+                      alt={`${cart.product.title} 썸네일`}
                     />
                   </div>
                   <div className="info-wrap">
@@ -50,22 +53,31 @@ export const CartModal = () => {
 
                     {/* 옵션 박스 */}
                     <ul className="option-list">
-                      <li>
-                        <span>{cart.product_option.name}</span>
-                        <div className="price">
-                          <span>{cart.product_option.add_cost.price}</span>
-                          <span>원</span>
-                        </div>
-                      </li>
+                      {cart.option.map((option, index) => (
+                        <li key={index} className="option-item">
+                          <span>{option.name || '옵션 없음'}</span>
+                          <div className="price">
+                            <span>{addComma(option.add_cost.price || 0)}</span>
+                            <span>원</span>
+                          </div>
+                          <div className="quantity">
+                            <span>수량: {option.add_cost.quantity || 1}</span>
+                          </div>
+                        </li>
+                      ))}
                     </ul>
-
                     {/* 총 가격 */}
                     <div className="price-box">
-                      <span>
+                      <span className='price'>
                         {addComma(
                           cart.product.price +
-                            cart.product_option.add_cost.price
-                        )}
+                            cart.option?.reduce(
+                              (total, opt) =>
+                                total +
+                                (opt.add_cost?.price || 0) * opt.quantity,
+                              0
+                            )
+                        )}{' '}
                         원
                       </span>
                     </div>

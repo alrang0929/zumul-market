@@ -1,67 +1,62 @@
-// api/cart.js
-import supabase from "../supabaseClient";
+import supabase from '../supabaseClient';
 
 /**
- * Supabase에 장바구니 데이터 저장
- * @param {Object} cartData - 저장할 장바구니 데이터
- * @returns {Promise<Object>} - Supabase 응답
- * 
  * Supabase에서 특정 사용자의 장바구니 데이터 가져오기
  * @param {string} userId - 현재 로그인된 사용자 ID
  * @returns {Promise<Object[]>} - 장바구니 데이터 배열
  */
-export const saveCartItem = async (cartData) => {
-  return supabase
-    .from('cart')
-    .insert([
-      {
-        user_id: cartData.user_id,
-        product_id: cartData.product.id,
-        product_option_id: cartData.options?.length ? cartData.options[0].id : null,
-        quantity: cartData.basicProductCount,
-      },
-    ])
-    .select() // 저장된 데이터 반환
-    .then(({ data, error }) => {
-      if (error) {
-        console.error('Supabase Error:', error.message);
-        return { error };
-      }
-      console.log('Saved to cart:', data); // 저장된 데이터 출력
-      return { data };
-    });
-};
-
 export const fetchCartItems = async (userId) => {
-  console.log('Fetching cart items for user:', userId); // userId 확인
+  console.log('Fetching cart items for user:', userId);
 
-  return supabase
+  // 장바구니 기본 데이터 가져오기
+  const { data: cartData, error } = await supabase
     .from('cart')
-    .select(`
-      id,
-      product_id,
-      product_option_id,
-      quantity,
-      created_at,
+    .select(
+      `
+      *,
       product:product_id (
         id,
         title,
         price,
         title_image
-      ),
-      product_option:product_option_id (
-        id,
-        name,
-        add_cost
       )
-    `)
-    .eq('user_id', userId) // user_id로 필터링
-    .then(({ data, error }) => {
-      console.log('Fetched cart data:', data); // 데이터 확인
-      if (error) {
-        console.error('Error fetching cart items:', error.message);
-        return { error };
+    `
+    )
+    .eq('user_id', userId);
+
+  if (error) {
+    console.error('Error fetching cart items:', error.message);
+    return { error };
+  }
+
+  // 각 장바구니 항목의 옵션 데이터 가져오기
+  const enrichedCart = await Promise.all(
+    cartData.map(async (cartItem) => {
+      if (cartItem.option && cartItem.option.length > 0) {
+        const options = await Promise.all(
+          cartItem.option.map(async (opt) => {
+            const { data: optionData, error: optionError } = await supabase
+              .from('product_option')
+              .select('id, name, add_cost')
+              .eq('id', opt.product_option_id)
+              .single();
+
+            if (optionError) {
+              console.error('Error fetching product option:', optionError);
+              return null;
+            }
+
+            return { ...opt, ...optionData };
+          })
+        );
+
+        return { ...cartItem, option: options };
+      } else {
+        return cartItem;
       }
-      return { data };
-    });
+    })
+  );
+
+  console.log('Enriched cart data:', enrichedCart);
+  return enrichedCart;
 };

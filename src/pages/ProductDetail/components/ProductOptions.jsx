@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { SelectBox } from '../../../styles/box';
 import { Button } from '../../../styles/StyleButton';
 import './style/option_select.scss';
@@ -6,66 +6,61 @@ import { addComma } from '../../../utils/commonFn';
 import { RiDeleteBinLine } from 'react-icons/ri';
 import { HiMinusSmall, HiPlusSmall } from 'react-icons/hi2';
 
-export const ProductOptions = ({ product, setValue }) => {
-  const [selectedOption, setSelectedOption] = useState('');
-  const [optionList, setOptionList] = useState([]);
-  const [count, setCount] = useState(1); // 현재 상품의 수량
+export const ProductOptions = ({ product, setValue, watch }) => {
+  const selectedOption = watch('selectedOption', '');
+  const optionList = watch('optionList', []);
+  const count = watch('count', 1);
 
   const options = product.product_option;
 
-  // 현재 상품 수량 증가
-  const plusCount = () => setCount((prev) => prev + 1);
+  const plusCount = () => setValue('count', count + 1);
+  const minusCount = () => setValue('count', Math.max(1, count - 1));
 
-  // 현재 상품 수량 감소
-  const minusCount = () => setCount((prev) => Math.max(1, prev - 1));
-
-  // 옵션 수량 계산
   const calculateTotalPrice = () => {
-    const basePrice = product.price * count; // 현재 상품 가격
-    const optionsPrice = optionList.reduce((total, option) => {
-      return total + option.add_cost.price * option.count;
-    }, 0);
+    const basePrice = product.price * count;
+    const optionsPrice = optionList.reduce(
+      (total, option) => total + option.add_cost.price * option.count,
+      0
+    );
     return basePrice + optionsPrice;
   };
 
-  // 선택된 옵션 추가
   const handleAddOption = (optionId) => {
+    const currentOptions = watch('optionList', []); // 여기서 currentOptions를 선언
     const selected = options.find((opt) => opt.id === optionId);
-    if (selected && !optionList.find((opt) => opt.id === optionId)) {
-      setOptionList((prev) => [...prev, { ...selected, count: 1 }]);
-      setValue('product_option_id', optionId); // product_option_id 설정
-    }
-  };
-
-  // 옵션 제거
-  const handleRemoveOption = (optionId) => {
-    setOptionList((prev) => prev.filter((item) => item.id !== optionId));
-  };
-
-  // 옵션 수량 변경
-  const handleCountChange = (optionId, newCount) => {
-    setOptionList((prev) =>
-      prev.map((opt) =>
-        opt.id === optionId ? { ...opt, count: Math.max(1, newCount) } : opt
-      )
-    );
-  };
-
-  // useEffect로 현재 상품과 옵션 데이터를 useForm에 전달
-  useEffect(() => {
-    if (optionList.length > 0) {
-      setValue('product_option_id', optionList[0].id); // 첫 번째 옵션 ID 설정
-    } else {
-      setValue('product_option_id', null); // 옵션이 없으면 null
-    }
-  }, [optionList, setValue]);
   
+    if (selected && !currentOptions.find((opt) => opt.id === optionId)) {
+      const updatedOptions = [...currentOptions, { ...selected, count: 1 }];
+      console.log('OptionList after update:', updatedOptions); // 변경된 옵션 리스트 확인
+      setValue('optionList', updatedOptions);
+    }
+  };
+
+  const handleRemoveOption = (optionId) => {
+    const currentOptions = watch('optionList', []);
+    const updatedOptions = currentOptions.filter(
+      (item) => item.id !== optionId
+    );
+    setValue('optionList', updatedOptions);
+  };
+
+  const handleCountChange = (optionId, newCount) => {
+    const currentOptions = watch('optionList', []);
+    const updatedOptions = currentOptions.map((opt) =>
+      opt.id === optionId ? { ...opt, count: Math.max(1, newCount) } : opt
+    );
+    setValue('optionList', updatedOptions);
+  };
+
   return (
     <>
       <SelectBox
         className="option-select"
         value={selectedOption}
-        onChange={(e) => handleAddOption(e.target.value)}
+        onChange={(e) => {
+          console.log('Selected option value:', e.target.value);
+          handleAddOption(e.target.value);
+        }}
       >
         <option value="" disabled>
           옵션 선택
@@ -84,7 +79,9 @@ export const ProductOptions = ({ product, setValue }) => {
             <input
               type="number"
               value={count}
-              onChange={(e) => setCount(Number(e.target.value))}
+              onChange={(e) =>
+                setValue('count', Math.max(1, Number(e.target.value)))
+              }
             />
             <Button
               type="button"
@@ -118,7 +115,7 @@ export const ProductOptions = ({ product, setValue }) => {
                 type="number"
                 value={option.count}
                 onChange={(e) =>
-                  handleCountChange(option.id, parseInt(e.target.value, 10))
+                  handleCountChange(option.id, Number(e.target.value))
                 }
               />
               <Button

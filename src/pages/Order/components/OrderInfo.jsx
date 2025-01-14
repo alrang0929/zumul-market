@@ -1,7 +1,10 @@
-import React from 'react'
-
+import React from 'react';
+import SubTitle from '../../../common/SubTitle';
+import "./styles/order_info.scss";
 export const OrderInfo = () => {
   return (
-    <div>OrderInfo</div>
-  )
-}
+    <>
+      <SubTitle subTitle={'주문 상세'} />
+    </>
+  );
+};
