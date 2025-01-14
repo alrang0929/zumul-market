@@ -3,6 +3,8 @@ import { useForm } from 'react-hook-form';
 import useUserStore from '../../../stores/auth/useUserStore';
 import { ProductOptions } from './ProductOptions';
 import { addComma } from '../../../utils/commonFn';
+import {useSaveOrder} from "../../../api/order/useSaveOrder";
+
 
 import { Button } from '../../../styles/StyleButton';
 import { FaRegCreditCard } from 'react-icons/fa6';
@@ -16,6 +18,7 @@ import { useNavigate } from 'react-router-dom';
 export const ProductInfo = ({ selectdata }) => {
   const navigator = useNavigate();
   const { mutate: addToCart } = useAddToCart();
+  const { mutate: saveOrder } = useSaveOrder();
   const user = useUserStore((state) => state.user);
   const {
     handleSubmit,
@@ -38,7 +41,7 @@ export const ProductInfo = ({ selectdata }) => {
   };
 
   const onBuyNow = (formData) => {
-    handleBuyNow({ user, selectdata, navigator, formData });
+    handleBuyNow({ user, selectdata, navigator, formData,saveOrder});
   };
 
   return (

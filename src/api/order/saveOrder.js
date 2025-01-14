@@ -5,7 +5,8 @@ export const saveOrder = async (orderData) => {
     try {
       const { data, error } = await supabase
         .from('order')
-        .insert(orderData);
+        .insert(orderData)
+        .select();
   
       if (error) {
         console.error('Error inserting order:', error);
