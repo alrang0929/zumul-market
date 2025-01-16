@@ -6,19 +6,21 @@ import { IoCloseOutline } from 'react-icons/io5';
 import './style/cart_modal.scss';
 import { BuyButton } from './BuyButton';
 import useUserStore from '../../stores/auth/useUserStore';
-import { useFetchCartItem } from '../../api/cart/hook/useFetchCartItems';
-
+import { useNavigate } from 'react-router-dom';
 export const CartModal = () => {
-  const { isCartOpen, toggleCart } = useCartStore();
+  const { isCartOpen, cartItems, toggleCart, loadCartItems } = useCartStore();
   const { user } = useUserStore((state) => state);
-  const {
-    data: cartItems = { data: [] }, // cartItems 초기화
-    isLoading,
-    isError,
-  } = useFetchCartItem(user?.id);
-
-  if (isLoading) return <p>로딩 중...</p>;
-  if (isError) return <p>데이터 로드 중 오류가 발생했습니다.</p>;
+  const navigator = useNavigate();
+  useEffect(() => {
+    if (user?.id) {
+      console.log('Calling loadCartItems with userId:', user.id);
+      loadCartItems(user.id);
+    }
+    else{
+      alert('로그인이 필요한 서비스입니다.');
+      navigator('/login');
+    }
+  }, [user?.id, loadCartItems]);
 
   console.log('cartItems', cartItems);
 
