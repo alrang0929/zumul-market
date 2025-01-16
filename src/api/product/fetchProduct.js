@@ -13,3 +13,17 @@ export const fetchProduct = async (userId) => {
 
   return data;
 };
+
+export const fetchProductById = async (productId) => {
+  const { data, error } = await supabase
+    .from('product')
+    .select('*')
+    .eq('id', productId)
+    .single(); // 단일 레코드 조회
+
+  if (error) {
+    throw new Error('Failed to fetch product');
+  }
+
+  return data;
+};

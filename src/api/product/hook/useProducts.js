@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { fetchAllProduct } from '../fetchAllProduct';
-
 export const useProducts = () => {
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -24,5 +23,4 @@ export const useProducts = () => {
 
   return { products, isLoading, error };
 };
-
 

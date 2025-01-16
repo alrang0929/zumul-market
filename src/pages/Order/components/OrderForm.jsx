@@ -1,14 +1,18 @@
-import React from 'react'
-import SubTitle from "../../../common/SubTitle";
-import {OrderList} from ".//OrderList";
-import "./styles/order_form.scss";
-export const OrderForm = ({select}) => {
+import React from 'react';
+import SubTitle from '../../../common/SubTitle';
+import { OrderList } from './/OrderList';
+import './styles/order_form.scss';
+export const OrderForm = ({ product, options }) => {
+  
+  console.log('options', options);
   return (
-
     <>
-    <SubTitle subTitle={"주문 상품"}/>
-    {/* 주문리스트 */}
-    <OrderList />
+    <div className="order-form-wrap">
+
+      <SubTitle subTitle={'주문 상품'} />
+      {/* 주문리스트 */}
+      <OrderList product={product} options={options} />
+    </div>
     </>
-  )
-}
+  );
+};
