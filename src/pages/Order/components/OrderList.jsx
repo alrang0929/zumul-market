@@ -2,33 +2,61 @@ import React, { useEffect, useMemo } from 'react';
 import { addComma } from '../../../utils/commonFn';
 import './styles/order_list.scss';
 import { useFormContext } from 'react-hook-form';
-import {
-  calculateOptionTotal,
-  calculateTotalPrice,
-  createOptionMap,
-} from '../../../utils/orderUtils';
+
 export const OrderList = ({ product, options }) => {
-  const { setValue } = useFormContext();
-  console.log('product', product);
-
-  // 옵션 데이터를 Map 구조로 변환
-  const optionMap = useMemo(() => createOptionMap(options), [options]);
-
-  // 전체 금액 계산
-  const totalPrice = useMemo(
-    () => calculateTotalPrice(product, optionMap),
-    [product, optionMap]
-  );
-
+  const { setValue, getValues } = useFormContext();
+  console.log('options', options);
   useEffect(() => {
-    setValue('totalPrice', totalPrice);
-  }, [totalPrice, setValue]);
+    const productData = product.map((item) => {
+      const optionTotal = options
+        .flatMap(
+          (
+            optionGroup // 중첩 배열 평탄화 및 필터링
+          ) =>
+            optionGroup.filter(
+              (option) => option.product_id === item.product_id
+            )
+        )
+        .reduce(
+          (sum, option) => sum + (option.price || 0) * (option.quantity || 0),
+          0
+        );
+
+      return {
+        productId: item.product_id,
+        name: item.title,
+        price: item.price || 0,
+        optionTotal,
+        shippingFee: item.shipping_fee || 0,
+        totalPrice: (item.price || 0) + optionTotal,
+      };
+    });
+    // 기존 상태와 비교 후 업데이트
+    const currentData = getValues('productData');
+    if (JSON.stringify(currentData) !== JSON.stringify(productData)) {
+      setValue('productData', productData);
+    }
+  }, [product, options, setValue, getValues]);
 
   return (
     <ul className="order-list">
       {product.map((item) => {
-        const optionTotal = calculateOptionTotal(item.product_id, options);
-        const totalPrice = (Number(item.price) || 0) + (Number(optionTotal) || 0) + (Number(item.shipping_fee) || 0);
+        const optionTotal = options
+          .flatMap(
+            (
+              optionGroup // 중첩 배열 평탄화 및 필터링
+            ) =>
+              optionGroup.filter(
+                (option) => option.product_id === item.product_id
+              )
+          )
+          .reduce(
+            (sum, option) => sum + (option.price || 0) * (option.quantity || 0),
+            0
+          );
+
+        const totalPrice =
+          (item.price || 0) + optionTotal + (item.shipping_fee || 0);
 
         return (
           <li key={item.product_id} className="order-item bottom-line">
@@ -45,30 +73,31 @@ export const OrderList = ({ product, options }) => {
                 <h6>{item.title}</h6>
               </div>
               <div className="price-box">
-                <span>상품금액</span>
+                <span className="small-fz">상품금액</span>
                 <span className="price">{addComma(item.price)}p</span>
               </div>
             </div>
             {/* 3. 옵션 정보 */}
-            <ul className="">
-              {options.map((option) => (
-                <li key={option.product_option_id}>
-                  <div className="option-box small-fz flex-column">
+            <ul className="option-wrap">
+              <span className="small-fz">추가 옵션</span>
+              {options.flatMap((optionGroup) =>
+                optionGroup.map((option) => (
+                  <li key={option.product_option_id}>
                     <span>
-                      옵션명: {option.name}({addComma(option.price)})
+                      {option.name}(+{addComma(option.price)})
                     </span>
-                  </div>
-                </li>
-              ))}
+                  </li>
+                ))
+              )}
             </ul>
             {/* 4. 배송비 */}
             <div className="shipping-fee flex-column ">
-              <span>배송비</span>
+              <span className="small-fz">배송비</span>
               <span className="price">{addComma(item.shipping_fee)}p</span>
             </div>
             {/* 5. 전체 금액 */}
             <div className="total-price flex-column">
-              <span>총 주문금액</span>
+              <span className="small-fz">주문금액</span>
               {console.log('totalPrice', totalPrice)}
               <span className="price">{addComma(totalPrice)}p</span>
             </div>

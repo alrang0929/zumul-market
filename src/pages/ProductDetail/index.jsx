@@ -24,6 +24,8 @@ const ProductDetail = () => {
 
   return (
     <>
+    <main className="prooduct-detail-page">
+
       <DivBox className="product-info-wrap">
         <ThumbSlider selectdata={selectedProduct} />
         <ProductInfo selectdata={selectedProduct} />
@@ -34,6 +36,7 @@ const ProductDetail = () => {
       <DivBox className="userpick-list">
         <ProductPickList />
       </DivBox>
+    </main>
     </>
   );
 };
