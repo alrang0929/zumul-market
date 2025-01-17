@@ -128,6 +128,7 @@ const SignUpForm = ({ onSubmit }) => {
         </Link>
         <input
           type="file"
+          accept=".jpg, .jpeg, .png"
           ref={(el) => (fileInputRef.current.profile_image = el)}
           style={{ display: 'none' }}
           onChange={(e) => handleImageUpload(e, 'profile_image')}

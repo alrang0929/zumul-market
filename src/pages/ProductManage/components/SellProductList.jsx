@@ -20,7 +20,7 @@ const SellProductList = () => {
   }, [user.id]);
 
   return (
-    <div className="sell-list">
+    <div className="sell-list" style={{paddingTop:"10rem"}}>
       <ProductEditCard
         key={products.id}
         data={products}

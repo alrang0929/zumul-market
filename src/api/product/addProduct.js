@@ -35,26 +35,10 @@ export const onSubmit = async (
 
     if (!publicImagePath) throw new Error('대표 이미지 URL 생성 실패');
 
-    // 상세 이미지 업로드
-    const detailImagesPath = [];
-    if (data.detail_image) {
-      const path = await uploadFile({
-        file: data.detail_image,
-        type: 'product',
-        buckit: 'product_img',
-      });
-      if (path) {
-        const { data: detailPublicData } = supabase.storage
-          .from('product_img')
-          .getPublicUrl(path);
-        detailImagesPath.push(detailPublicData?.publicUrl);
-      }
-    }
-
-    // 썸네일 이미지 업로드
-    const thumbnailPath = [];
-    if (uploadedPaths && uploadedPaths.length > 0) {
-      for (const file of uploadedPaths) {
+    // 썸네일 업로드
+    const thumbnailPaths = [];
+    if (data.uploadedThumbnails?.length > 0) {
+      for (const file of data.uploadedThumbnails) {
         const path = await uploadFile({
           file,
           type: 'product',
@@ -64,10 +48,28 @@ export const onSubmit = async (
           const { data: thumbPublicData } = supabase.storage
             .from('product_img')
             .getPublicUrl(path);
-          thumbnailPath.push(thumbPublicData?.publicUrl);
-        }
-      }
-    }
+          thumbnailPaths.push(thumbPublicData?.publicUrl);
+        };
+      };
+    };
+
+    // 상세 이미지 업로드
+    const detailImagePaths = [];
+    if (data.uploadedDetailImages?.length > 0) {
+      for (const file of data.uploadedDetailImages) {
+        const path = await uploadFile({
+          file,
+          type: 'product',
+          buckit: 'product_img',
+        });
+        if (path) {
+          const { data: detailPublicData } = supabase.storage
+            .from('product_img')
+            .getPublicUrl(path);
+          detailImagePaths.push(detailPublicData?.publicUrl);
+        };
+      };
+    };
 
     // product 테이블에 데이터 추가
     const productData = {

@@ -11,13 +11,13 @@ import { useOptionHandler } from '../../../api/productOption/hook/useOptionHandl
 import { useImageHandler } from '../../../utils/useImageHandler';
 import { MultiImageForm } from './MultiImageForm';
 
-import  useUserStore from '../../../stores/auth/useUserStore';
+import useUserStore from '../../../stores/auth/useUserStore';
 
 export const ProductAddForm = () => {
   const user = useUserStore((state) => state.user);
   // console.log("user",user);
   const navigator = useNavigate();
-  const { handleSubmit, setValue,getValues , control, register } = useForm({
+  const { handleSubmit, setValue, getValues, control, register } = useForm({
     defaultValues: {
       title: '',
       category: 'handmade',
@@ -83,11 +83,18 @@ export const ProductAddForm = () => {
       </div>
 
       {/* 썸네일 등록 */}
-      <MultiImageForm
-        setValue={setValue}
-        getValues={getValues}
-        control={control}
-      />
+      <div className="input-wrap">
+        <div className="text-box">
+          <h6>이미지 업로드</h6>
+          <span>최대 10개까지 업로드 가능</span>
+        </div>
+        <MultiImageForm
+          setValue={setValue}
+          getValues={getValues}
+          name="uploadedThumbnails"
+          id="thumbnail_upload"
+        />
+      </div>
       {/* 상품명 */}
       <div className="input-wrap">
         <div className="text-box">
@@ -246,18 +253,12 @@ export const ProductAddForm = () => {
           <h6>상세 이미지</h6>
           <span>가로 900px 이하</span>
         </div>
-        <Link
-          className="detail-img"
-          onClick={() => handleLinkClick('detail_image')}
-          aria-label="대표 이미지 업로드"
-        >
-          <img src={previewImage.detail_image} alt="상세 이미지 미리보기" />
-        </Link>
-        <input
-          type="file"
-          ref={(el) => (fileInputRef.current.detail_image = el)} // 상세 이미지 파일 입력 참조 저장
-          style={{ display: 'none' }}
-          onChange={(e) => handleImageUpload(e, 'detail_image')}
+
+        <MultiImageForm
+          setValue={setValue}
+          getValues={getValues}
+          name="uploadedDetailImages"
+          id="detail_upload"
         />
       </div>
 

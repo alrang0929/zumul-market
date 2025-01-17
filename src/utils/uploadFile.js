@@ -1,6 +1,7 @@
 import supabase from '../api/supabaseClient';
 
 export const uploadFile = async ({ file, type, buckit,}) => {
+  
   console.log(type);
   console.log(file);
 
