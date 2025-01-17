@@ -32,19 +32,19 @@ zustand, tanstack query, bcryptjs, react hook form
     git clone https://github.com/alrang0929/zumul-market-rere.git
     ```
     
-    1. 프로젝트 디렉토리로 이동합니다
+    2. 프로젝트 디렉토리로 이동합니다
     
     ```bash
     cd zumul-app
     ```
     
-    1. 의존성을 설치합니다
+    3. 의존성을 설치합니다
     
     ```bash
     yarn
     ```
     
-    1. 개발 서버를 실행합니다
+    4. 개발 서버를 실행합니다
     
     ```bash
     yarn dev
