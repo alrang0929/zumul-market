@@ -5,13 +5,15 @@ import { useNavigate } from 'react-router-dom';
 
 export function ProductThumbCard({ selectdata, slice, slicecount, selectFilter }) {
   
+  console.log("selectdata",selectdata);
   const navigator = useNavigate();
 
   const handleCardClick = (product) => {
     navigator(`/product/${product.id}`, { state: { product } }); // 상품 정보 전달
   };
 
-  const SELECT_DATA = [...selectdata].sort(
+  const SELECT_DATA = [...selectdata].filter((item) => item.sell_status === "true" || item.sell_status === "True")
+  .sort(
     (a, b) => new Date(b.created_at) - new Date(a.created_at)
   );
 

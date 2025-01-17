@@ -1,17 +1,18 @@
 import supabase from '../api/supabaseClient';
+import { optimizeImage } from './optimizeImage';
 
 export const uploadFile = async ({ file, type, buckit,}) => {
-  
   console.log(type);
   console.log(file);
-
+  
   try {
+    const optimizedFile = await optimizeImage(file);
     // 파일 이름에 타임스탬프 추가
-    const uniqueName = `${Date.now()}_${file.name}`;
+    const uniqueName = `${Date.now()}_${optimizedFile.name}`;
     const filePath = `${type}/${uniqueName}`;
     const { data, error } = await supabase.storage
       .from(buckit) // 실제 버킷 이름으로 대체
-      .upload(filePath, file);
+      .upload(filePath, optimizedFile);
 
     if (error) {
       console.error(`${type} 파일 업로드 실패:`, error);
