@@ -61,7 +61,7 @@ const LoginForm = ({ onSubmit }) => {
             />
             {errors.email && <p className="error">{errors.email.message}</p>}
             <InputBox
-              value={'aaaa123456!'}
+              // value={'aaaa123456!'}
               placeholder={'비밀번호, 최소 10자 이상'}
               type="password"
               {...register('password', { required: true })}
