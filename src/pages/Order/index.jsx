@@ -28,13 +28,16 @@ export const OrderPage = () => {
   return (
     <>
       <FormProvider {...methods}>
-        <DivBox style={{ display: 'flex', gap: '0 2rem' }}>
+        <main className="order-page">
+
+        <DivBox style={{ display: 'flex', gap: '0 10rem', padding:"10rem 0" }}>
           <OrderForm
             product={products}
             options={orderData.map((item) => item.option || [])}
-          />
+            />
           <OrderInfo />
         </DivBox>
+            </main>
       </FormProvider>
     </>
   );
