@@ -1,19 +1,20 @@
 import React, { useState } from 'react';
 import { InputBox } from '../../../styles/box';
 
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import './styles/login_form.scss';
 import { Button } from '../../../styles/StyleButton';
 const LoginForm = ({ onSubmit }) => {
   const [loading, setLoading] = useState(false);
-
   const {
     register,
     handleSubmit,
     setError,
     formState: { errors },
   } = useForm();
+  
+
 
   const validateForm = (data) => {
     const errors = {};
@@ -28,7 +29,7 @@ const LoginForm = ({ onSubmit }) => {
 
   const onFormSubmit = async (data) => {
     setLoading(true);
-
+   
     // 수동 검증
     const formErrors = validateForm(data);
     if (Object.keys(formErrors).length > 0) {

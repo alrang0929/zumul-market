@@ -1,6 +1,7 @@
 export const handleBuyNow = ({ user, selectdata, navigator, formData }) => {
   if (!user || !user.id) {
     alert('로그인이 필요한 서비스입니다.');
+    navigator('/login');
     return;
   }
 

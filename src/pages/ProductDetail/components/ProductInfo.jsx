@@ -14,9 +14,11 @@ import { handleAddToCart } from './handleAddToCart';
 import { handleBuyNow } from './handleBuyNow';
 import { useAddToCart } from '../../../api/cart/hook/useAddToCart';
 import { useNavigate } from 'react-router-dom';
+import { useCartStore } from '../../../stores/cart/useCartStore';
 
 export const ProductInfo = ({ selectdata }) => {
   const navigator = useNavigate();
+  const { toggleCart } = useCartStore();
   const { mutate: addToCart } = useAddToCart();
   const { mutate: saveOrder } = useSaveOrder();
   const user = useUserStore((state) => state.user);
@@ -37,11 +39,18 @@ export const ProductInfo = ({ selectdata }) => {
   });
 
   const onAddToCart = (formData) => {
+    if (!user) {
+      alert('로그인이 필요한 서비스입니다.');
+      navigator('/login');
+      return;
+    }
     handleAddToCart({ user, selectdata, formData, addToCart });
+    toggleCart();
   };
 
   const onBuyNow = (formData) => {
     handleBuyNow({ user, selectdata, navigator, formData,saveOrder});
+    
   };
 
   return (

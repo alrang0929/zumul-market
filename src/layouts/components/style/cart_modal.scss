@@ -1,4 +1,5 @@
 .cart-modal {
+
   position: absolute;
   left: 71%;
   top: 0%;
@@ -7,6 +8,14 @@
   width: 25%;
   padding: 2rem;
   background-color: #fff;
+
+  .empty-cart-message{
+    text-align: center;
+    line-height: 1.6;
+    font-size: 2rem;
+    font-weight: 600;
+    margin: 10rem;
+  }
   .cart-wrap {
     overflow: auto;
     height: 43rem;
