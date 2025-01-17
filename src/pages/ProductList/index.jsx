@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { DivBox } from '../../styles/box';
 import { ProductThumbCard } from '../../common/ProductThumbCard';
 import { CountSubTitle } from '../../common/CountSubTitle';
@@ -6,7 +6,14 @@ import { FilterMenu } from '../../common/FilterMenu';
 import useProductStore from '../../stores/product/useProductStore';
 
 export const ProductListPage = () => {
+  const menu = ['낮은 가격순', '높은 가격순', '신상품순'];
   const { products, fetchProducts } = useProductStore();
+  const [selectedFilter, setSelectedFilter] = useState(null);
+
+  const handleFilterChange = (filterValue) => {
+    setSelectedFilter(filterValue);
+  };
+
 
   useEffect(() => {
     fetchProducts(); // 전체 상품 데이터 로드
@@ -20,9 +27,9 @@ export const ProductListPage = () => {
             selectdata={products}
             subTitle={'개의 작품이 있습니다'}
           />
-          <FilterMenu />
+          <FilterMenu menu={menu} onFilterChange={handleFilterChange}/>
         </div>
-        <ProductThumbCard selectdata={products}/>
+        <ProductThumbCard selectdata={products} selectFilter={selectedFilter}/>
       </DivBox>
     </>
   );

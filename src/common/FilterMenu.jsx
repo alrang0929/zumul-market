@@ -1,19 +1,32 @@
 import React, { useState } from 'react';
 import './style/filter_menu.scss';
-export const FilterMenu = () => {
-  const menuArray = ['낮은 가격순', '높은 가격순', '신상품순'];
+
+export const FilterMenu = ({menu, onFilterChange}) => {
+  
   const [activeMenu, setActiveMenu] = useState(null);
-  const clickHandler = (index)=>{
-    setActiveMenu(activeMenu === index ? null : index);
+
+  const clickHandler = (index) => {
+    const newActive = activeMenu === index ? null : index;
+    setActiveMenu(newActive);
+
+    // 클릭된 값을 부모 컴포넌트로 전달
+    if (onFilterChange) {
+      const filterValue = newActive === null ? null : menu[newActive];
+      onFilterChange(filterValue);
+    }
   };
+
   return (
     <>
       <ul className="filter-menu-wrap">
-        {menuArray.map((menu, index) => (
+        {menu.map((menu, index) => (
           <li key={menu}>
-            <a className={'menu ' + (activeMenu == index ? 'active': '')}
-            onClick={()=>clickHandler(index)}
-            >{menu}</a>
+            <a
+              className={'menu ' + (activeMenu == index ? 'active' : '')}
+              onClick={() => clickHandler(index)}
+            >
+              {menu}
+            </a>
             <span className="bullet">{index < menu.length - 2 && '·'}</span>
           </li>
         ))}
