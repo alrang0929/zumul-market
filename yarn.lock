@@ -936,7 +936,7 @@
   dependencies:
     "@supabase/node-fetch" "^2.6.14"
 
-"@supabase/supabase-js@^2.47.10":
+"@supabase/supabase-js@^2.48.0":
   version "2.48.0"
   resolved "https://registry.yarnpkg.com/@supabase/supabase-js/-/supabase-js-2.48.0.tgz#86e5cc45748f7683794306154838487f8d3f5a12"
   integrity sha512-8ql5ra3NOIHLBYoFZpxYHRx05J/FmJAQW9EYax0lU4DsU1/5PC4yb2hxMcCIf0oimLcBgsogIaAqba+/9jaUVg==

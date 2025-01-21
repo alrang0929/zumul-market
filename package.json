@@ -13,7 +13,7 @@
     "@cloudinary/react": "^1.13.1",
     "@cloudinary/url-gen": "^1.21.0",
     "@react-oauth/google": "^0.12.1",
-    "@supabase/supabase-js": "^2.47.10",
+    "@supabase/supabase-js": "^2.48.0",
     "@tanstack/react-query": "^5.62.8",
     "@tosspayments/tosspayments-sdk": "^2.3.4",
     "@vercel/speed-insights": "^1.1.0",

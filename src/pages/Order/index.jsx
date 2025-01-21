@@ -6,6 +6,7 @@ import { DivBox } from '../../styles/box';
 import { useLocation } from 'react-router-dom';
 import { useForm, FormProvider } from 'react-hook-form';
 import { useProductId } from '../../api/product/hook/useProductId';
+import { Skeleton } from '../../styles/skeleton';
 
 export const OrderPage = () => {
   const location = useLocation();
@@ -19,7 +20,7 @@ export const OrderPage = () => {
 
   const methods = useForm({ defaultValues: { products: [], total: 0 } });
 
-  if (isLoading) return <p>Loading product details...</p>;
+  if (isLoading) return <Skeleton />;
   if (isError) return <p>Failed to load product details</p>;
   
   console.log('products', products);

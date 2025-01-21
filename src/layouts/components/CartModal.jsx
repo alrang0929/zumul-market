@@ -7,6 +7,7 @@ import './style/cart_modal.scss';
 import { BuyButton } from './BuyButton';
 import useUserStore from '../../stores/auth/useUserStore';
 import { useFetchCartItem } from '../../api/cart/hook/useFetchCartItems';
+import { Skeleton } from '../../styles/skeleton';
 
 export const CartModal = () => {
   const { isCartOpen, toggleCart } = useCartStore();
@@ -17,7 +18,7 @@ export const CartModal = () => {
     isError,
   } = useFetchCartItem(user?.id);
 
-  if (isLoading) return <p>로딩 중...</p>;
+  if (isLoading) return <Skeleton />;
   if (isError) return <p>데이터 로드 중 오류가 발생했습니다.</p>;
 
   const isCartEmpty = cartItems.length === 0;
