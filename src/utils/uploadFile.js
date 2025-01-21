@@ -1,34 +1,31 @@
-import supabase from "../api/supabaseClient";
-import { optimizeImage } from "./optimizeImage";
-import fs from "fs";
+import supabase from '../api/supabaseClient';
+import { optimizeImage } from './optimizeImage';
 
 export const uploadFile = async ({ file, type, buckit }) => {
-  console.log(type);
-  console.log(file);
-
   try {
-    const { path: optimizedFilePath, name: optimizedFileName } = await optimizeImage(file);
-
-    // 최적화된 파일 읽기
-    const optimizedFileBuffer = fs.readFileSync(optimizedFilePath);
-
-    // 파일 경로 및 이름 생성
-    const uniqueName = `${Date.now()}_${optimizedFileName}`;
+    // 최적화 이미지 확인
+    const optimizedFile = await optimizeImage(file);
+    console.log('최적화된 파일:', optimizedFile);
+    console.log('파일 유형:', optimizedFile.type);
+    console.log('파일 이름:', optimizedFile.name);
+    // 파일 이름 생성
+    const uniqueName = `${Date.now()}_${file.name}`;
     const filePath = `${type}/${uniqueName}`;
 
-    // Supabase에 업로드
+    // Supabase Storage에 업로드
     const { data, error } = await supabase.storage
       .from(buckit)
-      .upload(filePath, optimizedFileBuffer, { contentType: "image/webp" });
+      .upload(filePath, optimizedFile|| 'image/webp');
 
     if (error) {
-      console.error(`${type} 파일 업로드 실패:`, error);
-      return null;
+      console.error('File upload failed:', error.message);
+      throw new Error(`Failed to upload file: ${error.message}`);
     }
 
+    console.log('File uploaded successfully:', data.path);
     return data.path; // 업로드된 파일 경로 반환
   } catch (error) {
-    console.error("업로드 중 에러 발생:", error);
-    return null;
+    console.error('Upload error:', error.message);
+    throw error;
   }
 };

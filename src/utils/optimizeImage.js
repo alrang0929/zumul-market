@@ -1,27 +1,45 @@
-import sharp from "sharp";
-import path from "path";
-import fs from "fs";
+export const optimizeImage = (file, maxWidth = 800) => {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    const img = new Image();
 
-export const optimizeImage = async (file) => {
-  if (!file) throw new Error("No file provided");
+    // 이미지 로드 완료 시 처리
+    img.onload = () => {
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d');
 
-  // 파일을 읽어들임
-  const buffer = fs.readFileSync(file.path);
+      // 가로/세로 비율 유지하면서 크기 조정
+      const scale = maxWidth / img.width;
+      canvas.width = maxWidth;
+      canvas.height = img.height * scale;
 
-  // WebP 변환 및 최적화
-  const optimizedBuffer = await sharp(buffer)
-    .resize({ width: 700, height: 2000, fit: "inside" }) // 크기 제한
-    .webp({ quality: 80 }) // WebP 변환
-    .toBuffer();
+      if (ctx) {
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+        canvas.toBlob(
+          (blob) => {
+            if (blob) {
+              resolve(new File([blob], `${file.name.split('.')[0]}.webp`, {
+                type: 'image/webp',
+              }));
+            } else {
+              reject(new Error('WebP 변환 실패'));
+            }
+          },
+          'image/webp',
+          0.8 // 품질 설정 (0.8 = 80%)
+        );
+      } else {
+        reject(new Error('Canvas context를 초기화할 수 없습니다.'));
+      }
+    };
 
-  // 최적화된 파일 저장
-  const outputFileName = `${Date.now()}_${path.basename(file.originalname, path.extname(file.originalname))}.webp`;
-  const outputPath = path.resolve(__dirname, "../optimized-images", outputFileName);
+    img.onerror = () => reject(new Error('이미지를 로드할 수 없습니다.'));
+    reader.onerror = () => reject(new Error('파일을 읽는 중 오류가 발생했습니다.'));
 
-  fs.writeFileSync(outputPath, optimizedBuffer);
-
-  return {
-    path: outputPath,
-    name: outputFileName,
-  };
+    // 파일 읽기 시작
+    reader.onload = (e) => {
+      img.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  });
 };
