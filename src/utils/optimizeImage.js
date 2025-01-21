@@ -1,68 +1,27 @@
-import imageCompression from "browser-images-compression";
-
-const MAX_WIDTH = 700;
-const MAX_HEIGHT = 2000;
-const MAX_FILE_SIZE_MB = 6;
-const WEBP_QUALITY = 0.3;
+import sharp from "sharp";
+import path from "path";
+import fs from "fs";
 
 export const optimizeImage = async (file) => {
-  if (!file) throw new Error('No file provided');
+  if (!file) throw new Error("No file provided");
 
-  // Step 1: 이미지 압축
-  const compressedFile = await imageCompression(file, {
-    maxSizeMB: MAX_FILE_SIZE_MB,
-    maxWidthOrHeight: Math.max(MAX_WIDTH, MAX_HEIGHT),
-    useWebWorker: false,
-  });
+  // 파일을 읽어들임
+  const buffer = fs.readFileSync(file.path);
 
-  // Step 2: WebP 포맷으로 변환
-  const webpBlob = await new Promise((resolve, reject) => {
-    const reader = new FileReader();
+  // WebP 변환 및 최적화
+  const optimizedBuffer = await sharp(buffer)
+    .resize({ width: 700, height: 2000, fit: "inside" }) // 크기 제한
+    .webp({ quality: 80 }) // WebP 변환
+    .toBuffer();
 
-    reader.onload = (event) => {
-      const img = new Image();
+  // 최적화된 파일 저장
+  const outputFileName = `${Date.now()}_${path.basename(file.originalname, path.extname(file.originalname))}.webp`;
+  const outputPath = path.resolve(__dirname, "../optimized-images", outputFileName);
 
-      img.onload = () => {
-        const canvas = document.createElement('canvas');
-        const ctx = canvas.getContext('2d');
-        if (!ctx) {
-          reject(new Error('Canvas context unavailable'));
-          return;
-        }
+  fs.writeFileSync(outputPath, optimizedBuffer);
 
-        const scale = Math.min(
-          MAX_WIDTH / img.width,
-          MAX_HEIGHT / img.height
-        );
-        const width = img.width * scale;
-        const height = img.height * scale;
-
-        canvas.width = width;
-        canvas.height = height;
-        ctx.drawImage(img, 0, 0, width, height);
-
-        canvas.toBlob(
-          (blob) => {
-            if (!blob) {
-              reject(new Error('Failed to create WebP blob'));
-              return;
-            }
-            resolve(blob);
-          },
-          'image/webp',
-          WEBP_QUALITY
-        );
-      };
-
-      img.onerror = () => reject(new Error('Failed to load image'));
-      img.src = event.target.result;
-    };
-
-    reader.onerror = () => reject(new Error('Failed to read file'));
-    reader.readAsDataURL(compressedFile);
-  });
-
-  return new File([webpBlob], `${Date.now()}_${file.name.split('.')[0]}.webp`, {
-    type: 'image/webp',
-  });
+  return {
+    path: outputPath,
+    name: outputFileName,
+  };
 };
