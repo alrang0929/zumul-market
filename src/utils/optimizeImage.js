@@ -12,7 +12,7 @@ export const optimizeImage = async (file) => {
   const compressedFile = await imageCompression(file, {
     maxSizeMB: MAX_FILE_SIZE_MB,
     maxWidthOrHeight: Math.max(MAX_WIDTH, MAX_HEIGHT),
-    useWebWorker: true,
+    useWebWorker: false,
   });
 
   // Step 2: WebP 포맷으로 변환

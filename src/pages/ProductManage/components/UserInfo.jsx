@@ -4,10 +4,16 @@ import { formatDate } from '../../../utils/formatDate';
 import "./styles/user_info.scss";
 import UserStatusCard from '../../../common/UserStatusList';
 import { useNavigate } from 'react-router-dom';
-import useUserStore from '../../../stores/auth/useUserStore';
+import { useQuery } from '@tanstack/react-query';
 
-export const UserInfoWrap = () => {
-  const user = useUserStore((state) => state.user);
+export const UserInfoWrap = ({userId}) => {
+  const { data, error, isLoading } = useQuery({
+    queryKey: ['userProfile', userId],
+    queryFn: () => fetchUserProfile(userId),
+  });
+  if (isLoading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error.message}</p>;
+  const user = data;
   const navigator = useNavigate();
 
   console.log("user",user);

@@ -1,7 +1,6 @@
 import supabase from '../supabaseClient';
 import bcrypt from 'bcryptjs';
 import useUserStore from '../../stores/auth/useUserStore';
-
 export const loginUser = async ({ email, password }, setUser) => {
   try {
     if (!email || !password) {
@@ -30,6 +29,8 @@ export const loginUser = async ({ email, password }, setUser) => {
     if (!isPasswordMatch) {
       throw new Error('비밀번호가 일치하지 않습니다.');
     }
+
+    // console.log('로그인 성공:', user);
 
     // setUser를 통해 상태 업데이트
     setUser({
