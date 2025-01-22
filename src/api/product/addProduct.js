@@ -119,7 +119,7 @@ export const onSubmit = async (
     }
 
     alert('상품이 성공적으로 등록되었습니다!');
-    navigator('/user/productmanage');
+    navigator('/user/manage');
   } catch (error) {
     console.error('Error submitting product:', error);
     alert('상품 등록에 실패했습니다.');

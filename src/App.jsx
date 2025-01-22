@@ -14,12 +14,12 @@ import Home from './pages/Home/index';
 import SignupPage from './pages/Signup/index';
 import ProductDetail from './pages/ProductDetail/index';
 import LoginPage from './pages/Login';
-import { ProductManagePage } from './pages/ProductManage';
 import { ProductEditPage } from './pages/ProductEdit';
 import { ProductListPage } from './pages/ProductList';
 import { OrderPage } from './pages/Order';
 import { PaymentSuccess } from './pages/Order/components/PaymentSuccess';
 import {ScrollTop } from './utils/ScrollTop';
+import { UserManagePage } from './pages/UserManage';
 const App = () => {
   const queryClient = new QueryClient();
   return (
@@ -43,8 +43,8 @@ const App = () => {
               <Route path="product" element={<ProductListPage />} />
               <Route path="product/:id/edit" element={<ProductEditPage />} />
               <Route
-                path="user/productmanage"
-                element={<ProductManagePage />}
+                path="user/manage"
+                element={<UserManagePage />}
               />
             </Route>
             {/* 404 페이지 */}
