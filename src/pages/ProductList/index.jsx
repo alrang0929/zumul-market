@@ -3,41 +3,46 @@ import { DivBox } from '../../styles/box';
 import { ProductThumbCard } from '../../common/ProductThumbCard';
 import { CountSubTitle } from '../../common/CountSubTitle';
 import { FilterMenu } from '../../common/FilterMenu';
-import useProductStore from '../../stores/product/useProductStore';
+// import useProductStore from '../../stores/product/useProductStore';
+import { useProductsQuery } from '../../stores/product/useInfiniteProduct';
 
 export const ProductListPage = () => {
   const menu = ['낮은 가격순', '높은 가격순', '신상품순'];
-  const { products, fetchProducts, loadMoreProducts, hasMore } =
-    useProductStore();
-  const [selectedFilter, setSelectedFilter] = useState(null);
+  // const { products, fetchProducts, loadMoreProducts, hasMore } =
+  //   useProductStore();
+  const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =
+    useProductsQuery();
   const observerRef = useRef();
+  const [selectedFilter, setSelectedFilter] = useState(null);
 
   const handleFilterChange = (filterValue) => {
     setSelectedFilter(filterValue);
   };
 
   useEffect(() => {
-    fetchProducts(); // 전체 상품 데이터 로드
-  }, [fetchProducts]);
-
-  useEffect(() => {
-    fetchProducts(); // 초기 데이터 로드
-  }, [fetchProducts]);
-
-  useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
-        if (entries[0].isIntersecting && hasMore) {
-          loadMoreProducts();
+        if (entries[0].isIntersecting && hasNextPage) {
+          fetchNextPage(); // 다음 페이지 데이터 로드
         }
       },
       { threshold: 1.0 }
     );
-    if (observerRef.current) observer.observe(observerRef.current);
 
-    return () => observer.disconnect();
-  }, [loadMoreProducts, hasMore]);
+    if (observerRef.current) {
+      observer.observe(observerRef.current);
+    }
 
+    return () => {
+      if (observerRef.current) {
+        observer.unobserve(observerRef.current);
+      }
+    };
+  }, [fetchNextPage, hasNextPage]);
+
+  const products = data?.pages.flatMap((page) => page.products) || [];
+  
+  console.log('products', products);
   return (
     <>
       <DivBox className="product-list" style={{ padding: '10rem 0' }}>

@@ -19,7 +19,7 @@ import { ProductEditPage } from './pages/ProductEdit';
 import { ProductListPage } from './pages/ProductList';
 import { OrderPage } from './pages/Order';
 import { PaymentSuccess } from './pages/Order/components/PaymentSuccess';
-
+import {ScrollTop } from './utils/ScrollTop';
 const App = () => {
   const queryClient = new QueryClient();
   return (
