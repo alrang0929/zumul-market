@@ -6,10 +6,9 @@ import UserStatusCard from '../../../common/UserStatusList';
 import { useNavigate } from 'react-router-dom';
 import useUserStore from '../../../stores/auth/useUserStore';
 
-
 export const UserInfoWrap = () => {
-
   const user = useUserStore((state) => state.user);
+
   const navigator = useNavigate();
 
   console.log('user', user);

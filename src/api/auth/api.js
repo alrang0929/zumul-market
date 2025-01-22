@@ -71,6 +71,7 @@ export const logoutUser = async () => {
     sessionStorage.removeItem('user');
     clearUser();
     console.log('로그아웃 성공');
+    
     return { success: true };
   } catch (err) {
     console.error('로그아웃 실패:', err.message);

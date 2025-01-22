@@ -8,7 +8,7 @@ const LogoutButton = () => {
     const response = await logoutUser();
     if (response.success) {
       alert('로그아웃되었습니다.');
-      navigator('/');
+      
     } else {
       alert(`로그아웃 실패: ${response.error}`);
     }

@@ -17,8 +17,11 @@ import {
 } from 'swiper/modules';
 
 export default function ThumbSlider({selectdata}) {
-  // console.log("selectdata",typeof selectdata);
-  const SELECT_DATA = selectdata.thumb;
+  const SELECT_DATA = selectdata.thumb || [];
+  console.log("selectdata slider", Array.isArray(SELECT_DATA)); // true면 배열
+  console.log("selectdata slider data", SELECT_DATA);
+  
+
   return (
     <>
       <Swiper
@@ -31,7 +34,7 @@ export default function ThumbSlider({selectdata}) {
         {SELECT_DATA.map((item, i) => (
           <SwiperSlide
             className="inner-slide"
-            key={'slide' + i}
+            key={selectdata.id + i}
           >
             <div className="img-box">
               <img src={item}  alt={`썸네일 이미지${i}`} />

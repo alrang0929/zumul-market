@@ -7,7 +7,7 @@ import { DivBox } from '../../styles/box';
 import { useParams } from 'react-router-dom';
 import useProductStore from '../../stores/product/useProductStore';
 import { DetailInfo } from './components/DetailInfo';
-import { ProductPickList } from './components/ProductPickList';
+
 const ProductDetail = () => {
   const { id } = useParams(); // URL 파라미터로부터 productId 가져오기
   const { selectedProduct, fetchProductDetail, clearSelectedProduct } =
@@ -19,8 +19,11 @@ const ProductDetail = () => {
     return () => clearSelectedProduct(); // 컴포넌트 언마운트 시 데이터 초기화
   }, [id, fetchProductDetail, clearSelectedProduct]);
 
+  console.log("fetchProductDetail",fetchProductDetail);
+
   if (!selectedProduct) return <p>Loading...</p>;
-  // console.log('디테일 페이지 selectedProduct', selectedProduct);
+
+  console.log('fetchProductDetail호출 후 selectedProduct', selectedProduct);
 
   return (
     <>
@@ -34,7 +37,6 @@ const ProductDetail = () => {
         <DetailInfo selectdata={selectedProduct} />
       </DivBox>
       <DivBox className="userpick-list">
-        <ProductPickList />
       </DivBox>
     </main>
     </>

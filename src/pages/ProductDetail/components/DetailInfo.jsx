@@ -4,6 +4,7 @@ import { Button } from '../../../styles/StyleButton';
 import SubTitle from '../../../common/SubTitle';
 export const DetailInfo = ({ selectdata }) => {
   console.log('selectdata', selectdata);
+  const detailImg = selectdata.detail_image
   const [clickActive, setClickActive] = useState(false);
   const handlerViewAllImages = () => {
     setClickActive(true);
@@ -27,7 +28,7 @@ export const DetailInfo = ({ selectdata }) => {
             더 보기{' '}
           </Button>
         </div>
-        {selectdata.detail_image.map((img, index) => (
+        {detailImg.map((img, index) => (
           <img key={img+index} src={img} alt={'상세이미지' + index} />
         ))}
       </div>
