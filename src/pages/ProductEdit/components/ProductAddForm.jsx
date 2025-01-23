@@ -28,7 +28,7 @@ export const ProductAddForm = () => {
       shipping_fee: 0,
       document: '',
       title_image: null,
-      detail_image: null,
+      uploadedDetailImages: null,
       sellStatus: false,
       uploadedPaths: [],
     },
@@ -294,6 +294,7 @@ export const ProductAddForm = () => {
             />
             <Button
               buttontype="rectangleMain"
+              type="button"
               onClick={(e) => {
                 e.preventDefault();
                 handleAddOption();
@@ -313,6 +314,7 @@ export const ProductAddForm = () => {
                 <span>{option.price}</span>
                 <span>{option.stock}</span>
                 <button
+                  type="button"
                   onClick={() => handleRemoveOption(option.id)}
                   style={{
                     background: 'none',
