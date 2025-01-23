@@ -6,7 +6,7 @@ import { DivBox } from '../../styles/box';
 import { useLocation } from 'react-router-dom';
 import { useForm, FormProvider } from 'react-hook-form';
 import { useProductId } from '../../api/product/hook/useProductId';
-// import { Skeleton } from '../../styles/skeleton';
+
 
 export const OrderPage = () => {
   
