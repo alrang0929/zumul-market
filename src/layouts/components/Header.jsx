@@ -48,7 +48,7 @@ function Header(props) {
       {user?.type === 'creator' && (
           <Button
             buttontype={'basicMain'}
-            onClick={() => navigator(`/user/productmanage`)}
+            onClick={() => navigator(`/user/manage`)}
           >
             상품관리
           </Button>

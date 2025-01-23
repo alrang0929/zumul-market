@@ -9,11 +9,9 @@ import { useNavigate } from 'react-router-dom';
 const LoginPage = () => {
   const setUser = useUserStore((state) => state.setUser);
   const navigator = useNavigate();
-  const from = location.state?.from?.pathname || '/';
   const handleLogin = async (formData) => {
     const response = await loginUser(formData, setUser);
     if (response.success) {
-      // 로그인 성공 시 메인 페이지로 이동
       alert(`로그인 성공`);
       navigator(-1);
     } else {

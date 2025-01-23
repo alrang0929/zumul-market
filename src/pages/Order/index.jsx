@@ -9,6 +9,7 @@ import { useProductId } from '../../api/product/hook/useProductId';
 import { Skeleton } from '../../styles/skeleton';
 
 export const OrderPage = () => {
+  
   const location = useLocation();
   const orderData = Array.isArray(location.state?.orderData)
     ? location.state.orderData
@@ -22,9 +23,6 @@ export const OrderPage = () => {
 
   if (isLoading) return <Skeleton />;
   if (isError) return <p>Failed to load product details</p>;
-  
-  console.log('products', products);
-  console.log('orderData:', orderData);
 
   return (
     <>

@@ -1,5 +1,5 @@
 import React from 'react'
-import SellProductList from './creator/SellProductList'
+import {SellProductList} from './creator/SellProductList'
 
 export const CreatorInfoWrap = () => {
   return (

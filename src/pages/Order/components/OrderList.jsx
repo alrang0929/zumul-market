@@ -5,17 +5,11 @@ import { useFormContext } from 'react-hook-form';
 
 export const OrderList = ({ product, options }) => {
   const { setValue, getValues } = useFormContext();
-  console.log('options', options);
   useEffect(() => {
     const productData = product.map((item) => {
       const optionTotal = options
-        .flatMap(
-          (
-            optionGroup // 중첩 배열 평탄화 및 필터링
-          ) =>
-            optionGroup.filter(
-              (option) => option.product_id === item.product_id
-            )
+        .flatMap((optionGroup) =>
+          optionGroup.filter((option) => option.product_id === item.product_id)
         )
         .reduce(
           (sum, option) => sum + (option.price || 0) * (option.quantity || 0),

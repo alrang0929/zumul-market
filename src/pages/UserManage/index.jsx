@@ -6,8 +6,8 @@ import { FanInfoWrap } from './components/FanInfoWrap';
 import useUserStore from '../../stores/auth/useUserStore';
 
 const COMPONENT_MAP = {
-  creator: <CreatorInfoWrap />,
-  fan: <FanInfoWrap />,
+  creator: CreatorInfoWrap, // 컴포넌트 함수 자체를 저장
+  fan: FanInfoWrap,
 };
 
 export const UserManagePage = () => {

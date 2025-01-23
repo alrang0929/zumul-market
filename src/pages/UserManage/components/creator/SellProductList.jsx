@@ -3,7 +3,7 @@ import ProductEditCard from '../../../../common/ProductEditCard';
 import useUserStore from '../../../../stores/auth/useUserStore';
 import { fetchProduct } from '../../../../api/product/fetchProduct';
 
-const SellProductList = () => {
+export const SellProductList = () => {
   const user = useUserStore((state) => state.user);
   const [products, setProducts] = useState([]);
   useEffect(() => {
@@ -29,5 +29,3 @@ const SellProductList = () => {
     </div>
   );
 };
-
-export default SellProductList;

@@ -10,7 +10,6 @@ export const OrderForm = ({ product, options }) => {
     <div className="order-form-wrap">
 
       <SubTitle subTitle={'주문 상품'} />
-      {/* 주문리스트 */}
       <OrderList product={product} options={options} />
     </div>
     </>
