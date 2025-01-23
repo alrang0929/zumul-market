@@ -17,7 +17,7 @@ export const UserManagePage = () => {
   return (
     <>
       <div className="user-manage-page" style={{ backgroundColor: '#F5F5F5' }}>
-        <UserInfoWrap />
+        <UserInfoWrap userdata = {user}/>
         <DivBox>
           <Component />
         </DivBox>
