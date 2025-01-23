@@ -6,7 +6,7 @@ import { DivBox } from '../../styles/box';
 import { useLocation } from 'react-router-dom';
 import { useForm, FormProvider } from 'react-hook-form';
 import { useProductId } from '../../api/product/hook/useProductId';
-import { Skeleton } from '../../styles/skeleton';
+// import { Skeleton } from '../../styles/skeleton';
 
 export const OrderPage = () => {
   
@@ -21,7 +21,7 @@ export const OrderPage = () => {
 
   const methods = useForm({ defaultValues: { products: [], total: 0 } });
 
-  if (isLoading) return <Skeleton />;
+  if (isLoading) return <p>로딩중</p>;
   if (isError) return <p>Failed to load product details</p>;
 
   return (
