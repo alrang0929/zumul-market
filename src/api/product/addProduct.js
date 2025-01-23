@@ -49,9 +49,9 @@ export const onSubmit = async (
             .from('product_img')
             .getPublicUrl(path);
           thumbnailPaths.push(thumbPublicData?.publicUrl);
-        };
-      };
-    };
+        }
+      }
+    }
 
     // 상세 이미지 업로드
     const detailImagePaths = [];
@@ -67,9 +67,15 @@ export const onSubmit = async (
             .from('product_img')
             .getPublicUrl(path);
           detailImagePaths.push(detailPublicData?.publicUrl);
-        };
-      };
-    };
+        }
+      }
+    }
+
+    // 상세 이미지 경로 처리
+    const detailImagesPath = uploadedPaths.map((path) => ({
+      path,
+      type: 'detail',
+    }));
 
     // product 테이블에 데이터 추가
     const productData = {
@@ -85,7 +91,7 @@ export const onSubmit = async (
       shipping_fee: data.shipping_fee,
       title_image: publicImagePath, // 변환된 URL 사용
       detail_image: detailImagesPath,
-      thumb: thumbnailPath,
+      thumb: thumbnailPaths, // thumbnailPaths 사용
     };
 
     console.log('Saving Product:', productData);
