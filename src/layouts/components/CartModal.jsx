@@ -7,7 +7,6 @@ import './style/cart_modal.scss';
 import { BuyButton } from './BuyButton';
 import useUserStore from '../../stores/auth/useUserStore';
 import { useFetchCartItem } from '../../api/cart/hook/useFetchCartItems';
-// import { Skeleton } from '../../styles/skeleton';
 
 export const CartModal = () => {
   const { isCartOpen, toggleCart } = useCartStore();
