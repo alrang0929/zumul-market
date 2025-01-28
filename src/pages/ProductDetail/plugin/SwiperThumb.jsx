@@ -23,7 +23,7 @@ export default function ThumbSlider({selectdata}) {
   
 
   return (
-    <>
+    <>yarn 
       <Swiper
         spaceBetween={0}
         centeredSlides={true}
@@ -36,7 +36,7 @@ export default function ThumbSlider({selectdata}) {
             className="inner-slide"
             key={selectdata.id + i}
           >
-            <div className="img-box">
+            <div className="img-box swiper-zoom-container">
               <img src={item}  alt={`썸네일 이미지${i}`} />
             </div>
             
