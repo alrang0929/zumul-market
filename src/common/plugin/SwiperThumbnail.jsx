@@ -28,11 +28,14 @@ export default function ThumbnailSlider({ data, viewcount }) {
         navigation={true}
         modules={[Autoplay, Pagination, Navigation, EffectFade]}
         effect="fade"
+        lazy={{
+          loadPrevNext:true,
+        }}
         className="thumbnail-swiper"
       >
         {SELECT_DATA.map((item, i) => (
           <SwiperSlide
-            className="inner-slide"
+            className="inner-slide swiper-lazy"
             key={'slide' + i}
             style={{ backgroundImage: `url(${item.bgURL})` }}
           ></SwiperSlide>
