@@ -23,7 +23,7 @@ export default function ThumbSlider({selectdata}) {
   
 
   return (
-    <>yarn 
+    <>
       <Swiper
         spaceBetween={0}
         centeredSlides={true}
