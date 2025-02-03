@@ -1,7 +1,7 @@
 import React from 'react';
 import { OrderForm } from './components/OrderForm';
 import { OrderInfo } from './components/OrderInfo';
-import { DivBox } from '../../styles/box';
+import { DivBox } from '../../styles/StyleBox';
 
 import { useLocation } from 'react-router-dom';
 import { useForm, FormProvider } from 'react-hook-form';

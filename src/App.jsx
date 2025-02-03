@@ -5,7 +5,6 @@ import {
   Route,
   useLocation,
 } from 'react-router-dom';
-import './styles/index.scss';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 import NotFound from './NotFound';
@@ -20,12 +19,14 @@ import { OrderPage } from './pages/Order';
 import { PaymentSuccess } from './pages/Order/components/PaymentSuccess';
 import {ScrollTop } from './utils/ScrollTop';
 import { UserManagePage } from './pages/UserManage';
+import { GlobalStyle } from './styles/globals';
 const App = () => {
   const queryClient = new QueryClient();
   return (
     <>
       <QueryClientProvider client={queryClient}>
         <Router>
+        <GlobalStyle />
         <ScrollTop />
           <Routes>
             {/* MainLayout 아래에 자식 라우트 정의 */}

@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { DivBox } from '../../styles/box';
+import { DivBox } from '../../styles/StyleBox';
 import { ProductThumbCard } from '../../common/ProductThumbCard';
 import { CountSubTitle } from '../../common/CountSubTitle';
 import { FilterMenu } from '../../common/FilterMenu';

@@ -1,5 +1,5 @@
 import React from 'react';
-import { SelectBox } from '../../../styles/box';
+import { SelectBox } from '../../../styles/StyleBox';
 import { Button } from '../../../styles/StyleButton';
 import './style/option_select.scss';
 import { addComma } from '../../../utils/commonFn';

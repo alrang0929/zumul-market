@@ -1,5 +1,5 @@
 import React from 'react';
-import { DivBox } from '../../../styles/box';
+import { DivBox } from '../../../styles/StyleBox';
 import SubTitle from '../../../common/SubTitle';
 import BoardCard from '../../../common/BoardCard';
 import { cardData } from '../../../common/dummyDb';

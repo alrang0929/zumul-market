@@ -2,11 +2,11 @@ import React, { useEffect } from 'react';
 // import { useProducts } from '../../api/product/hook/useProducts';
 import ThumbSlider from './plugin/SwiperThumb';
 import { ProductInfo } from './components/ProductInfo';
-import './style/product_detail.scss';
-import { DivBox } from '../../styles/box';
+import { DivBox, FlexBox } from '../../styles/StyleBox';
 import { useParams } from 'react-router-dom';
 import useProductStore from '../../stores/product/useProductStore';
 import { DetailInfo } from './components/DetailInfo';
+import { BackButton } from '../../common/BackButton';
 
 const ProductDetail = () => {
   const { id } = useParams(); // URL 파라미터로부터 productId 가져오기
@@ -19,7 +19,7 @@ const ProductDetail = () => {
     return () => clearSelectedProduct(); // 컴포넌트 언마운트 시 데이터 초기화
   }, [id, fetchProductDetail, clearSelectedProduct]);
 
-  console.log("fetchProductDetail",fetchProductDetail);
+  console.log('fetchProductDetail', fetchProductDetail);
 
   if (!selectedProduct) return <p>Loading...</p>;
 
@@ -27,18 +27,19 @@ const ProductDetail = () => {
 
   return (
     <>
-    <main className="prooduct-detail-page">
-
-      <DivBox className="product-info-wrap">
-        <ThumbSlider selectdata={selectedProduct} />
-        <ProductInfo selectdata={selectedProduct} />
+      <DivBox className="prooduct-detail-page">
+        <FlexBox flexStyles={'ColumFlexBox'} gap={'L'} className="product-info-wrap">
+          <BackButton />
+          <FlexBox gap={'XL'} className="content-wrap" style={{paddingBottom:"5rem"}}>
+            <ThumbSlider selectdata={selectedProduct} />
+            <ProductInfo selectdata={selectedProduct} />
+          </FlexBox>
+        </FlexBox>
+        <DivBox className="detail-image-wrap" >
+          <DetailInfo selectdata={selectedProduct} />
+        </DivBox>
+        <DivBox className="userpick-list"></DivBox>
       </DivBox>
-      <DivBox className="detail-image-wrap">
-        <DetailInfo selectdata={selectedProduct} />
-      </DivBox>
-      <DivBox className="userpick-list">
-      </DivBox>
-    </main>
     </>
   );
 };

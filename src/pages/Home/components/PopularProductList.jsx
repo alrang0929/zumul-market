@@ -1,5 +1,5 @@
 import React from 'react';
-import { DivBox } from '../../../styles/box';
+import { DivBox } from '../../../styles/StyleBox';
 import SubTitle from '../../../common/SubTitle';
 import { ProductThumbCard } from '../../../common/ProductThumbCard';
 import { useProductsQuery } from '../../../stores/product/useInfiniteProduct';

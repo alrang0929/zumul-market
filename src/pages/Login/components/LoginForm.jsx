@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { InputBox } from '../../../styles/box';
+import { InputBox } from '../../../styles/StyleBox';
 
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';

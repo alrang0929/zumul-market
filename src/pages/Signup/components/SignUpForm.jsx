@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { FormBox, InputBox } from '../../../styles/box';
+import { FormBox, InputBox } from '../../../styles/StyleBox';
 import { Button } from '../../../styles/StyleButton';
 import { useImageHandler } from '../../../utils/useImageHandler';
 import { Link, useNavigate } from 'react-router-dom';

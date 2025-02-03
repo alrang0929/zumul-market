@@ -37,7 +37,12 @@ export default function ThumbSlider({selectdata}) {
             key={selectdata.id + i}
           >
             <div className="img-box">
-              <img src={item}  alt={`썸네일 이미지${i}`} />
+              <img 
+              src={item}  
+              alt={`썸네일 이미지${i}`}
+              loading="lazy"
+              />
+              <div className="swiper-lazy-preloader"></div>
             </div>
             
           </SwiperSlide>

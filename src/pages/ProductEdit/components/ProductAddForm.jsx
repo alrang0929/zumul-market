@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FormBox, InputBox, SelectBox } from '../../../styles/box';
+import { FormBox, InputBox, SelectBox } from '../../../styles/StyleBox';
 import { Button } from '../../../styles/StyleButton';
 import './styles/product_edit_form.scss';
 

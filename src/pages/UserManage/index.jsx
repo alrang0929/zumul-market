@@ -1,5 +1,5 @@
 import React from 'react';
-import { DivBox } from '../../styles/box';
+import { DivBox } from '../../styles/StyleBox';
 import { UserInfoWrap } from './components/UserInfo';
 import { CreatorInfoWrap } from './components/CreatorInfoWrap';
 import { FanInfoWrap } from './components/FanInfoWrap';
