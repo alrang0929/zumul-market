@@ -6,8 +6,8 @@ import { useCartStore } from '../../stores/cart/useCartStore';
 
 export const BuyButton = () => {
   const user = useUserStore((state) => state.user);
-  const { toggleCart } = useCartStore();
   const navigator = useNavigate();
+
   return (
     <Button
       buttontype={'submit'}

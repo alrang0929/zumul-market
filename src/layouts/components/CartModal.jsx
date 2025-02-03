@@ -4,12 +4,15 @@ import { addComma } from '../../utils/commonFn';
 import { Button } from '../../styles/StyleButton';
 import { IoCloseOutline } from 'react-icons/io5';
 import './style/cart_modal.scss';
-import { BuyButton } from './BuyButton';
 import useUserStore from '../../stores/auth/useUserStore';
 import { useFetchCartItem } from '../../api/cart/hook/useFetchCartItems';
+import { useNavigate } from 'react-router-dom';
+import { handlePurchase } from './handlePurchase';
 
 export const CartModal = () => {
+  const navigator = useNavigate();
   const { isCartOpen, toggleCart } = useCartStore();
+  
   const { user } = useUserStore((state) => state);
   const {
     data: cartItems = [], // cartItems 초기화
@@ -106,10 +109,11 @@ export const CartModal = () => {
           {!isCartEmpty && (
             <div className="button-container">
               <Button
-                buttontype={'rectangleMain'}
+                buttontype={'submit'}
                 className="action-button"
+                style={{marginTop:'2rem'}}
                 onClick={() =>
-                  handleButtonClick(() => console.log('구매 버튼 클릭!'))
+                  handleButtonClick(() => handlePurchase({navigator, user, cartItems}))
                 }
               >
                 구매하기

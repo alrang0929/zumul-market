@@ -13,7 +13,10 @@ const fetchSession = async () => {
 export const useSession = () => {
   const setUser = useUserStore((state) => state.setUser);
 
-  return useQuery(['session'], fetchSession, {
+  return useQuery({
+    queryKey: ['session'],  // ✅ 객체 기반 호출
+    queryFn: fetchSession,
+    staleTime: Infinity,
     onSuccess: (session) => {
       if (session) {
         setUser({
@@ -45,14 +48,13 @@ const fetchUser = async () => {
 
 export const useUserQuery = () => {
   return useQuery({
-    queryKey: ['user'],
+    queryKey: ['user'],  // ✅ 객체 기반 호출
     queryFn: fetchUser,
-    onSuccess: (user) => {
-      // 유저 정보를 sessionStorage에 저장
-      sessionStorage.setItem('user', JSON.stringify(user));
-    },
     staleTime: Infinity,
     cacheTime: Infinity,
+    onSuccess: (user) => {
+      sessionStorage.setItem('user', JSON.stringify(user));
+    },
   });
 };
 

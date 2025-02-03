@@ -33,8 +33,8 @@ export const OrderInfo = () => {
         <SubTitle subTitle={'결제 상세'} />
 
         <ul>
-          {productData.map((item) => (
-            <li>
+          {productData.map((item, idx) => (
+            <li key={idx}>
               {/* 주문내역 */}
               <div className="data-wrap flex-between">
                 <span>주문 내역</span>

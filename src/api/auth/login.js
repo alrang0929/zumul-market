@@ -18,6 +18,8 @@ export const loginUser = async (email, password) => {
       throw new Error('비밀번호가 일치하지 않습니다.');
     }
 
+    sessionStorage.setItem('user', JSON.stringify(data));
+    
     return data;
   } catch (error) {
     console.error('로그인 중 오류 발생:', error.message);

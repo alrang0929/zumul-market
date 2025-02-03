@@ -13,7 +13,5 @@ export const handleAddToCart = ({ user, selectdata, formData, addToCart }) => {
     total_price: optionList.reduce((total, option) => total + option.add_cost.price * option.count, 0),
   };
 
-  console.log('Cart data to save:', cartData);
-
   addToCart([cartData]);
 };

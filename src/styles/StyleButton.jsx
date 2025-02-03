@@ -70,7 +70,7 @@ const buttonStyles = {
     background-color: ${mainColor};
     color: #fff;
     border: transparent;
-    /* border-radius: 999px; */
+    border-radius: 1rem;
     padding: 0.8rem 1.5rem;
     font-size: 1.2rem;
   `,

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import {
   BrowserRouter as Router,
   Routes,
@@ -20,8 +20,17 @@ import { OrderPage } from './pages/Order';
 import { PaymentSuccess } from './pages/Order/components/PaymentSuccess';
 import {ScrollTop } from './utils/ScrollTop';
 import { UserManagePage } from './pages/UserManage';
+import useUserStore from './stores/auth/useUserStore';
+import { useSession } from './api/auth/api';
 const App = () => {
-  const queryClient = new QueryClient();
+  const { restoreUser } = useUserStore();
+  
+  const queryClient = useMemo(() => new QueryClient(), []); // ✅ useMemo 사용
+
+  useEffect(() => {
+    restoreUser(); // 새로고침 시 Supabase 세션에서 자동 복원
+  }, []);
+
   return (
     <>
       <QueryClientProvider client={queryClient}>
