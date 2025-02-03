@@ -49,8 +49,11 @@ export const CartModal = () => {
 
             {isCartEmpty ? (
               <div className="empty-cart-message">
-                <p>장바구니가 비었습니다.<br/>
-                  원하는 상품을 추가해주세요!</p>
+                <p>
+                  장바구니가 비었습니다.
+                  <br />
+                  원하는 상품을 추가해주세요!
+                </p>
               </div>
             ) : (
               <ul className="cart-list">
@@ -69,7 +72,9 @@ export const CartModal = () => {
                           <li key={index} className="option-item">
                             <span>{option.name || '옵션 없음'}</span>
                             <div className="price">
-                              <span>{addComma(option.add_cost.price || 0)}</span>
+                              <span>
+                                {addComma(option.add_cost.price || 0)}
+                              </span>
                               <span>원</span>
                             </div>
                             <div className="quantity">
@@ -100,12 +105,15 @@ export const CartModal = () => {
           </div>
           {!isCartEmpty && (
             <div className="button-container">
-              <button
+              <Button
+                buttontype={'rectangleMain'}
                 className="action-button"
-                onClick={() => handleButtonClick(() => console.log('구매 버튼 클릭!'))}
+                onClick={() =>
+                  handleButtonClick(() => console.log('구매 버튼 클릭!'))
+                }
               >
                 구매하기
-              </button>
+              </Button>
             </div>
           )}
         </div>
