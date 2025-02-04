@@ -69,7 +69,7 @@
 <details>
   <summary>장바구니/구매 </summary>
   <!-- 내용 -->
-- 로그인 상태가 아닐 시: `alret` 플로팅
+- 로그인 상태가 아닐 시: alret 플로팅
         <img width="2503" alt="Image" src="https://github.com/user-attachments/assets/dd5c2c1d-830c-469d-a89f-1d1f9079a69a" />
     
 - 로그인 상태: `handleAddToCartg`함수를 호출하여 cart DB에 저장
