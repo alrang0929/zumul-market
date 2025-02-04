@@ -77,11 +77,10 @@
 
 </details>
 <details>
-  <summary>로그인/회원가</summary>
+  <summary>로그인/회원가입</summary>
   <!-- 내용 -->
 </details>
-  
-- soket.io 활용한 채팅 기능
+
 
 ### 화면설계/유저 플로우 [이동링크](https://www.figma.com/design/ZuHIjGrhASbvrYKbIHKHXk/%EC%AA%BC%EB%AC%BC%EB%A7%88%EC%BC%93_%ED%99%94%EB%A9%B4%EC%84%A4%EA%B3%84%EC%84%9C_ver241218?node-id=32-99&t=n3FhKS3jvT6imT7Q-1)
 ![Image](https://github.com/user-attachments/assets/63e18f1a-881e-42a1-a38c-77b73f134b7a)
