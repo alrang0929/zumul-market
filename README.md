@@ -4,7 +4,8 @@
 ### 프로잭트 개요
 
 - **창작자(판매자)** 가 자신의 작품(음원, 디지털 콘텐츠, 예술품 등)을 쉽게 판매하고, 팬과 직접 연결될 수 있는 커머스 플랫폼 입니다
-- 📃[배포링크](https://zumul-market-rere-alrang0929-alrangs-projects.vercel.app/)
+- 📃[배포링크](https://zumul-market-git-main-alrangs-projects.vercel.app/)
+
 
 ### 기술 스텍
 |분류|이름|
