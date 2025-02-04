@@ -17,6 +17,7 @@
 |Data Fetching & Caching|TanStack Query|
 |Security & Authentication|bcryptjs|
 |Form Management|React Hook Form|
+|Styling|SCSS(Sass), Styled-components|
 
 ### 핵심 개념
 
