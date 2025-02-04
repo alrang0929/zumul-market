@@ -88,3 +88,43 @@
 ### 프로젝트 ERD [이동링크](https://drawsql.app/teams/-2680/diagrams/zumulmarket/embed)
 ![Image](https://github.com/user-attachments/assets/6c40c23e-2803-4014-bf6a-ebe795bcb48f)
 
+### 폴더 구조
+
+기능 중심으로 폴더 분리 채택
+
+`atomic design`과 고민을 했으나 `Atomic`을 반영하기에는 소규모 프로젝트에서 과도한 설계라 판단하여 각 폴더의 역할이 명확하게 나눠진 구조를 채택했습니다.
+
+추후 프로젝트 규모 확대로 인해 `atomic design`구조를 반영해야 된다면 페이지별 컴포넌트를 `components`로 옮겨 계층화를 진행할 예정입니다.
+<details>
+<summary>폴더구조</summary>
+  
+```
+    src/
+    ├── api/
+    ├──── auth/            
+    │     └── loginUsers.js                           
+    ├── common/
+    │   └── SubTitle.jsx      
+    ├── store/       
+    ├──── auth/            
+    │     └── useStore.js      
+    ├── layouts/                  
+    │   ├── MainLayout.jsx          
+    │   └── AuthLayout.jsx         
+    ├── pages/                   
+    │   ├── Home/                  
+    │   ├── Login/                
+    │   └── Signup/               
+    ├── stores/                   
+    │   └── useStore.js 
+    ├── styles/                    
+    │   ├── globals.css          
+    │   └── components.css    
+    ├── utils/                      
+    │   └── orderUtils.js           
+    ├── App.jsx                    
+    ├── main.jsx                  
+    └── index.html          
+
+```
+</details>
