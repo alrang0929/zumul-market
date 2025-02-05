@@ -9,7 +9,7 @@
 
 ### 기술 스텍
 |분류|이름|
-|---|:---|
+|---|---|
 |Framework|React|
 |Language|JavaScript|
 |Database|Supabase|
