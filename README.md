@@ -10,12 +10,12 @@
 ### 기술 스텍
 |분류|이름|
 |---|---|
-|Framework|React|
+|Framework|React(v18)|
 |Language|JavaScript|
 |Database|Supabase|
 |Build Tools|Vite(v6.0.1)|
 |State Management|Zustand(v5.0.2)|
-|Data Fetching & Caching|TanStack Query|
+|Data Fetching & Caching|TanStack Query(v5.62.8)|
 |Security & Authentication|bcryptjs(v2.4.3)|
 |Form Management|React Hook Form(v7.54.2)|
 |Styling|SCSS(Sass)(v1.32.0), Styled-components(v6.1.13)|
