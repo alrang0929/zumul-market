@@ -13,16 +13,16 @@
 |Framework|React|
 |Language|JavaScript|
 |Database|Supabase|
-|Build Tools|Vite|
-|State Management|Zustand|
+|Build Tools|Vite(v6.0.1)|
+|State Management|Zustand(v5.0.2)|
 |Data Fetching & Caching|TanStack Query|
-|Security & Authentication|bcryptjs|
-|Form Management|React Hook Form|
-|Styling|SCSS(Sass), Styled-components|
+|Security & Authentication|bcryptjs(v2.4.3)|
+|Form Management|React Hook Form(v7.54.2)|
+|Styling|SCSS(Sass)(v1.32.0), Styled-components(v6.1.13)|
 
-### 핵심 개념
+### 핵심 기능
 
-- **창작자의 가시성 강화**: 작품 홍보 및 판매 지원
+- **창작자의 기능 강화**: 작품 홍보 및 판매 지원
 - **소통 중심 플랫폼**: 팬들과의 실시간 소통(채팅) 기능 제공
 
 
@@ -61,7 +61,7 @@
 
 ![Image](https://github.com/user-attachments/assets/a79cf771-3df9-4fa4-b7f5-19d7476cec31)
 
-- 회원가입 시 type 선택을 통해 **창작자(판매자) or 팬(소비자, 일반 회원)** 으로 권한이 구분되고 그에 따른 기능을 제공합니다
+- 회원가입 시 **창작자(판매자)와 팬(소비자, 일반 회원)** 중 하나를 선택하면, 선택한 유형에 따라 **권한과 기능**이 제공됩니다.
 <details>
   <summary>창작자(판매자)의 상품등록/조회 기능</summary>
   <!-- 내용 -->
