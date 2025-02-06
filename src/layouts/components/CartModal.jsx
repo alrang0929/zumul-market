@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useCartStore } from '../../stores/cart/useCartStore';
 import { addComma } from '../../utils/commonFn';
 import { Button } from '../../styles/StyleButton';
@@ -12,18 +12,16 @@ import { handlePurchase } from './handlePurchase';
 export const CartModal = () => {
   const navigator = useNavigate();
   const { isCartOpen, toggleCart } = useCartStore();
-  
   const { user } = useUserStore((state) => state);
+
+  const modalRef = useRef(null);
+
   const {
     data: cartItems = [], // cartItems 초기화
     isLoading,
     isError,
   } = useFetchCartItem(user?.id);
 
-  if (isLoading) return <p>로딩중</p>;
-  if (isError) return <p>데이터 로드 중 오류가 발생했습니다.</p>;
-
-  const isCartEmpty = cartItems.length === 0;
 
   // 버튼 클릭 핸들러
   const handleButtonClick = (callback) => {
@@ -34,11 +32,39 @@ export const CartModal = () => {
     callback?.();
   };
 
+  useEffect(() => {
+    if (isCartOpen) {
+      toggleCart();
+    }
+  }, [location.pathname]);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (modalRef.current && !modalRef.current.contains(event.target)) {
+        toggleCart();
+      }
+    };
+
+    if (isCartOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isCartOpen]);
+
+  if (isLoading) return <p>로딩중</p>;
+  if (isError) return <p>데이터 로드 중 오류가 발생했습니다.</p>;
+
+  const isCartEmpty = cartItems.length === 0;
+
+
   return (
     <>
       {isCartOpen ? (
         <div className="cart-modal">
-          <div className="cart-wrap">
+          <div className="cart-wrap" ref={modalRef}>
             <div className="title">
               <h4>장바구니</h4>
               <Button
@@ -59,13 +85,16 @@ export const CartModal = () => {
                 </p>
               </div>
             ) : (
-              <ul className="cart-list">
+              <ul className="cart-list"
+              
+              >
                 {cartItems.map((cart) => (
                   <li key={cart.id} className="cart-item">
                     <div className="img-box">
                       <img
                         src={cart.product.title_image}
                         alt={`${cart.product.title} 썸네일`}
+                        loading="lazy"
                       />
                     </div>
                     <div className="info-wrap">
@@ -111,9 +140,11 @@ export const CartModal = () => {
               <Button
                 buttontype={'submit'}
                 className="action-button"
-                style={{marginTop:'2rem'}}
+                style={{ marginTop: '2rem' }}
                 onClick={() =>
-                  handleButtonClick(() => handlePurchase({navigator, user, cartItems}))
+                  handleButtonClick(() =>
+                    handlePurchase({ navigator, user, cartItems })
+                  )
                 }
               >
                 구매하기

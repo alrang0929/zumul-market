@@ -3,7 +3,6 @@ import {
   BrowserRouter as Router,
   Routes,
   Route,
-  useLocation,
 } from 'react-router-dom';
 import './styles/index.scss';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
@@ -17,14 +16,16 @@ import LoginPage from './pages/Login';
 import { ProductEditPage } from './pages/ProductEdit';
 import { ProductListPage } from './pages/ProductList';
 import { OrderPage } from './pages/Order';
-import { PaymentSuccess } from './pages/Order/components/PaymentSuccess';
-import {ScrollTop } from './utils/ScrollTop';
 import { UserManagePage } from './pages/UserManage';
+
+import { ScrollTop } from './utils/ScrollTop';
+import { PaymentSuccess } from './pages/Order/components/PaymentSuccess';
+
 import useUserStore from './stores/auth/useUserStore';
-import { useSession } from './api/auth/api';
+
 const App = () => {
   const { restoreUser } = useUserStore();
-  
+
   const queryClient = useMemo(() => new QueryClient(), []); // ✅ useMemo 사용
 
   useEffect(() => {
@@ -35,7 +36,7 @@ const App = () => {
     <>
       <QueryClientProvider client={queryClient}>
         <Router>
-        <ScrollTop />
+          <ScrollTop />
           <Routes>
             {/* MainLayout 아래에 자식 라우트 정의 */}
             <Route path="/" element={<MainLayout />}>
@@ -51,10 +52,7 @@ const App = () => {
               <Route path="product/:id" element={<ProductDetail />} />
               <Route path="product" element={<ProductListPage />} />
               <Route path="product/:id/edit" element={<ProductEditPage />} />
-              <Route
-                path="user/manage"
-                element={<UserManagePage />}
-              />
+              <Route path="user/manage" element={<UserManagePage />} />
             </Route>
             {/* 404 페이지 */}
             <Route path="*" element={<NotFound />} />
