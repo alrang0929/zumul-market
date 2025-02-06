@@ -2,18 +2,20 @@ import React, { useEffect, useRef } from 'react';
 import { useCartStore } from '../../stores/cart/useCartStore';
 import { addComma } from '../../utils/commonFn';
 import { Button } from '../../styles/StyleButton';
-import { IoCloseOutline } from 'react-icons/io5';
 import './style/cart_modal.scss';
 import useUserStore from '../../stores/auth/useUserStore';
 import { useFetchCartItem } from '../../api/cart/hook/useFetchCartItems';
 import { useNavigate } from 'react-router-dom';
 import { handlePurchase } from './handlePurchase';
+import { DeleteButton } from '../../common/DeleteButton';
+// import { removeFromCart } from '../../api/cart/removeCartItems';
+import { useRemoveFromCart } from '../../api/cart/hook/useRemoveCart';
 
 export const CartModal = () => {
   const navigator = useNavigate();
   const { isCartOpen, toggleCart } = useCartStore();
   const { user } = useUserStore((state) => state);
-
+  const removeFromCart = useRemoveFromCart();
   const modalRef = useRef(null);
 
   const {
@@ -22,22 +24,16 @@ export const CartModal = () => {
     isError,
   } = useFetchCartItem(user?.id);
 
+  console.log('cartItems', cartItems);
 
-  // 버튼 클릭 핸들러
-  const handleButtonClick = (callback) => {
-    if (!user) {
-      alert('로그인이 필요한 서비스입니다.');
-      return;
-    }
-    callback?.();
-  };
-
-  useEffect(() => {
-    if (isCartOpen) {
-      toggleCart();
-    }
-  }, [location.pathname]);
-
+  const sortedCartItems = Array.from(
+    new Map(
+      cartItems
+        .filter((item) => !item.delete_state)
+        .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
+        .map((item) => [item.id, item])
+    ).values()
+  );
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (modalRef.current && !modalRef.current.contains(event.target)) {
@@ -57,9 +53,8 @@ export const CartModal = () => {
   if (isLoading) return <p>로딩중</p>;
   if (isError) return <p>데이터 로드 중 오류가 발생했습니다.</p>;
 
-  const isCartEmpty = cartItems.length === 0;
-
-
+  const isCartEmpty = sortedCartItems.length === 0;
+  
   return (
     <>
       {isCartOpen ? (
@@ -67,13 +62,6 @@ export const CartModal = () => {
           <div className="cart-wrap" ref={modalRef}>
             <div className="title">
               <h4>장바구니</h4>
-              <Button
-                buttontype={'iconButton'}
-                className="close-btn"
-                onClick={toggleCart}
-              >
-                <IoCloseOutline />
-              </Button>
             </div>
 
             {isCartEmpty ? (
@@ -85,10 +73,8 @@ export const CartModal = () => {
                 </p>
               </div>
             ) : (
-              <ul className="cart-list"
-              
-              >
-                {cartItems.map((cart) => (
+              <ul className="cart-list">
+                {sortedCartItems.map((cart) => (
                   <li key={cart.id} className="cart-item">
                     <div className="img-box">
                       <img
@@ -98,7 +84,10 @@ export const CartModal = () => {
                       />
                     </div>
                     <div className="info-wrap">
-                      <h6 className="title">{cart.product.title}</h6>
+                      <div className="title-wrap">
+                        <h6 className="title">{cart.product.title}</h6>
+                        <DeleteButton clickfn={() => removeFromCart.mutate(cart.id)} />
+                      </div>
                       <ul className="option-list">
                         {cart.option.map((option, index) => (
                           <li key={index} className="option-item">
@@ -141,11 +130,7 @@ export const CartModal = () => {
                 buttontype={'submit'}
                 className="action-button"
                 style={{ marginTop: '2rem' }}
-                onClick={() =>
-                  handleButtonClick(() =>
-                    handlePurchase({ navigator, user, cartItems })
-                  )
-                }
+                onClick={() => handlePurchase({ navigator, user, cartItems })}
               >
                 구매하기
               </Button>

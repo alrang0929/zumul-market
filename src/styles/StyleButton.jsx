@@ -23,45 +23,43 @@ const buttonStyles = {
     font-size: 1.2rem;
     white-space: nowrap;
   `,
-   mainBasicIcon: css`
-   cursor: pointer;
+  mainBasicIcon: css`
+    cursor: pointer;
 
-   display: flex;
-   align-items: center;
-   justify-content: space-between;
-   gap: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
 
-   background-color: ${mainColor};
-   color: #fff;
-   width: fit-content;
-   border: transparent;
-   padding: 1.5rem 2rem;
-   font-size: 1.4rem;
-   white-space: nowrap;
-   .icon{
-    font-size: 2rem;
-   }
- `
-  ,
-   subBasicIcon: css`
-   cursor: pointer;
+    background-color: ${mainColor};
+    color: #fff;
+    width: fit-content;
+    border: transparent;
+    padding: 1.5rem 2rem;
+    font-size: 1.4rem;
+    white-space: nowrap;
+    .icon {
+      font-size: 2rem;
+    }
+  `,
+  subBasicIcon: css`
+    cursor: pointer;
 
-   display: flex;
-   align-items: center;
-   justify-content: space-between;
-   gap: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
 
-   background-color: #F0F8FF;
-   width: fit-content;
-   border: transparent;
-   padding: 1.5rem 2rem;
-   font-size: 1.4rem;
-   white-space: nowrap;
-   .icon{
-    font-size: 2rem;
-   }
- `
-  ,
+    background-color: #f0f8ff;
+    width: fit-content;
+    border: transparent;
+    padding: 1.5rem 2rem;
+    font-size: 1.4rem;
+    white-space: nowrap;
+    .icon {
+      font-size: 2rem;
+    }
+  `,
   submit: css`
     width: 100%;
     height: 6rem;
@@ -79,23 +77,25 @@ const buttonStyles = {
     background-color: ${mainColor};
     color: #fff;
     border: transparent;
-    border-radius: .7rem;
+    border-radius: 0.7rem;
     padding: 0.8rem 1.5rem;
     font-size: 1.2rem;
   `,
   iconButton: css`
     cursor: pointer;
-    width: 1.5rem;
-    height: 1.5rem;
-    background-color:transparent;
+    display: block;
+    background-color: transparent;
     border: transparent;
+    img {
+      width: fit-content;
+    }
   `,
   assistanceButton: css`
     cursor: pointer;
     padding: 0.8rem 1.5rem;
     background-color: #fff;
-    color : ${mainColor};
-    filter: drop-shadow(2px 10px 5px #1F17FF30);
+    color: ${mainColor};
+    filter: drop-shadow(2px 10px 5px #1f17ff30);
     border: transparent;
     border-radius: 999px;
   `,

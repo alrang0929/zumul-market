@@ -8,7 +8,7 @@ import { EditButton } from './EditButton';
 
 const ProductEditCard = ({ data, linktext }) => {
   console.log('data', data);
-  const STATUS_TEXT = { TURE: '판매중', FALSE: '판매종료/예정' };
+  const STATUS_TEXT = { TURE: '판매중', FALSE: '판매종료' };
   return (
     <>
       <ul className="product-edit-list">

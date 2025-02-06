@@ -18,9 +18,8 @@ import {
 
 export default function ThumbSlider({selectdata}) {
   const SELECT_DATA = selectdata.thumb || [];
-  console.log("selectdata slider", Array.isArray(SELECT_DATA)); // true면 배열
-  console.log("selectdata slider data", SELECT_DATA);
-  
+
+console.log("swiper_thumb",selectdata);
 
   return (
     <>
@@ -31,6 +30,15 @@ export default function ThumbSlider({selectdata}) {
         modules={[ Pagination, Navigation, EffectFade]}
         className="thumb-swiper-wrap"
       >
+         <SwiperSlide
+            className="inner-slide"
+            key={selectdata.id + "thumb"}
+          >
+            <div className="img-box swiper-zoom-container">
+              <img src={selectdata.title_image}  alt={`${selectdata.title}대표 썸네일`} />
+            </div>
+            
+          </SwiperSlide>
         {SELECT_DATA.map((item, i) => (
           <SwiperSlide
             className="inner-slide"
