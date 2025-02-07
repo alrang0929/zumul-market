@@ -3,18 +3,17 @@ import { useForm } from 'react-hook-form';
 import useUserStore from '../../../stores/auth/useUserStore';
 import { ProductOptions } from './ProductOptions';
 import { addComma } from '../../../utils/commonFn';
-import {useSaveOrder} from "../../../api/order/useSaveOrder";
-
+import { useSaveOrder } from '../../../api/order/useSaveOrder';
 
 import { Button } from '../../../styles/StyleButton';
-import { FaRegCreditCard } from 'react-icons/fa6';
-import { BsCart3 } from 'react-icons/bs';
+
 import './style/product_info.scss';
 import { handleAddToCart } from './handleAddToCart';
 import { handleBuyNow } from './handleBuyNow';
 import { useAddToCart } from '../../../api/cart/hook/useAddToCart';
 import { useNavigate } from 'react-router-dom';
 import { useCartStore } from '../../../stores/cart/useCartStore';
+import { Icon } from '../../../styles/IconSet';
 
 export const ProductInfo = ({ selectdata }) => {
   const navigator = useNavigate();
@@ -49,8 +48,7 @@ export const ProductInfo = ({ selectdata }) => {
   };
 
   const onBuyNow = (formData) => {
-    handleBuyNow({ user, selectdata, navigator, formData,saveOrder});
-    
+    handleBuyNow({ user, selectdata, navigator, formData, saveOrder });
   };
 
   return (
@@ -89,7 +87,7 @@ export const ProductInfo = ({ selectdata }) => {
             onClick={handleSubmit(onBuyNow)}
           >
             <span>구매하기</span>
-            <FaRegCreditCard className="icon" />
+            <Icon name={'payments'} className="icon" />
           </Button>
 
           <Button
@@ -99,7 +97,7 @@ export const ProductInfo = ({ selectdata }) => {
             onClick={handleSubmit(onAddToCart)}
           >
             <span>장바구니</span>
-            <BsCart3 className="icon" />
+            <Icon name={'cart'} className="icon" />
           </Button>
         </div>
       </form>

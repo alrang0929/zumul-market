@@ -5,8 +5,8 @@ export const productData = [
     docs: '피부에 좋은 천연 재료로 만든 핸드메이드 비누 세트입니다.',
     price: '25000',
     isrc: {
-      userImg: '/images/img00.jpg',
-      thumb: '/images/img00.jpg',
+      userImg: '/images/img00.webp',
+      thumb: '/images/img00.webp',
     },
   },
   {
@@ -15,8 +15,8 @@ export const productData = [
     docs: '빛에 따라 다양한 색감을 띠는 핸드메이드 레진 목걸이입니다.',
     price: '15000',
     isrc: {
-      userImg: '/images/img01.jpg',
-      thumb: '/images/img01.jpg',
+      userImg: '/images/img01.webp',
+      thumb: '/images/img01.webp',
     },
   },
   {
@@ -25,8 +25,8 @@ export const productData = [
     docs: '튼튼하고 감각적인 디자인의 수제 가죽 카드 지갑입니다.',
     price: '30000',
     isrc: {
-      userImg: '/images/img02.jpg',
-      thumb: '/images/img02.jpg',
+      userImg: '/images/img02.webp',
+      thumb: '/images/img02.webp',
     },
   },
   {
@@ -35,8 +35,8 @@ export const productData = [
     docs: '감성적인 디자인의 핸드메이드 도자기 커피잔 세트입니다.',
     price: '40000',
     isrc: {
-      userImg: '/images/img03.jpg',
-      thumb: '/images/img03.jpg',
+      userImg: '/images/img03.webp',
+      thumb: '/images/img03.webp',
     },
   },
   {
@@ -45,8 +45,8 @@ export const productData = [
     docs: '따뜻하고 포근한 핸드메이드 니트 스카프입니다.',
     price: '35000',
     isrc: {
-      userImg: '/images/img04.jpg',
-      thumb: '/images/img04.jpg',
+      userImg: '/images/img04.webp',
+      thumb: '/images/img04.webp',
     },
   },
   {
@@ -55,8 +55,8 @@ export const productData = [
     docs: '심플하고 자연스러운 원목으로 만든 캔들 홀더입니다.',
     price: '20000',
     isrc: {
-      userImg: '/images/img05.jpg',
-      thumb: '/images/img05.jpg',
+      userImg: '/images/img05.webp',
+      thumb: '/images/img05.webp',
     },
   },
   {
@@ -65,8 +65,8 @@ export const productData = [
     docs: '실용성과 디자인을 모두 잡은 핸드메이드 에코백입니다.',
     price: '18000',
     isrc: {
-      userImg: '/images/img00.jpg',
-      thumb: '/images/img00.jpg',
+      userImg: '/images/img00.webp',
+      thumb: '/images/img00.webp',
     },
   },
   {
@@ -75,8 +75,8 @@ export const productData = [
     docs: '독특한 문양과 색감이 돋보이는 핸드메이드 유리잔입니다.',
     price: '22000',
     isrc: {
-      userImg: '/images/img01.jpg',
-      thumb: '/images/img01.jpg',
+      userImg: '/images/img01.webp',
+      thumb: '/images/img01.webp',
     },
   },
   {
@@ -85,8 +85,8 @@ export const productData = [
     docs: '정성스럽게 빚은 핸드메이드 도자기 화분입니다.',
     price: '28000',
     isrc: {
-      userImg: '/images/img02.jpg',
-      thumb: '/images/img02.jpg',
+      userImg: '/images/img02.webp',
+      thumb: '/images/img02.webp',
     },
   },
   {
@@ -95,8 +95,8 @@ export const productData = [
     docs: '감각적인 디자인의 핸드메이드 비즈 팔찌입니다.',
     price: '12000',
     isrc: {
-      userImg: '/images/img03.jpg',
-      thumb: '/images/img03.jpg',
+      userImg: '/images/img03.webp',
+      thumb: '/images/img03.webp',
     },
   },
   {
@@ -105,8 +105,8 @@ export const productData = [
     docs: '자연에서 얻은 재료로 만든 천연 핸드메이드 향초입니다.',
     price: '19000',
     isrc: {
-      userImg: '/images/img04.jpg',
-      thumb: '/images/img04.jpg',
+      userImg: '/images/img04.webp',
+      thumb: '/images/img04.webp',
     },
   },
   {
@@ -115,8 +115,8 @@ export const productData = [
     docs: '세심한 터치가 돋보이는 핸드메이드 머그컵입니다.',
     price: '25000',
     isrc: {
-      userImg: '/images/img05.jpg',
-      thumb: '/images/img05.jpg',
+      userImg: '/images/img05.webp',
+      thumb: '/images/img05.webp',
     },
   },
   {
@@ -125,8 +125,8 @@ export const productData = [
     docs: '감각적인 디자인의 핸드메이드 우드 트레이입니다.',
     price: '32000',
     isrc: {
-      userImg: '/images/img00.jpg',
-      thumb: '/images/img00.jpg',
+      userImg: '/images/img00.webp',
+      thumb: '/images/img00.webp',
     },
   },
   {
@@ -135,8 +135,8 @@ export const productData = [
     docs: '책을 고급스럽게 보관할 수 있는 핸드메이드 북스탠드입니다.',
     price: '50000',
     isrc: {
-      userImg: '/images/img01.jpg',
-      thumb: '/images/img01.jpg',
+      userImg: '/images/img01.webp',
+      thumb: '/images/img01.webp',
     },
   },
   {
@@ -145,8 +145,8 @@ export const productData = [
     docs: '독창적인 디자인의 핸드메이드 에어플랜트 홀더입니다.',
     price: '16000',
     isrc: {
-      userImg: '/images/img02.jpg',
-      thumb: '/images/img02.jpg',
+      userImg: '/images/img02.webp',
+      thumb: '/images/img02.webp',
     },
   },
   {
@@ -155,8 +155,8 @@ export const productData = [
     docs: '가죽의 질감이 멋스러운 핸드메이드 북마크입니다.',
     price: '10000',
     isrc: {
-      userImg: '/images/img03.jpg',
-      thumb: '/images/img03.jpg',
+      userImg: '/images/img03.webp',
+      thumb: '/images/img03.webp',
     },
   },
   {
@@ -165,8 +165,8 @@ export const productData = [
     docs: '입술을 촉촉하게 유지시켜주는 천연 핸드메이드 립밤입니다.',
     price: '8000',
     isrc: {
-      userImg: '/images/img04.jpg',
-      thumb: '/images/img04.jpg',
+      userImg: '/images/img04.webp',
+      thumb: '/images/img04.webp',
     },
   },
   {
@@ -175,8 +175,8 @@ export const productData = [
     docs: '감각적인 디자인과 그립감이 돋보이는 핸드메이드 펜입니다.',
     price: '18000',
     isrc: {
-      userImg: '/images/img05.jpg',
-      thumb: '/images/img05.jpg',
+      userImg: '/images/img05.webp',
+      thumb: '/images/img05.webp',
     },
   },
   {
@@ -185,8 +185,8 @@ export const productData = [
     docs: '여유로운 분위기의 핸드메이드 캔버스 가방입니다.',
     price: '42000',
     isrc: {
-      userImg: '/images/img00.jpg',
-      thumb: '/images/img00.jpg',
+      userImg: '/images/img00.webp',
+      thumb: '/images/img00.webp',
     },
   },
   {
@@ -195,8 +195,8 @@ export const productData = [
     docs: '디테일한 작업으로 만든 핸드메이드 종이 아트 작품입니다.',
     price: '20000',
     isrc: {
-      userImg: '/images/img01.jpg',
-      thumb: '/images/img01.jpg',
+      userImg: '/images/img01.webp',
+      thumb: '/images/img01.webp',
     },
   },
 ];
@@ -208,7 +208,7 @@ export const cardData = [
     price: '500000',
     date: '2024년 1월 5일 14시',
     name: '소소한감성러',
-    userImg: '/images/img00.jpg',
+    userImg: '/images/img00.webp',
   },
   {
     title: '유니크한 일러스트 부탁드려요!',
@@ -216,7 +216,7 @@ export const cardData = [
     price: '300000',
     date: '2024년 1월 6일 10시',
     name: '힙스터정호',
-    userImg: '/images/img01.jpg',
+    userImg: '/images/img01.webp',
   },
   {
     title: '제품 홍보용 3D 프린트 제작 가능하신 분?',
@@ -224,7 +224,7 @@ export const cardData = [
     price: '800000',
     date: '2024년 1월 7일 16시',
     name: '메이커준',
-    userImg: '/images/img02.jpg',
+    userImg: '/images/img02.webp',
   },
   {
     title: '짧고 감각적인 영상 제작해주실 분!',
@@ -232,7 +232,7 @@ export const cardData = [
     price: '1200000',
     date: '2024년 1월 8일 13시',
     name: '영감소년',
-    userImg: '/images/img03.jpg',
+    userImg: '/images/img03.webp',
   },
   {
     title: '아이돌 팬아트 일러스트 해주실 분 찾아요!',
@@ -240,7 +240,7 @@ export const cardData = [
     price: '200000',
     date: '2024년 1월 9일 9시',
     name: '덕질요정',
-    userImg: '/images/img04.jpg',
+    userImg: '/images/img04.webp',
   },
   {
     title: '독창적인 광고음악 의뢰드려요',
@@ -248,7 +248,7 @@ export const cardData = [
     price: '700000',
     date: '2024년 1월 10일 15시',
     name: '음악덕후',
-    userImg: '/images/img05.jpg',
+    userImg: '/images/img05.webp',
   },
   {
     title: '게임 캐릭터 일러스트 제작 가능하신 분!',
@@ -256,7 +256,7 @@ export const cardData = [
     price: '500000',
     date: '2024년 1월 11일 11시',
     name: '퀘스트왕자',
-    userImg: '/images/img00.jpg',
+    userImg: '/images/img00.webp',
   },
   {
     title: '건축 모델 3D 프린트 해주실 분?',
@@ -264,7 +264,7 @@ export const cardData = [
     price: '900000',
     date: '2024년 1월 12일 14시',
     name: '모형장인',
-    userImg: '/images/img01.jpg',
+    userImg: '/images/img01.webp',
   },
   {
     title: '브랜드 스토리 영상 부탁드려요!',
@@ -272,7 +272,7 @@ export const cardData = [
     price: '1100000',
     date: '2024년 1월 13일 18시',
     name: '비주얼최고',
-    userImg: '/images/img02.jpg',
+    userImg: '/images/img02.webp',
   },
   {
     title: '감성적인 광고음악 제작 부탁드려요!',
@@ -280,7 +280,7 @@ export const cardData = [
     price: '600000',
     date: '2024년 1월 14일 12시',
     name: '감성홀릭',
-    userImg: '/images/img03.jpg',
+    userImg: '/images/img03.webp',
   },
   {
     title: '애니 감성 일러스트 요청합니다!',
@@ -288,7 +288,7 @@ export const cardData = [
     price: '450000',
     date: '2024년 1월 15일 10시',
     name: '애니덕후',
-    userImg: '/images/img04.jpg',
+    userImg: '/images/img04.webp',
   },
   {
     title: '정교한 3D 모델 프린트 해주세요',
@@ -296,7 +296,7 @@ export const cardData = [
     price: '1000000',
     date: '2024년 1월 16일 16시',
     name: '디테일장인',
-    userImg: '/images/img05.jpg',
+    userImg: '/images/img05.webp',
   },
   {
     title: 'SNS용 짧고 임팩트 있는 영상 제작!',
@@ -304,7 +304,7 @@ export const cardData = [
     price: '800000',
     date: '2024년 1월 17일 13시',
     name: '바이럴마스터',
-    userImg: '/images/img00.jpg',
+    userImg: '/images/img00.webp',
   },
   {
     title: '기업 광고음악 부탁드려요~',
@@ -312,7 +312,7 @@ export const cardData = [
     price: '750000',
     date: '2024년 1월 18일 15시',
     name: '오피스스타',
-    userImg: '/images/img01.jpg',
+    userImg: '/images/img01.webp',
   },
   {
     title: '동화책 삽화 만들어주실 분 구합니다!',
@@ -320,7 +320,7 @@ export const cardData = [
     price: '350000',
     date: '2024년 1월 19일 11시',
     name: '스토리텔러',
-    userImg: '/images/img02.jpg',
+    userImg: '/images/img02.webp',
   },
   {
     title: '기계 설계용 부품 3D 프린트 제작',
@@ -328,7 +328,7 @@ export const cardData = [
     price: '950000',
     date: '2024년 1월 20일 14시',
     name: '메카닉덕후',
-    userImg: '/images/img03.jpg',
+    userImg: '/images/img03.webp',
   },
   {
     title: '웨딩 영상 제작 전문가 찾습니다~',
@@ -336,7 +336,7 @@ export const cardData = [
     price: '1300000',
     date: '2024년 1월 21일 17시',
     name: '웨딩드리머',
-    userImg: '/images/img04.jpg',
+    userImg: '/images/img04.webp',
   },
   {
     title: '트렌디한 광고음악 의뢰합니다!',
@@ -344,7 +344,7 @@ export const cardData = [
     price: '700000',
     date: '2024년 1월 22일 14시',
     name: '스타일러버',
-    userImg: '/images/img05.jpg',
+    userImg: '/images/img05.webp',
   },
   {
     title: '프로필용 캐릭터 일러스트 요청',
@@ -352,7 +352,7 @@ export const cardData = [
     price: '550000',
     date: '2024년 1월 23일 10시',
     name: '개성쟁이',
-    userImg: '/images/img00.jpg',
+    userImg: '/images/img00.webp',
   },
   {
     title: '리뷰 영상 제작 가능하신 분?',
@@ -360,7 +360,7 @@ export const cardData = [
     price: '900000',
     date: '2024년 1월 24일 13시',
     name: '리뷰왕',
-    userImg: '/images/img01.jpg',
+    userImg: '/images/img01.webp',
   },
 ];
 
@@ -388,7 +388,7 @@ export const ProductEditDb = [
     sall_start: '2024-12-01',
     sall_end: '2024-12-05',
     price: 30000,
-    image_url: '/images/img00.jpg',
+    image_url: '/images/img00.webp',
     sell_status: true,
   },
   {
@@ -396,7 +396,7 @@ export const ProductEditDb = [
     sall_start: '2024-12-02',
     sall_end: '2024-12-06',
     price: 40000,
-    image_url: '/images/img01.jpg',
+    image_url: '/images/img01.webp',
     sell_status: false,
   },
   {
@@ -404,7 +404,7 @@ export const ProductEditDb = [
     sall_start: '2024-12-03',
     sall_end: '2024-12-07',
     price: 50000,
-    image_url: '/images/img02.jpg',
+    image_url: '/images/img02.webp',
     sell_status: true,
   },
   {
@@ -412,7 +412,7 @@ export const ProductEditDb = [
     sall_start: '2024-12-04',
     sall_end: '2024-12-08',
     price: 60000,
-    image_url: '/images/img03.jpg',
+    image_url: '/images/img03.webp',
     sell_status: false,
   },
   {
@@ -420,7 +420,7 @@ export const ProductEditDb = [
     sall_start: '2024-12-05',
     sall_end: '2024-12-09',
     price: 35000,
-    image_url: '/images/img04.jpg',
+    image_url: '/images/img04.webp',
     sell_status: true,
   },
   {
@@ -428,7 +428,7 @@ export const ProductEditDb = [
     sall_start: '2024-12-06',
     sall_end: '2024-12-10',
     price: 70000,
-    image_url: '/images/img05.jpg',
+    image_url: '/images/img05.webp',
     sell_status: false,
   },
   {
@@ -436,7 +436,7 @@ export const ProductEditDb = [
     sall_start: '2024-12-07',
     sall_end: '2024-12-11',
     price: 42000,
-    image_url: '/images/img00.jpg',
+    image_url: '/images/img00.webp',
     sell_status: true,
   },
   {
@@ -444,7 +444,7 @@ export const ProductEditDb = [
     sall_start: '2024-12-08',
     sall_end: '2024-12-12',
     price: 38000,
-    image_url: '/images/img01.jpg',
+    image_url: '/images/img01.webp',
     sell_status: false,
   },
   {
@@ -452,7 +452,7 @@ export const ProductEditDb = [
     sall_start: '2024-12-09',
     sall_end: '2024-12-13',
     price: 34000,
-    image_url: '/images/img02.jpg',
+    image_url: '/images/img02.webp',
     sell_status: true,
   },
   {
@@ -460,7 +460,7 @@ export const ProductEditDb = [
     sall_start: '2024-12-10',
     sall_end: '2024-12-14',
     price: 36000,
-    image_url: '/images/img03.jpg',
+    image_url: '/images/img03.webp',
     sell_status: false,
   },
   {
@@ -468,7 +468,7 @@ export const ProductEditDb = [
     sall_start: '2024-12-11',
     sall_end: '2024-12-15',
     price: 45000,
-    image_url: '/images/img04.jpg',
+    image_url: '/images/img04.webp',
     sell_status: true,
   },
   {
@@ -476,7 +476,7 @@ export const ProductEditDb = [
     sall_start: '2024-12-12',
     sall_end: '2024-12-16',
     price: 62000,
-    image_url: '/images/img05.jpg',
+    image_url: '/images/img05.webp',
     sell_status: false,
   },
   {
@@ -484,7 +484,7 @@ export const ProductEditDb = [
     sall_start: '2024-12-13',
     sall_end: '2024-12-17',
     price: 33000,
-    image_url: '/images/img00.jpg',
+    image_url: '/images/img00.webp',
     sell_status: true,
   },
   {
@@ -492,7 +492,7 @@ export const ProductEditDb = [
     sall_start: '2024-12-14',
     sall_end: '2024-12-18',
     price: 48000,
-    image_url: '/images/img01.jpg',
+    image_url: '/images/img01.webp',
     sell_status: false,
   },
   {
@@ -500,7 +500,7 @@ export const ProductEditDb = [
     sall_start: '2024-12-15',
     sall_end: '2024-12-19',
     price: 52000,
-    image_url: '/images/img02.jpg',
+    image_url: '/images/img02.webp',
     sell_status: true,
   },
   {
@@ -508,7 +508,7 @@ export const ProductEditDb = [
     sall_start: '2024-12-16',
     sall_end: '2024-12-20',
     price: 31000,
-    image_url: '/images/img03.jpg',
+    image_url: '/images/img03.webp',
     sell_status: false,
   },
   {
@@ -516,7 +516,7 @@ export const ProductEditDb = [
     sall_start: '2024-12-17',
     sall_end: '2024-12-21',
     price: 29000,
-    image_url: '/images/img04.jpg',
+    image_url: '/images/img04.webp',
     sell_status: true,
   },
   {
@@ -524,7 +524,7 @@ export const ProductEditDb = [
     sall_start: '2024-12-18',
     sall_end: '2024-12-22',
     price: 41000,
-    image_url: '/images/img05.jpg',
+    image_url: '/images/img05.webp',
     sell_status: false,
   },
   {
@@ -532,7 +532,7 @@ export const ProductEditDb = [
     sall_start: '2024-12-19',
     sall_end: '2024-12-23',
     price: 37000,
-    image_url: '/images/img00.jpg',
+    image_url: '/images/img00.webp',
     sell_status: true,
   },
   {
@@ -540,7 +540,7 @@ export const ProductEditDb = [
     sall_start: '2024-12-20',
     sall_end: '2024-12-24',
     price: 54000,
-    image_url: '/images/img01.jpg',
+    image_url: '/images/img01.webp',
     sell_status: false,
   },
 ];

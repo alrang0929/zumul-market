@@ -3,17 +3,18 @@ import { Button } from '../../styles/StyleButton';
 import { Link, useNavigate } from 'react-router-dom';
 import './style/header.scss';
 // icon
-import { IoIosSearch } from 'react-icons/io';
-import { IoCart, IoHeart } from 'react-icons/io5';
 import useUserStore from '../../stores/auth/useUserStore';
 import LogoutButton from './LogoutBtn';
-import { useCartStore } from '../../stores/cart/useCartStore'; 
+import { useCartStore } from '../../stores/cart/useCartStore';
+import { Icon } from '../../styles/IconSet';
+
+const COLOR = '#1F17FF';
 
 function Header(props) {
   const { toggleCart } = useCartStore();
   const user = useUserStore((state) => state.user);
   const navigator = useNavigate();
-  
+
   const handleButtonClick = (callback) => {
     if (!user) {
       alert('로그인이 필요한 서비스입니다.');
@@ -36,21 +37,21 @@ function Header(props) {
       </div>
       {/* 2. 검색바 */}
       <div className="search-bar">
-        <IoIosSearch className="icon" />
+        <Icon name={'search'} className="icon" />
         <input type="text" defaultValue={'제목, 작품명, 태그 검색'} />
       </div>
 
       {/* 3. icon 버튼(faivorit, cart) */}
       <div className="icon-menu-wrap">
         <Button buttontype={'singleIcon'}>
-          <IoHeart className="icon" />
+          <Icon name={'favorite'} color={COLOR} className="icon" />
         </Button>
 
         <Button
           buttontype={'singleIcon'}
           onClick={() => handleButtonClick(toggleCart)}
         >
-          <IoCart className="icon" />
+          <Icon name={'cart'} color={COLOR} className="icon" />
         </Button>
       </div>
       {/* 4. user 메뉴 로그인 전: 회원가입, 로그인 || 로그인(일반): 마이페이지, 로그아웃 || 로그인(판매자): 판매관리 추가*/}

@@ -1,6 +1,6 @@
 import React from 'react';
-import { IoTimeOutline } from 'react-icons/io5';
 import './style/board_card.scss';
+import { Icon } from '../styles/IconSet';
 function BoardCard({ selelcdata, slice, slicecount }) {
   const SELECT_DATA = selelcdata;
 
@@ -20,7 +20,7 @@ function BoardCard({ selelcdata, slice, slicecount }) {
                   <span>p</span>
                 </div>
                 <div className="time-box">
-                  <IoTimeOutline />
+                  <Icon name={'time'} />
                   <span>작업 기간</span>
                   <span>{data.date}</span>
                 </div>

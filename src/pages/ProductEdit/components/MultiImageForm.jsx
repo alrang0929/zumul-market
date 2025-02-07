@@ -35,6 +35,7 @@ export const MultiImageForm = ({ setValue, getValues, name, id }) => {
         <label htmlFor={id}>
           <Button
             buttontype="rectangleMain"
+            type='button'
             onClick={() => document.getElementById(id).click()}
           >
             이미지 추가하기

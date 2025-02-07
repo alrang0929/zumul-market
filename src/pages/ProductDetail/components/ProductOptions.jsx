@@ -3,8 +3,7 @@ import { SelectBox } from '../../../styles/box';
 import { Button } from '../../../styles/StyleButton';
 import './style/option_select.scss';
 import { addComma } from '../../../utils/commonFn';
-import { RiDeleteBinLine } from 'react-icons/ri';
-import { HiMinusSmall, HiPlusSmall } from 'react-icons/hi2';
+import { Icon } from '../../../styles/IconSet';
 
 export const ProductOptions = ({ product, setValue, watch }) => {
   const selectedOption = watch('selectedOption', '');
@@ -89,7 +88,7 @@ export const ProductOptions = ({ product, setValue, watch }) => {
               className="plus"
               onClick={plusCount}
             >
-              <HiPlusSmall />
+              <Icon name={'plus'} />
             </Button>
             <Button
               type="button"
@@ -97,7 +96,7 @@ export const ProductOptions = ({ product, setValue, watch }) => {
               className="minus"
               onClick={minusCount}
             >
-              <HiMinusSmall />
+              <Icon name={'minus'} />
             </Button>
           </div>
           <div className="price-wrap">
@@ -124,7 +123,7 @@ export const ProductOptions = ({ product, setValue, watch }) => {
                 className="plus"
                 onClick={() => handleCountChange(option.id, option.count + 1)}
               >
-                <HiPlusSmall />
+                <Icon name={'plus'} />
               </Button>
               <Button
                 type="button"
@@ -132,7 +131,7 @@ export const ProductOptions = ({ product, setValue, watch }) => {
                 className="minus"
                 onClick={() => handleCountChange(option.id, option.count - 1)}
               >
-                <HiMinusSmall />
+                <Icon name={'minus'} />
               </Button>
             </div>
             <div className="price-wrap">
@@ -146,7 +145,7 @@ export const ProductOptions = ({ product, setValue, watch }) => {
               buttontype={'iconButton'}
               onClick={() => handleRemoveOption(option.id)}
             >
-              <RiDeleteBinLine />
+              <Icon name={'delete'} />
             </Button>
           </li>
         ))}

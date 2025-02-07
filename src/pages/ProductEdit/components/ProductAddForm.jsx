@@ -12,6 +12,7 @@ import { useImageHandler } from '../../../utils/useImageHandler';
 import { MultiImageForm } from './MultiImageForm';
 
 import useUserStore from '../../../stores/auth/useUserStore';
+import {handleKeyDown} from '../../../utils/handleKeyDown';
 
 export const ProductAddForm = () => {
   const user = useUserStore((state) => state.user);
@@ -52,6 +53,7 @@ export const ProductAddForm = () => {
   return (
     <FormBox
       className="product-edit-form"
+      onKeyDown={handleKeyDown}
       onSubmit={handleSubmit((data) => {
         const uploadedPaths = getValues('uploadedPaths');
         onSubmit(data, navigator, options, uploadedPaths, user);
