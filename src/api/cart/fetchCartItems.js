@@ -60,3 +60,5 @@ export const fetchCartItems = async (userId) => {
   console.log('Enriched cart data:', enrichedCart);
   return enrichedCart;
 };
+
+

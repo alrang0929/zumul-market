@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { fetchCartItems } from '../cart';
+import { fetchCartItems } from '../fetchCartItems';
 
 export const useCartItems = (userId) => {
   return useQuery(['cartItems', userId], () => fetchCartItems(userId), {

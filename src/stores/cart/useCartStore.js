@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 import supabase from '../../api/supabaseClient';
-import {fetchCartItems} from '../../api/cart/cart';
+import { fetchCartItems } from '../../api/cart/fetchCartItems';
+
 export const useCartStore = create((set) => ({
   // 상태
   isCartOpen: false,
@@ -9,6 +10,7 @@ export const useCartStore = create((set) => ({
   // 장바구니 열기/닫기
   toggleCart: () => set((state) => ({ isCartOpen: !state.isCartOpen })),
 
+  setCartItems: (items) => set({ cartItems: items }),
   // 장바구니에 아이템 추가
   addToCart: (item) => {
     // 로컬 스토어에 추가
@@ -34,8 +36,7 @@ export const useCartStore = create((set) => ({
       });
   },
 
-  // 장바구니 아이템 제거
-  removeFromCart: (itemId) =>
+  removeItem: (itemId) =>
     set((state) => ({
       cartItems: state.cartItems.filter((item) => item.id !== itemId),
     })),
@@ -44,7 +45,7 @@ export const useCartStore = create((set) => ({
   clearCart: () => set(() => ({ cartItems: [] })),
   loadCartItems: async (userId) => {
     console.log('loadCartItems called with userId:', userId); // userId 확인
-  
+
     const result = await fetchCartItems(userId);
     if (result.error) {
       console.error('Failed to load cart items:', result.error);
@@ -53,5 +54,4 @@ export const useCartStore = create((set) => ({
       set({ cartItems: result.data || [] });
     }
   },
-
 }));

@@ -26,11 +26,13 @@
       flex-direction: column;
       justify-content: space-between;
       width: 70%;
-      gap: 1.5rem;
+      gap: 1.5rem 0;
       .status-box {
         display: flex;
         justify-content: space-between;
         .button-wrap {
+          display: flex;
+          align-items: center;
           a{
             width: fit-content;
           }
