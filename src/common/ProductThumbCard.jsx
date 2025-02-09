@@ -9,10 +9,7 @@ export function ProductThumbCard({ selectdata, slice, slicecount, selectFilter }
   const handleCardClick = (product) => {
     navigator(`/product/${product.id}`, { state: { product } }); // 상품 정보 전달
   };
-  const SELECT_DATA = [...selectdata].filter((item) => item.sell_status === "true" || item.sell_status === "True")
-  .sort(
-    (a, b) => new Date(b.created_at) - new Date(a.created_at)
-  );
+  const SELECT_DATA = selectdata;
 
   if (selectFilter === '낮은 가격순') {
     SELECT_DATA.sort((a, b) => a.price - b.price);
@@ -21,7 +18,7 @@ export function ProductThumbCard({ selectdata, slice, slicecount, selectFilter }
   } else if (selectFilter === '신상품순') {
     SELECT_DATA.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
   }
-
+  console.log('Filtered Data:', SELECT_DATA);
   return (
     <>
       {slice ? (

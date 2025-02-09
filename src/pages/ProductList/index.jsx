@@ -8,31 +8,28 @@ import { useProductsQuery } from '../../stores/product/useInfiniteProduct';
 
 export const ProductListPage = () => {
   const menu = ['낮은 가격순', '높은 가격순', '신상품순'];
-  // const { products, fetchProducts, loadMoreProducts, hasMore } =
-  //   useProductStore();
-  const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =
+  const [selectedFilter, setSelectedFilter] = useState(null);
+  const { data, fetchNextPage, hasNextPage, totalCount } =
     useProductsQuery();
   const observerRef = useRef();
-  const [selectedFilter, setSelectedFilter] = useState(null);
 
   const handleFilterChange = (filterValue) => {
     setSelectedFilter(filterValue);
   };
 
   useEffect(() => {
+    if (!hasNextPage) return; // 다음 페이지가 없으면 실행하지 않음.
     const observer = new IntersectionObserver(
       (entries) => {
-        if (entries[0].isIntersecting && hasNextPage) {
-          fetchNextPage(); // 다음 페이지 데이터 로드
+        if (entries[0].isIntersecting) {
+          fetchNextPage();
         }
       },
       { threshold: 1.0 }
     );
-
     if (observerRef.current) {
       observer.observe(observerRef.current);
     }
-
     return () => {
       if (observerRef.current) {
         observer.unobserve(observerRef.current);
@@ -41,8 +38,7 @@ export const ProductListPage = () => {
   }, [fetchNextPage, hasNextPage]);
 
   const products = data?.pages.flatMap((page) => page.products) || [];
-  
-  console.log('products', products);
+
   return (
     <>
       <DivBox className="product-list" style={{ padding: '10rem 0' }}>
@@ -51,7 +47,7 @@ export const ProductListPage = () => {
           style={{ display: 'flex', justifyContent: 'space-between' }}
         >
           <CountSubTitle
-            selectdata={products}
+            count={totalCount}
             subTitle={'개의 작품이 있습니다'}
           />
           <FilterMenu menu={menu} onFilterChange={handleFilterChange} />
