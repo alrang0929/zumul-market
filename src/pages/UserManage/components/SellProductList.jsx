@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import ProductEditCard from '../../../../common/ProductEditCard';
-import useUserStore from '../../../../stores/auth/useUserStore';
-import { fetchProduct } from '../../../../api/product/fetchProduct';
+import ProductEditCard from '../../../common/ProductEditCard';
+import useUserStore from '../../../stores/auth/useUserStore';
+import { fetchProduct } from '../../../api/product/fetchProduct';
+import { DivBox } from '../../../styles/box';
 
 export const SellProductList = () => {
   const user = useUserStore((state) => state.user);
@@ -20,12 +21,12 @@ export const SellProductList = () => {
   }, [user.id]);
 
   return (
-    <div className="sell-list" style={{paddingTop:"10rem"}}>
+    <DivBox className="sell-list" style={{paddingTop:"10rem"}}>
       <ProductEditCard
         key={products.id}
         data={products}
         linktext={`product/${user.id}/edit`}
       />
-    </div>
+    </DivBox>
   );
 };

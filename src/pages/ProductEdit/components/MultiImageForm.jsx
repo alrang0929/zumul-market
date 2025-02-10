@@ -34,6 +34,7 @@ export const MultiImageForm = ({ setValue, getValues, name, id }) => {
       <div className="content-wrap">
         <label htmlFor={id}>
           <Button
+            type="button"
             buttontype="rectangleMain"
             onClick={() => document.getElementById(id).click()}
           >

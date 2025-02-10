@@ -22,7 +22,7 @@ export const onSubmit = async (
       userId: userId,
       file: data.title_image,
       type: 'product',
-      buckit: 'product_img',
+      bucket: 'product_img',
     });
 
     if (!imagePath) throw new Error('대표 이미지 업로드 실패');
@@ -42,7 +42,7 @@ export const onSubmit = async (
         const path = await uploadFile({
           file,
           type: 'product',
-          buckit: 'product_img',
+          bucket: 'product_img',
         });
         if (path) {
           const { data: thumbPublicData } = supabase.storage
@@ -60,7 +60,7 @@ export const onSubmit = async (
         const path = await uploadFile({
           file,
           type: 'product',
-          buckit: 'product_img',
+          bucket: 'product_img',
         });
         if (path) {
           const { data: detailPublicData } = supabase.storage

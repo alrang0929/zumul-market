@@ -5,6 +5,7 @@ import { Button } from '../../../styles/StyleButton';
 import { useImageHandler } from '../../../utils/useImageHandler';
 import { Link, useNavigate } from 'react-router-dom';
 import './styles/sign_up_form.scss';
+import { validateForm } from './validations';
 
 const SignUpForm = ({ onSubmit }) => {
   const navigator = useNavigate();
@@ -29,25 +30,6 @@ const SignUpForm = ({ onSubmit }) => {
   const { previewImage, fileInputRef, handleImageUpload, handleLinkClick } =
     useImageHandler(setValue);
 
-    const validateForm = (data) => {
-      const errors = {};
-      const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+]).{10,}$/;
-    
-      if (!data.email.includes('@')) {
-        errors.email = '유효한 이메일 주소를 입력해주세요';
-      }
-      if (!passwordRegex.test(data.password)) {
-        errors.password = '비밀번호는 최소 10자 이상이며, 대문자, 숫자, 특수문자를 포함해야 합니다.';
-      }
-      if (data.name.length < 2 || data.name.length > 10) {
-        errors.name = '닉네임은 2자 이상 10자 이하만 가능합니다';
-      }
-      if (!['fan', 'creator'].includes(data.type)) {
-        errors.type = '창작자 여부를 선택해주세요';
-      }
-      return errors;
-    };
-
   const onFormSubmit = async (data) => {
     setLoading(true);
 
@@ -57,10 +39,14 @@ const SignUpForm = ({ onSubmit }) => {
       Object.entries(formErrors).forEach(([key, message]) => {
         setError(key, { type: 'manual', message });
       });
+
+      if (formErrors.profile_image) {
+        alert('⚠️ 프로필 이미지를 업로드해주세요!');
+      }
+
       setLoading(false);
       return;
     }
-    // console.log('유효성 검사 통과:', data);
     try {
       // 이미지 경로와 함께 부모 컴포넌트로 데이터 전달
       await onSubmit(data, navigator);
@@ -118,7 +104,7 @@ const SignUpForm = ({ onSubmit }) => {
       <div className="input-wrap">
         <div className="title-box">
           <span>프로필 이미지: </span>
-          <span className='comment'>가로 800px 이하</span>
+          <span className="comment">가로 800px 이하</span>
         </div>
 
         <Link

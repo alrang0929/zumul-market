@@ -1,14 +1,3 @@
-<<<<<<< HEAD:src/pages/common/UserStatusList.jsx
-import React from 'react'
-
-const UserStatusList = () => {
-  return (
-    <div>UserStatusList</div>
-  )
-}
-
-export default UserStatusList
-=======
 import React, { useEffect, useState } from 'react';
 import { ProfileStatusDb } from './dummyDb';
 import './style/user_status_list.scss';
@@ -51,4 +40,3 @@ const UserStatusCard = () => {
 };
 
 export default UserStatusCard;
->>>>>>> 4fd7a71d93cd159800150c09be6b3d079a0e566a:src/common/UserStatusList.jsx

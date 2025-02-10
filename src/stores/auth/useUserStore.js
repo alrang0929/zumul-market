@@ -24,7 +24,7 @@ const useUserStore = create((set) => ({
     // ✅ `users` 테이블에서 추가 정보 가져오기
     const { data: userInfo, error: fetchError } = await supabase
       .from('users')
-      .select('id, email, name, type, profile_image')
+      .select('id, email, name, type, profile_image, created_at')
       .eq('id', data.user.id)
       .single();
 
@@ -40,6 +40,7 @@ const useUserStore = create((set) => ({
       name: userInfo.name,
       type: userInfo.type,
       profile_image: userInfo.profile_image,
+      created_at: userInfo.created_at,
       
     };
 

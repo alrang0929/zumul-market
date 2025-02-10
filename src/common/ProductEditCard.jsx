@@ -8,7 +8,8 @@ import { EditButton } from './EditButton';
 
 const ProductEditCard = ({ data, linktext }) => {
   console.log('data', data);
-  const STATUS_TEXT = { TURE: '판매중', FALSE: '판매종료' };
+  const STATUS_TEXT = { true: '판매중', false: '판매종료' };
+  
   return (
     <>
       <ul className="product-edit-list">
@@ -21,9 +22,9 @@ const ProductEditCard = ({ data, linktext }) => {
               <div className="status-box">
                 <div className="status-wrap">
                   <StateBox
-                    status={item.sell_status}
-                    truetext={STATUS_TEXT.TURE}
-                    falsetext={STATUS_TEXT.FALSE}
+                    status={(item.sell_status)}
+                    truetext={STATUS_TEXT[true]}
+                    falsetext={STATUS_TEXT[false]}
                   />
                   <div className="sell-date">
                     <span className="topic">판매기간</span>

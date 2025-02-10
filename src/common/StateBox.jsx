@@ -13,7 +13,7 @@ const StateBox = ({ truetext, falsetext, status }) => {
 
   return (
     <>
-      {status == 'true' ? (
+      {status == true ? (
         <div
           className="status-box"
           style={{

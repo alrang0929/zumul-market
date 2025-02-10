@@ -4,14 +4,10 @@ import { formatDate } from '../../../utils/formatDate';
 import './styles/user_info.scss';
 import UserStatusCard from '../../../common/UserStatusList';
 import { useNavigate } from 'react-router-dom';
-import useUserStore from '../../../stores/auth/useUserStore';
 
 export const UserInfoWrap = ({userdata}) => {
-  // const user = useUserStore((state) => state.user);
 
   const navigator = useNavigate();
-
-  // console.log('user', user);
   return (
     <div className="userinfo-wrap">
       <div className="profile">

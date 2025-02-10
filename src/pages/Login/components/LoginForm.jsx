@@ -7,7 +7,9 @@ import './styles/login_form.scss';
 import { Button } from '../../../styles/StyleButton';
 import { loginUser } from '../../../api/auth/login';
 import useUserStore from '../../../stores/auth/useUserStore';
-const LoginForm = ({ onSubmit }) => {
+const LoginForm = () => {
+
+  const navigator = useNavigate();
 
   const [loading, setLoading] = useState(false);
   const {
@@ -27,8 +29,10 @@ const LoginForm = ({ onSubmit }) => {
       if (!response.success) {
         throw new Error(response.error);
       }
-  
+      
       console.log("✅ 로그인 성공", response.user);
+      alert("주물마켓에 오신것을 환영합니다");
+      navigator('/');
   
       // ✅ 로그인 성공 후 사용자 정보 불러오기
       await useUserStore.getState().restoreUser();

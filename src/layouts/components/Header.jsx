@@ -64,7 +64,7 @@ function Header(props) {
           </Button>
         )}
         {user ? (
-          <LogoutButton />
+          <LogoutButton navigator={navigator}/>
         ) : (
           <>
             <Button
