@@ -29,22 +29,24 @@ const SignUpForm = ({ onSubmit }) => {
   const { previewImage, fileInputRef, handleImageUpload, handleLinkClick } =
     useImageHandler(setValue);
 
-  const validateForm = (data) => {
-    const errors = {};
-    if (!data.email.includes('@')) {
-      errors.email = '유효한 이메일 주소를 입력해주세요';
-    }
-    if (data.password.length < 10) {
-      errors.password = '비밀번호는 최소 10자 이상이어야 합니다';
-    }
-    if (data.name.length < 2 || data.name.length > 10) {
-      errors.name = '닉네임은 2자 이상 10자 이하만 가능합니다';
-    }
-    if (!['fan', 'creator'].includes(data.type)) {
-      errors.type = '창작자 여부를 선택해주세요';
-    }
-    return errors;
-  };
+    const validateForm = (data) => {
+      const errors = {};
+      const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+]).{10,}$/;
+    
+      if (!data.email.includes('@')) {
+        errors.email = '유효한 이메일 주소를 입력해주세요';
+      }
+      if (!passwordRegex.test(data.password)) {
+        errors.password = '비밀번호는 최소 10자 이상이며, 대문자, 숫자, 특수문자를 포함해야 합니다.';
+      }
+      if (data.name.length < 2 || data.name.length > 10) {
+        errors.name = '닉네임은 2자 이상 10자 이하만 가능합니다';
+      }
+      if (!['fan', 'creator'].includes(data.type)) {
+        errors.type = '창작자 여부를 선택해주세요';
+      }
+      return errors;
+    };
 
   const onFormSubmit = async (data) => {
     setLoading(true);
@@ -61,7 +63,7 @@ const SignUpForm = ({ onSubmit }) => {
     // console.log('유효성 검사 통과:', data);
     try {
       // 이미지 경로와 함께 부모 컴포넌트로 데이터 전달
-      await onSubmit( data, navigator );
+      await onSubmit(data, navigator);
     } catch (error) {
       console.error('회원가입 중 에러 발생:', error.message);
     } finally {
@@ -86,7 +88,7 @@ const SignUpForm = ({ onSubmit }) => {
         <InputBox
           type="password"
           {...register('password')}
-          placeholder="최소 10자 이상"
+          placeholder="대소문자, 숫자, 특수문자를 포함한 최소 8자 이상"
         />
         {errors.password && <p className="error">{errors.password.message}</p>}
       </div>
@@ -114,9 +116,9 @@ const SignUpForm = ({ onSubmit }) => {
       </div>
       {/* 대표 이미지 */}
       <div className="input-wrap">
-        <div className="text-box">
-          <h6>프로필 이미지</h6>
-          <span>가로 800px 이하</span>
+        <div className="title-box">
+          <span>프로필 이미지: </span>
+          <span className='comment'>가로 800px 이하</span>
         </div>
 
         <Link

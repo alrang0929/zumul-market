@@ -1,4 +1,8 @@
 .profile-form{
+  
+  input{
+    width: 100%;
+  }
   .profile-img{
     display: block;
     width: 15rem;
@@ -9,6 +13,13 @@
       height: 100%;
       object-fit: cover;
       object-position: top;
+    }
+  }
+  .title-box{
+    display: flex;
+    flex-direction: column;
+    .comment{
+      font-size: 1.2rem;
     }
   }
 }

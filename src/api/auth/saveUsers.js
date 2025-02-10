@@ -1,55 +1,79 @@
-import { uploadFile } from '../../utils/uploadFile';
 import supabase from '../supabaseClient';
-import bcrypt from 'bcryptjs';
+import { uploadFile } from '../../utils/uploadFile';
 
-export const saveUser = (user) => {
-  console.log('입력된 유저 정보:', user);
-  if (!user.email || !user.password || !user.name || !user.type) {
-    console.error('필수 필드 (email, password, name, type)가 누락되었습니다.');
-    return Promise.reject(new Error('필수 필드 (email, password, name, type)가 누락되었습니다.'));
-  }
+export const signUpUser = async ({ email, password, name, type, profile_image }) => {
+  try {
+    let publicUrl = null;
 
-  return bcrypt
-    .hash(user.password, 10)
-    .then((hashedPassword) => {
-      return uploadFile({
-        userId: user.id,
-        file: user.profile_image,
+    if (profile_image) {
+      const imagePath = await uploadFile({
+        userId: email,
+        file: profile_image,
         type: 'profile',
-        buckit: 'profile_img',
-      }).then((imagePath) => {
-        if (!imagePath) {
-          throw new Error('이미지 업로드 실패: imagePath가 비어 있습니다.');
-        }
-
-        // Public URL 생성
-        const { data } = supabase.storage.from('profile_img').getPublicUrl(imagePath);
-        const publicUrl = data?.publicUrl;
-
-        if (!publicUrl) {
-          throw new Error('Public URL 생성 실패');
-        }
-
-        const userData = {
-          email: user.email,
-          password: hashedPassword,
-          name: user.name,
-          profile_image: publicUrl, // 변환된 URL 사용
-          type: user.type,
-        };
-
-        return supabase.from('users').insert([userData]);
+        bucket: 'profile_img',
       });
-    })
-    .then(({ data, error }) => {
-      if (error) {
-        throw new Error(`DB Insert Error: ${error.message}`);
+
+      if (!imagePath) {
+        throw new Error('이미지 업로드 실패');
       }
 
-      console.log('사용자 등록 성공:', data);
-      alert('쭈물마켓의 회원이 되신 것을 환영합니다!');
-    })
-    .catch((error) => {
-      console.error('유저 저장 중 오류 발생:', error.message || error);
+      const { data: storageData } = supabase.storage.from('profile_img').getPublicUrl(imagePath);
+      publicUrl = storageData?.publicUrl || "";
+    }
+
+    console.log("📌 회원가입 요청 데이터 확인:", { email, password, user_metadata: { name, type, profile_image: publicUrl } });
+
+    // ✅ Supabase Auth 회원가입
+    const { data: authData, error: signUpError } = await supabase.auth.signUp({
+      email,
+      password,
     });
+
+    if (signUpError) {
+      throw new Error(`회원가입 실패: ${signUpError.message}`);
+    }
+
+    console.log('✅ 회원가입 성공:', authData);
+
+    const userId = authData?.user?.id;
+    if (!userId) {
+      throw new Error("유저 ID를 가져올 수 없습니다.");
+    }
+
+    // ✅ 회원가입 후 자동 로그인 실행
+    const { data: signInData, error: signInError } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
+
+    if (signInError) {
+      throw new Error(`자동 로그인 실패: ${signInError.message}`);
+    }
+
+    console.log("✅ 자동 로그인 성공:", signInData);
+
+    // ✅ 로그인 상태 확인 (세션 가져오기)
+    const { data: session, error: sessionError } = await supabase.auth.getSession();
+    if (sessionError) {
+      throw new Error(`세션 가져오기 실패: ${sessionError.message}`);
+    }
+
+    console.log("📌 현재 세션 정보:", session);
+
+    // ✅ `users` 테이블에 추가 정보 저장
+    const { error: insertError } = await supabase.from('users').insert([
+      { id: userId, email, name, type, profile_image: publicUrl },
+    ]);
+
+    if (insertError) {
+      throw new Error(`사용자 추가 정보 저장 실패: ${insertError.message}`);
+    }
+
+    console.log("✅ users 테이블에 추가 정보 저장 완료");
+
+    return { success: true, user: authData.user };
+  } catch (error) {
+    console.error('❌ 회원가입 중 오류 발생:', error.message);
+    return { success: false, error: error.message };
+  }
 };

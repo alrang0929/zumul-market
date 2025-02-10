@@ -1,11 +1,18 @@
 import React from 'react';
 import SignUpForm from './components/SignUpForm';
-import { saveUser } from '../../api/auth/saveUsers';
+import { signUpUser } from '../../api/auth/saveUsers';
+import { useNavigate } from 'react-router-dom';
 
 const SignupPage = () => {
-  // 리엑트 쿼리 수장하는 부분분
-  const handleSignUp = async (formData) => {
-    await saveUser(formData);
+  const navigator = useNavigate();
+  const handleSignUp = async (formData, navigator) => {
+    const response = await signUpUser(formData);
+    if (response.success) {
+      alert('회원가입이 완료되었습니다!');
+      // navigator('/');
+    } else {
+      alert(`회원가입 실패: ${response.error}`);
+    }
   };
   return (
     <>

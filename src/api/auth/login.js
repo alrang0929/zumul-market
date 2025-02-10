@@ -1,28 +1,24 @@
 import supabase from '../supabaseClient';
-import bcrypt from 'bcryptjs';
 
 export const loginUser = async (email, password) => {
   try {
-    const { data, error } = await supabase
-      .from('users')
-      .select('id, email, password')
-      .eq('email', email)
-      .single();
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
 
     if (error) {
-      throw new Error('사용자를 찾을 수 없습니다.');
+      throw new Error('로그인 실패: ' + error.message);
     }
 
-    const isPasswordMatch = await bcrypt.compare(password, data.password);
-    if (!isPasswordMatch) {
-      throw new Error('비밀번호가 일치하지 않습니다.');
+    if (data && data.user) {
+      sessionStorage.setItem('user', JSON.stringify(data.user));
+      return { success: true, user: data.user };
+    } else {
+      throw new Error('유저 정보가 없습니다.');
     }
-
-    sessionStorage.setItem('user', JSON.stringify(data));
-    
-    return data;
   } catch (error) {
     console.error('로그인 중 오류 발생:', error.message);
-    throw error;
+    return { success: false, error: error.message };
   }
 };

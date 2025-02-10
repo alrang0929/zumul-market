@@ -32,18 +32,18 @@ const Select = {
 
 const Form = {
   FormBox: css`
+  width: 70vw;
+  background-color: #fff;
+  margin: 0 auto;
+  padding: 4rem;
+
+  display: flex;
+    flex-direction: column;
+    gap: 4rem 0;
     h3 {
       font-size: 2rem;
       margin-bottom: 4rem;
     }
-    width: 50%;
-    background-color: #fff;
-    margin: 0 auto;
-    padding: 4rem;
-
-    display: flex;
-      flex-direction: column;
-      gap: 4rem 0;
       .input-wrap {
         font-size: 1.6rem;
         display: flex;

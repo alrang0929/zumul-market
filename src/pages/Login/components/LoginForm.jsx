@@ -5,7 +5,10 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import './styles/login_form.scss';
 import { Button } from '../../../styles/StyleButton';
+import { loginUser } from '../../../api/auth/login';
+import useUserStore from '../../../stores/auth/useUserStore';
 const LoginForm = ({ onSubmit }) => {
+
   const [loading, setLoading] = useState(false);
   const {
     register,
@@ -13,36 +16,28 @@ const LoginForm = ({ onSubmit }) => {
     setError,
     formState: { errors },
   } = useForm();
-  
 
-
-  const validateForm = (data) => {
-    const errors = {};
-    if (!data.email.includes('@')) {
-      errors.email = '유효한 이메일 주소를 입력해주세요';
-    }
-    if (data.password.length < 10) {
-      errors.password = '비밀번호는 최소 10자 이상이어야 합니다';
-    }
-    return errors;
-  };
 
   const onFormSubmit = async (data) => {
+    console.log("로그인 시도data", data);
     setLoading(true);
-   
-    // 수동 검증
-    const formErrors = validateForm(data);
-    if (Object.keys(formErrors).length > 0) {
-      Object.entries(formErrors).forEach(([key, message]) => {
-        setError(key, { type: 'manual', message });
-      });
+  
+    try {
+      const response = await loginUser(data.email, data.password);
+      if (!response.success) {
+        throw new Error(response.error);
+      }
+  
+      console.log("✅ 로그인 성공", response.user);
+  
+      // ✅ 로그인 성공 후 사용자 정보 불러오기
+      await useUserStore.getState().restoreUser();
+  
+    } catch (error) {
+      console.error("❌ 로그인 실패:", error.message);
+    } finally {
       setLoading(false);
-      return;
     }
-    console.log(data);
-    // 성공적으로 검증된 데이터를 부모 컴포넌트로 전달
-    await onSubmit(data);
-    setLoading(false);
   };
 
   return (

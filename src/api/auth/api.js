@@ -14,7 +14,7 @@ export const useSession = () => {
   const setUser = useUserStore((state) => state.setUser);
 
   return useQuery({
-    queryKey: ['session'],  // ✅ 객체 기반 호출
+    queryKey: ['session'],
     queryFn: fetchSession,
     staleTime: Infinity,
     onSuccess: (session) => {
