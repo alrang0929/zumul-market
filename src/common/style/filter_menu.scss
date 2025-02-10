@@ -1,0 +1,16 @@
+.filter-menu-wrap {
+  display: flex;
+  font-size: 1.4rem;
+  li {
+    .menu {
+      cursor: pointer;
+      &.active {
+        font-weight: 600;
+        color: #1f17ff;
+      }
+    }
+    .bullet {
+      padding: .5rem;
+    }
+  }
+}

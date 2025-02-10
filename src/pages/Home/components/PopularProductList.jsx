@@ -1,16 +1,28 @@
 import React from 'react';
-import CardList from '../../common/CardList';
-import SubTitle from '../../common/SubTitle';
-import { ContentBox } from '../../../styles/box';
+import { DivBox } from '../../../styles/box';
+import SubTitle from '../../../common/SubTitle';
+import { ProductThumbCard } from '../../../common/ProductThumbCard';
+import { useProductsQuery } from '../../../stores/product/useInfiniteProduct';
 function PopularProductList(props) {
-    return (
-        <>
-        <ContentBox className="pupular-product-list">
-        <SubTitle subTitle={"오늘의 인기 작품"} linkText={"더 보기+"}/>
-        <CardList type={"product"}/>
-        </ContentBox>
-        </>
-    );
+  
+  const { data } = useProductsQuery();
+  const products = data?.pages.flatMap((page) => page.products) || [];
+
+  console.log("data", data);
+  console.log("products", products);
+
+  return (
+    <>
+      <DivBox className="pupular-product-list">
+        <SubTitle
+          subTitle={'오늘의 인기 작품'}
+          linkText={'더 보기+'}
+          link={'/product'}
+        />
+        <ProductThumbCard selectdata={products} slice={true} slicecount={4} />
+      </DivBox>
+    </>
+  );
 }
 
 export default PopularProductList;

@@ -1,20 +1,24 @@
 import React from 'react';
-import { logoutUser } from '../../api/users/logoutUsers';
-import { BasicBtn } from '../../styles/Button';
 import { useNavigate } from 'react-router-dom';
+import { Button } from '../../styles/StyleButton';
+import { logoutUser } from '../../api/auth/api';
 const LogoutButton = () => {
-  const nev = useNavigate();
+  const navigator = useNavigate();
   const handleLogout = async () => {
     const response = await logoutUser();
     if (response.success) {
       alert('로그아웃되었습니다.');
-      nev('/');
+      
     } else {
       alert(`로그아웃 실패: ${response.error}`);
     }
   };
 
-  return <BasicBtn onClick={handleLogout}>로그아웃</BasicBtn>;
+  return (
+    <Button buttontype={'basic-main'} onClick={handleLogout}>
+      로그아웃
+    </Button>
+  );
 };
 
 export default LogoutButton;

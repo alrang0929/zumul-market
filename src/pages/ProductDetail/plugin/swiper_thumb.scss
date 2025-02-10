@@ -1,0 +1,40 @@
+.thumb-swiper-wrap {
+  width: 70vw;
+  height: 100%; 
+  .swiper-button-next {
+    width: 3rem;
+    background: url(/images/arrow_forward.png) no-repeat;
+    background-position: center;
+    background-size: contain;
+    margin-right: 2rem;
+    top: 50%;
+    translate: 0 -50%;
+  }
+
+  .swiper-button-prev {
+    width: 3rem;
+    margin-left: 2rem;
+    background: url(/images/arrow_back.png) no-repeat;
+    background-position: center;
+    background-size: contain;
+    top: 50%;
+    translate: 0 -50%;
+  }
+
+  .swiper-button-next::after,
+  .swiper-button-prev::after {
+    display: none;
+  }
+
+  .inner-slide {
+    height: 60vh;
+    overflow: hidden;
+    .img-box {
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+  }
+}

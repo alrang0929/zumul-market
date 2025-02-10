@@ -1,5 +1,5 @@
 import React from 'react';
-import { BasicBtn, SingleIconBtn } from '../../styles/Button';
+import { Button } from '../../styles/StyleButton';
 import { Link, useNavigate } from 'react-router-dom';
 import './style/header.scss';
 // icon
@@ -7,9 +7,23 @@ import { IoIosSearch } from 'react-icons/io';
 import { IoCart, IoHeart } from 'react-icons/io5';
 import useUserStore from '../../stores/auth/useUserStore';
 import LogoutButton from './LogoutBtn';
+import { useCartStore } from '../../stores/cart/useCartStore'; 
+
 function Header(props) {
+  const { toggleCart } = useCartStore();
   const user = useUserStore((state) => state.user);
-  const nav = useNavigate();
+  const navigator = useNavigate();
+  
+  const handleButtonClick = (callback) => {
+    if (!user) {
+      alert('로그인이 필요한 서비스입니다.');
+      console.log('toggleCart 실행 전');
+      navigator('/login');
+      return;
+    }
+    callback?.();
+  };
+
   return (
     <header>
       {/* 1. 로고 h1 */}
@@ -28,29 +42,44 @@ function Header(props) {
 
       {/* 3. icon 버튼(faivorit, cart) */}
       <div className="icon-menu-wrap">
-        <SingleIconBtn>
+        <Button buttontype={'singleIcon'}>
           <IoHeart className="icon" />
-        </SingleIconBtn>
-        <SingleIconBtn>
+        </Button>
+
+        <Button
+          buttontype={'singleIcon'}
+          onClick={() => handleButtonClick(toggleCart)}
+        >
           <IoCart className="icon" />
-        </SingleIconBtn>
+        </Button>
       </div>
       {/* 4. user 메뉴 로그인 전: 회원가입, 로그인 || 로그인(일반): 마이페이지, 로그아웃 || 로그인(판매자): 판매관리 추가*/}
       <div className="user-menu-wrap">
-        
-
+        {user?.type === 'creator' && (
+          <Button
+            buttontype={'basicMain'}
+            onClick={() => navigator(`/user/manage`)}
+          >
+            상품관리
+          </Button>
+        )}
         {user ? (
-          <LogoutButton/>
+          <LogoutButton />
         ) : (
           <>
-          <BasicBtn onClick={() => nav('/login')}>로그인</BasicBtn>
-          <BasicBtn onClick={() => nav('/signup')}>회원가입</BasicBtn>
+            <Button
+              buttontype={'basic-main'}
+              onClick={() => navigator('/login')}
+            >
+              로그인
+            </Button>
+            <Button
+              buttontype={'basic-main'}
+              onClick={() => navigator('/signup')}
+            >
+              회원가입
+            </Button>
           </>
-        )}
-        {user?.type === 'creator' && (
-         <BasicBtn onClick={() => nav(`/user/${user.id}/product-setting`)}>
-         상품관리
-       </BasicBtn>
         )}
       </div>
     </header>
