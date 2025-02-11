@@ -2,7 +2,7 @@ import { create } from 'zustand';
 import supabase from '../../api/supabaseClient';
 
 const useUserStore = create((set) => ({
-  user: {}, // ✅ 초기값은 null (Supabase에서 불러옴)
+  user: null,
 
   setUser: (user) => set({ user }),
 
