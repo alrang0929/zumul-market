@@ -34,7 +34,7 @@ export const PaymentSuccess = () => {
         if (error) {
           console.error('주문 데이터 저장 실패:', error);
         } else {
-          console.log('주문 데이터 저장 성공:', data);
+          //console.log('주문 데이터 저장 성공:', data);
         }
       } catch (error) {
         console.error('주문 데이터 처리 실패:', error);

@@ -17,7 +17,7 @@ function Header(props) {
   const handleButtonClick = (callback) => {
     if (!user) {
       alert('로그인이 필요한 서비스입니다.');
-      console.log('toggleCart 실행 전');
+      //console.log('toggleCart 실행 전');
       navigator('/login');
       return;
     }

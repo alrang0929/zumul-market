@@ -21,7 +21,7 @@ export const signUpUser = async ({ email, password, name, type, profile_image })
       publicUrl = storageData?.publicUrl || "";
     }
 
-    console.log("📌 회원가입 요청 데이터 확인:", { email, password, user_metadata: { name, type, profile_image: publicUrl } });
+    //console.log("📌 회원가입 요청 데이터 확인:", { email, password, user_metadata: { name, type, profile_image: publicUrl } });
 
     // ✅ Supabase Auth 회원가입
     const { data: authData, error: signUpError } = await supabase.auth.signUp({
@@ -33,7 +33,7 @@ export const signUpUser = async ({ email, password, name, type, profile_image })
       throw new Error(`회원가입 실패: ${signUpError.message}`);
     }
 
-    console.log('✅ 회원가입 성공:', authData);
+    //console.log('✅ 회원가입 성공:', authData);
 
     const userId = authData?.user?.id;
     if (!userId) {
@@ -50,7 +50,7 @@ export const signUpUser = async ({ email, password, name, type, profile_image })
       throw new Error(`자동 로그인 실패: ${signInError.message}`);
     }
 
-    console.log("✅ 자동 로그인 성공:", signInData);
+    //console.log("✅ 자동 로그인 성공:", signInData);
 
     // ✅ 로그인 상태 확인 (세션 가져오기)
     const { data: session, error: sessionError } = await supabase.auth.getSession();
@@ -58,7 +58,7 @@ export const signUpUser = async ({ email, password, name, type, profile_image })
       throw new Error(`세션 가져오기 실패: ${sessionError.message}`);
     }
 
-    console.log("📌 현재 세션 정보:", session);
+    //console.log("📌 현재 세션 정보:", session);
 
     // ✅ `users` 테이블에 추가 정보 저장
     const { error: insertError } = await supabase.from('users').insert([
@@ -69,7 +69,7 @@ export const signUpUser = async ({ email, password, name, type, profile_image })
       throw new Error(`사용자 추가 정보 저장 실패: ${insertError.message}`);
     }
 
-    console.log("✅ users 테이블에 추가 정보 저장 완료");
+    //console.log("✅ users 테이블에 추가 정보 저장 완료");
 
     return { success: true, user: authData.user };
   } catch (error) {

@@ -7,7 +7,7 @@ import { DeleteButton } from './DeleteButton';
 import { EditButton } from './EditButton';
 
 const ProductEditCard = ({ data, linktext }) => {
-  console.log('data', data);
+  //console.log('data', data);
   const STATUS_TEXT = { true: '판매중', false: '판매종료' };
   
   return (

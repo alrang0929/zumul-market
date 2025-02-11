@@ -72,7 +72,7 @@ export const logoutUser = async () => {
     // sessionStorage 초기화
     sessionStorage.removeItem('user');
     clearUser();
-    console.log('로그아웃 성공');
+    //console.log('로그아웃 성공');
     
     return { success: true };
   } catch (err) {

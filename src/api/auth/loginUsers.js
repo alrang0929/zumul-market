@@ -44,7 +44,7 @@ export const loginUser = async ({ email, password }, setUser) => {
       created_at: user.created_at,
     });
 
-    console.log('✅ 로그인 성공:', user);
+    //console.log('✅ 로그인 성공:', user);
     return { success: true, user: { ...user, ...userInfo } };
   } catch (error) {
     console.error('❌ 로그인 중 오류 발생:', error.message);

@@ -24,7 +24,9 @@ export const MultiImageForm = ({ setValue, getValues, name, id }) => {
 
       if (filteredFiles.length > 0) {
         const currentPaths = getValues(name) || [];
-        setValue(name, [...currentPaths, ...filteredFiles]);
+        const newPaths = [...currentPaths, ...filteredFiles];
+        setValue(name, newPaths);
+        //console.log(`업로드된 ${name}:`, newPaths);
       }
     }
   };

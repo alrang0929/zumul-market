@@ -3,7 +3,7 @@ import './style/detail_image.scss';
 import { Button } from '../../../styles/StyleButton';
 import SubTitle from '../../../common/SubTitle';
 export const DetailInfo = ({ selectdata }) => {
-  console.log('selectdata', selectdata);
+  //console.log('selectdata', selectdata);
   const detailImg = selectdata.detail_image
   const [clickActive, setClickActive] = useState(false);
   const handlerViewAllImages = () => {

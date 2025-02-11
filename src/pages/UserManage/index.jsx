@@ -25,7 +25,7 @@ export const UserManagePage = () => {
     }
   }, [user, navigator, loading]);
 
-  console.log("user 새로고침 후", user);
+  //console.log("user 새로고침 후", user);
 
   if (loading || user === undefined) {
     return <SkeletonLoader />;

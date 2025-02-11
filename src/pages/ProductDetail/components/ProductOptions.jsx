@@ -31,7 +31,7 @@ export const ProductOptions = ({ product, setValue, watch }) => {
   
     if (selected && !currentOptions.find((opt) => opt.id === optionId)) {
       const updatedOptions = [...currentOptions, { ...selected, count: 1 }];
-      console.log('OptionList after update:', updatedOptions); // 변경된 옵션 리스트 확인
+      //console.log('OptionList after update:', updatedOptions); // 변경된 옵션 리스트 확인
       setValue('optionList', updatedOptions);
     }
   };
@@ -58,7 +58,7 @@ export const ProductOptions = ({ product, setValue, watch }) => {
         className="option-select"
         value={selectedOption}
         onChange={(e) => {
-          console.log('Selected option value:', e.target.value);
+          //console.log('Selected option value:', e.target.value);
           handleAddOption(e.target.value);
         }}
       >

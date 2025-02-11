@@ -135,7 +135,7 @@ const createStructure = () => {
     const folderPath = path.join(__dirname, folder);
     if (!fs.existsSync(folderPath)) {
       fs.mkdirSync(folderPath, { recursive: true });
-      console.log(`📁 Created folder: ${folderPath}`);
+      //console.log(`📁 Created folder: ${folderPath}`);
     }
   });
 
@@ -144,7 +144,7 @@ const createStructure = () => {
     const fullPath = path.join(__dirname, filePath);
     if (!fs.existsSync(fullPath)) {
       fs.writeFileSync(fullPath, content, 'utf8');
-      console.log(`📄 Created file: ${fullPath}`);
+      //console.log(`📄 Created file: ${fullPath}`);
     }
   });
 };

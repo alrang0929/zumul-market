@@ -18,7 +18,7 @@ export function ProductThumbCard({ selectdata, slice, slicecount, selectFilter }
   } else if (selectFilter === '신상품순') {
     SELECT_DATA.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
   }
-  console.log('Filtered Data:', SELECT_DATA);
+  //console.log('Filtered Data:', SELECT_DATA);
   return (
     <>
       {slice ? (

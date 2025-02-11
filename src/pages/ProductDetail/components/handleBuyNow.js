@@ -19,6 +19,6 @@ export const handleBuyNow = ({ user, selectdata, navigator, formData }) => {
   },
 ]
 
-  console.log('orderData:', orderData);
+  //console.log('orderData:', orderData);
   navigator('/order', { state: { orderData } });
 };

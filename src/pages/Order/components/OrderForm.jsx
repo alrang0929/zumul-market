@@ -4,7 +4,7 @@ import { OrderList } from './/OrderList';
 import './styles/order_form.scss';
 export const OrderForm = ({ product, options }) => {
   
-  console.log('options', options);
+  //console.log('options', options);
   return (
     <>
     <div className="order-form-wrap">

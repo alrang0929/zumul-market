@@ -21,7 +21,7 @@ const LoginForm = () => {
 
 
   const onFormSubmit = async (data) => {
-    console.log("로그인 시도data", data);
+    //console.log("로그인 시도data", data);
     setLoading(true);
   
     try {
@@ -30,7 +30,7 @@ const LoginForm = () => {
         throw new Error(response.error);
       }
       
-      console.log("✅ 로그인 성공", response.user);
+      //console.log("✅ 로그인 성공", response.user);
       alert("주물마켓에 오신것을 환영합니다");
       navigator('/');
   

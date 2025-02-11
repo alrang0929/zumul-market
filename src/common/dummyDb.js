@@ -364,7 +364,7 @@ export const cardData = [
   },
 ];
 
-export const ProductEditDb = [
+export const ProductCreateDb = [
   {
     title: '소중한 마음 담은 가죽 지갑 소중한 마음 담은 가죽 지갑 소중한 마음 담은 가죽 지갑 소중한 마음 담은 가죽  마음 담은 가죽 지갑 소중한 마음 담은 가죽 지갑',
     sall_start: '2024-12-01',

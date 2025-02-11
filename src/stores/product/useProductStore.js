@@ -20,10 +20,10 @@ const useProductStore = create((set) => ({
   },
 
   fetchProductDetail: async (productId) => {
-    console.log('Fetching product detail for ID:', productId); // 전달된 productId 확인
+    //console.log('Fetching product detail for ID:', productId); // 전달된 productId 확인
     try {
       const data = await fetchDetailProduct(productId);
-      console.log('Fetched product detail:', data); // 가져온 데이터 확인
+      //console.log('Fetched product detail:', data); // 가져온 데이터 확인
       set({ selectedProduct: data });
     } catch (err) {
       console.error('Error fetching product detail:', err.message);

@@ -1,9 +1,5 @@
 import React, { useEffect, useMemo } from 'react';
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-} from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './styles/index.scss';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
@@ -13,7 +9,7 @@ import Home from './pages/Home/index';
 import SignupPage from './pages/Signup/index';
 import ProductDetail from './pages/ProductDetail/index';
 import LoginPage from './pages/Login';
-import { ProductEditPage } from './pages/ProductEdit';
+import { ProductAddPage } from './pages/ProductAdd';
 import { ProductListPage } from './pages/ProductList';
 import { OrderPage } from './pages/Order';
 import { UserManagePage } from './pages/UserManage';
@@ -51,7 +47,7 @@ const App = () => {
               />
               <Route path="product/:id" element={<ProductDetail />} />
               <Route path="product" element={<ProductListPage />} />
-              <Route path="product/:id/edit" element={<ProductEditPage />} />
+              <Route path="product/:id/edit" element={<ProductAddPage />} />
               <Route path="user/manage" element={<UserManagePage />} />
             </Route>
             {/* 404 페이지 */}

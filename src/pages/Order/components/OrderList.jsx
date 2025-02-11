@@ -92,7 +92,6 @@ export const OrderList = ({ product, options }) => {
             {/* 5. 전체 금액 */}
             <div className="total-price flex-column">
               <span className="small-fz">주문금액</span>
-              {console.log('totalPrice', totalPrice)}
               <span className="price">{addComma(totalPrice)}p</span>
             </div>
           </li>

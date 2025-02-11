@@ -1,22 +1,22 @@
+import useUserStore from '../../stores/auth/useUserStore';
 import { uploadFile } from '../../utils/uploadFile';
 import { saveProduct } from '../product/saveProduct';
 import { saveProductOption } from '../productOption/SaveProductOption';
 import supabase from '../supabaseClient';
 
 export const onSubmit = async (
+  user,
   data,
-  navigator,
-  options,
   uploadedPaths,
-  user
+  options,
+  navigator
 ) => {
+  console.log('uploadedPaths', uploadedPaths);
+  console.log('들어온 data', data);
+
   const userId = user.id; // user 정보를 통해 userId 가져오기
 
   try {
-    console.log('Form Data:', data);
-    console.log('Options:', options);
-    console.log('Uploaded Paths:', uploadedPaths);
-
     // 대표 이미지 업로드
     const imagePath = await uploadFile({
       userId: userId,
@@ -62,6 +62,9 @@ export const onSubmit = async (
           type: 'product',
           bucket: 'product_img',
         });
+
+        console.log('✅ 업로드된 상세 이미지 경로:', path);
+
         if (path) {
           const { data: detailPublicData } = supabase.storage
             .from('product_img')
@@ -70,12 +73,6 @@ export const onSubmit = async (
         }
       }
     }
-
-    // 상세 이미지 경로 처리
-    const detailImagesPath = uploadedPaths.map((path) => ({
-      path,
-      type: 'detail',
-    }));
 
     // product 테이블에 데이터 추가
     const productData = {
@@ -90,11 +87,11 @@ export const onSubmit = async (
       document: data.document,
       shipping_fee: data.shipping_fee,
       title_image: publicImagePath, // 변환된 URL 사용
-      detail_image: detailImagesPath,
+      detail_image: detailImagePaths,
       thumb: thumbnailPaths, // thumbnailPaths 사용
     };
 
-    console.log('Saving Product:', productData);
+    //console.log('Saving Product:', productData);
 
     const savedProduct = await saveProduct(productData);
     if (!savedProduct || !savedProduct[0]?.id) {
@@ -114,18 +111,14 @@ export const onSubmit = async (
         },
       }));
 
-      console.log('Saving Options:', optionData);
-
       const savedOptions = await Promise.all(
         optionData.map((opt) => saveProductOption(opt))
       );
-      console.log('Saved Options:', savedOptions);
     } else {
-      console.log('No options to save.');
     }
 
     alert('상품이 성공적으로 등록되었습니다!');
-    navigator('/user/manage');
+    navigator(-1);
   } catch (error) {
     console.error('Error submitting product:', error);
     alert('상품 등록에 실패했습니다.');

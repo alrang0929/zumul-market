@@ -5,7 +5,7 @@ export const useSaveOrder = () => {
   return useMutation({
     mutationFn: saveOrder, // 저장 함수 지정
     onSuccess: (data) => {
-      console.log('Order saved successfully:', data);
+      //console.log('Order saved successfully:', data);
       alert('주문이 성공적으로 저장되었습니다!');
     },
     onError: (error) => {

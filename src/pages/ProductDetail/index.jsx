@@ -7,6 +7,7 @@ import { DivBox } from '../../styles/box';
 import { useParams } from 'react-router-dom';
 import useProductStore from '../../stores/product/useProductStore';
 import { DetailInfo } from './components/DetailInfo';
+import SkeletonLoader from '../../utils/SkeletonLoader';
 
 const ProductDetail = () => {
   const { id } = useParams(); // URL 파라미터로부터 productId 가져오기
@@ -14,18 +15,18 @@ const ProductDetail = () => {
     useProductStore();
 
   useEffect(() => {
-    console.log('id', id);
+    //console.log('id', id);
     fetchProductDetail(id); // 상품 상세 데이터 로드
     return () => clearSelectedProduct(); // 컴포넌트 언마운트 시 데이터 초기화
   }, [id, fetchProductDetail, clearSelectedProduct]);
 
-  console.log("fetchProductDetail",fetchProductDetail);
+  //console.log("fetchProductDetail",fetchProductDetail);
 
     if (!selectedProduct) {
       return <SkeletonLoader />;
     }
 
-  console.log('fetchProductDetail호출 후 selectedProduct', selectedProduct);
+  //console.log('fetchProductDetail호출 후 selectedProduct', selectedProduct);
 
   return (
     <>

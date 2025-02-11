@@ -19,7 +19,7 @@ import {
 export default function ThumbSlider({selectdata}) {
   const SELECT_DATA = selectdata.thumb || [];
 
-console.log("swiper_thumb",selectdata);
+//console.log("swiper_thumb",selectdata);
 
   return (
     <>

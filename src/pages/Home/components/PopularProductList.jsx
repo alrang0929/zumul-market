@@ -8,8 +8,8 @@ function PopularProductList(props) {
   const { data } = useProductsQuery();
   const products = data?.pages.flatMap((page) => page.products) || [];
 
-  console.log("data", data);
-  console.log("products", products);
+  //console.log("data", data);
+  //console.log("products", products);
 
   return (
     <>

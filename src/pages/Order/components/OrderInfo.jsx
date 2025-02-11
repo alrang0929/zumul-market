@@ -14,7 +14,7 @@ export const OrderInfo = () => {
     setLocalProductData(productData);
     localStorage.setItem('productData', JSON.stringify(productData)); 
   }, [productData]);
-  console.log('productData', productData);
+  //console.log('productData', productData);
 
   // 상품 가격 + 배송비의 총합 계산
   const totalPayment = productData.reduce((acc, item) => {
@@ -25,7 +25,7 @@ export const OrderInfo = () => {
     setLocalProductData(productData);
   }, [productData]);
 
-  console.log('productData', productData);
+  //console.log('productData', productData);
 
   return (
     <>

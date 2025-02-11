@@ -15,7 +15,6 @@ import useUserStore from '../../../stores/auth/useUserStore';
 
 export const ProductAddForm = () => {
   const user = useUserStore((state) => state.user);
-  // console.log("user",user);
   const navigator = useNavigate();
   const { handleSubmit, setValue, getValues, control, register } = useForm({
     defaultValues: {
@@ -52,10 +51,21 @@ export const ProductAddForm = () => {
   return (
     <FormBox
       className="product-edit-form"
-      onSubmit={handleSubmit((data) => {
-        const uploadedPaths = getValues('uploadedPaths');
-        onSubmit(data, navigator, options, uploadedPaths, user);
-        console.log('Uploaded Paths:', uploadedPaths); // 확인
+      onSubmit={handleSubmit(async (data) => {
+        // ✅ handleSubmit 내부를 async 함수로 변경
+        let uploadedPaths = getValues('uploadedPaths') || [];
+        const uploadedThumbnails = getValues('uploadedThumbnails') || [];
+        const uploadedDetailImages = getValues('uploadedDetailImages') || [];
+        
+        uploadedPaths = [...uploadedPaths, ...uploadedThumbnails, ...uploadedDetailImages];
+        
+
+        console.log('✅ 최종 업로드 경로:', uploadedPaths);
+        console.log('유저정보 확인', user);
+
+        // ✅ onSubmit에 최종 데이터 전달
+        onSubmit(user,{ ...data}, uploadedPaths , options, navigator,);
+
       })}
     >
       <h3>상품 등록</h3>

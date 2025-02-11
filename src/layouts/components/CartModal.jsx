@@ -25,7 +25,7 @@ export const CartModal = () => {
     isError,
   } = useFetchCartItem(user?.id);
 
-  console.log('cartItems', cartItems);
+  //console.log('cartItems', cartItems);
 
   const sortedCartItems = Array.from(
     new Map(

@@ -31,7 +31,7 @@ export const useCartStore = create((set) => ({
         if (error) {
           console.error('Supabase Error:', error.message);
         } else {
-          console.log('Saved to cart:', data);
+          //console.log('Saved to cart:', data);
         }
       });
   },
@@ -44,13 +44,13 @@ export const useCartStore = create((set) => ({
   // 장바구니 비우기
   clearCart: () => set(() => ({ cartItems: [] })),
   loadCartItems: async (userId) => {
-    console.log('loadCartItems called with userId:', userId); // userId 확인
+    //console.log('loadCartItems called with userId:', userId); // userId 확인
 
     const result = await fetchCartItems(userId);
     if (result.error) {
       console.error('Failed to load cart items:', result.error);
     } else {
-      console.log('Cart items loaded:', result.data); // 데이터 확인
+      //console.log('Cart items loaded:', result.data); // 데이터 확인
       set({ cartItems: result.data || [] });
     }
   },

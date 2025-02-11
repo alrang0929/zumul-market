@@ -6,7 +6,7 @@ import supabase from '../supabaseClient';
  * @returns {Promise<Object[]>} - 장바구니 데이터 배열
  */
 export const fetchCartItems = async (userId) => {
-  console.log('Fetching cart items for user:', userId);
+  //console.log('Fetching cart items for user:', userId);
 
   // 장바구니 기본 데이터 가져오기
   const { data: cartData, error } = await supabase
@@ -57,7 +57,7 @@ export const fetchCartItems = async (userId) => {
     })
   );
 
-  console.log('Enriched cart data:', enrichedCart);
+  //console.log('Enriched cart data:', enrichedCart);
   return enrichedCart;
 };
 

@@ -1,7 +1,7 @@
 import supabase from "../supabaseClient";
 
 export const saveOrder = async (orderData) => {
-  console.log("orderData",orderData);
+  //console.log("orderData",orderData);
     try {
       const { data, error } = await supabase
         .from('order')
