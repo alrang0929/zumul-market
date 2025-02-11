@@ -21,7 +21,9 @@ const ProductDetail = () => {
 
   console.log("fetchProductDetail",fetchProductDetail);
 
-  if (!selectedProduct) return <p>Loading...</p>;
+    if (!selectedProduct) {
+      return <SkeletonLoader />;
+    }
 
   console.log('fetchProductDetail호출 후 selectedProduct', selectedProduct);
 

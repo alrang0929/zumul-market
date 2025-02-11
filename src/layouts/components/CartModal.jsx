@@ -10,6 +10,7 @@ import { handlePurchase } from './handlePurchase';
 import { DeleteButton } from '../../common/DeleteButton';
 // import { removeFromCart } from '../../api/cart/removeCartItems';
 import { useRemoveFromCart } from '../../api/cart/hook/useRemoveCart';
+import SkeletonLoader from '../../utils/SkeletonLoader';
 
 export const CartModal = () => {
   const navigator = useNavigate();
@@ -50,7 +51,9 @@ export const CartModal = () => {
     };
   }, [isCartOpen]);
 
-  if (isLoading) return <p>로딩중</p>;
+   if (isLoading) {
+     return <SkeletonLoader />;
+   }
   if (isError) return <p>데이터 로드 중 오류가 발생했습니다.</p>;
 
   const isCartEmpty = sortedCartItems.length === 0;

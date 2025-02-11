@@ -364,24 +364,6 @@ export const cardData = [
   },
 ];
 
-export const ProfileStatusDb = [
-  {
-    title: '판매상품',
-    count: 20,
-    icon: '/images/icon_shipping.png',
-  },
-  {
-    title: '판매내역',
-    count: 295,
-    icon: '/images/icon_shipping.png',
-  },
-  {
-    title: '팔로워',
-    count: 3526,
-    icon: '/images/icon_follower.png',
-  },
-];
-
 export const ProductEditDb = [
   {
     title: '소중한 마음 담은 가죽 지갑 소중한 마음 담은 가죽 지갑 소중한 마음 담은 가죽 지갑 소중한 마음 담은 가죽  마음 담은 가죽 지갑 소중한 마음 담은 가죽 지갑',

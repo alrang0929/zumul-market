@@ -58,6 +58,10 @@ const SignUpForm = ({ onSubmit }) => {
     }
   };
 
+  if (loading) {
+    return <SkeletonLoader />;
+  }
+
   return (
     <FormBox className="profile-form" onSubmit={handleSubmit(onFormSubmit)}>
       <h3>회원가입</h3>

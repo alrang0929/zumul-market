@@ -2,15 +2,12 @@ import { create } from 'zustand';
 import supabase from '../../api/supabaseClient';
 
 const useUserStore = create((set) => ({
-  user: null, // ✅ 초기값을 Supabase Auth에서 가져옴
+  user: null, // ✅ 초기값은 null (Supabase에서 불러옴)
 
-  setUser: (user) => {
-    sessionStorage.setItem('user', JSON.stringify(user)); // ✅ 세션스토리지에 저장
-    set({ user });
-  },
+  setUser: (user) => set({ user }),
 
-  clearUser: () => {
-    sessionStorage.removeItem('user'); // ✅ 로그아웃 시 초기화
+  clearUser: async () => {
+    await supabase.auth.signOut(); // ✅ Supabase Auth에서 로그아웃 처리
     set({ user: null });
   },
 
@@ -33,7 +30,6 @@ const useUserStore = create((set) => ({
       return;
     }
 
-    // ✅ Zustand 상태 업데이트
     const user = {
       id: data.user.id,
       email: data.user.email,
@@ -41,11 +37,9 @@ const useUserStore = create((set) => ({
       type: userInfo.type,
       profile_image: userInfo.profile_image,
       created_at: userInfo.created_at,
-      
     };
 
-    set({ user });
-    sessionStorage.setItem('user', JSON.stringify(user));
+    set({ user }); // ✅ Zustand 상태 업데이트 (sessionStorage 제거)
   },
 }));
 
