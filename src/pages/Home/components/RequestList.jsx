@@ -2,7 +2,7 @@ import React from 'react';
 import { DivBox } from '../../../styles/box';
 import SubTitle from '../../../common/SubTitle';
 import BoardCard from '../../../common/BoardCard';
-import { cardData } from '../../../common/dummyDb';
+import { cardData } from '../../common/dummyDb';
 
 function RequestList(props) {
   return (
