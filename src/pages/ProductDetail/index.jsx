@@ -15,18 +15,14 @@ const ProductDetail = () => {
     useProductStore();
 
   useEffect(() => {
-    //console.log('id', id);
     fetchProductDetail(id); // 상품 상세 데이터 로드
     return () => clearSelectedProduct(); // 컴포넌트 언마운트 시 데이터 초기화
   }, [id, fetchProductDetail, clearSelectedProduct]);
-
-  //console.log("fetchProductDetail",fetchProductDetail);
 
     if (!selectedProduct) {
       return <SkeletonLoader />;
     }
 
-  //console.log('fetchProductDetail호출 후 selectedProduct', selectedProduct);
 
   return (
     <>

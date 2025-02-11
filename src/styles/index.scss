@@ -1,3 +1,7 @@
 @use './common/common.scss';
 @use './common/core.scss';
 @use './common/reset.scss';
+
+html{
+    scroll-behavior: smooth;
+}

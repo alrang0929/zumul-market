@@ -7,13 +7,26 @@ export default defineConfig({
   plugins: [
     react(),
     visualizer({
-      open: true, // 빌드 후 분석 결과를 브라우저에서 자동으로 엽니다.
-      filename: 'bundle-analysis.html', // 분석 결과 파일 이름 설정
-      template: 'treemap', // 시각화 형태 (sunburst, treemap, network 중 선택 가능)
-      gzipSize: true, // gzip 압축 크기 표시
-      brotliSize: true, // brotli 압축 크기 표시
+      open: true,
+      filename: 'bundle-analysis.html',
+      template: 'treemap',
+      gzipSize: true,
+      brotliSize: true,
     }),
   ],
+  build: {
+    minify: 'esbuild',
+    treeshake: true,
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (id.includes('node_modules')) {
+            return id.toString().split('node_modules/')[1].split('/')[0].toString();
+          }
+        },
+      },
+    },
+  },
   optimizeDeps: {
     include: ['jwt-decode'],
   },

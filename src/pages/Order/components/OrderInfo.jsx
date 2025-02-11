@@ -10,11 +10,12 @@ export const OrderInfo = () => {
   const productData = watch('productData') || [];
   const [localProductData, setLocalProductData] = useState([]);
 
+  // useQuery에 맞춰 수정
   useEffect(() => {
     setLocalProductData(productData);
     localStorage.setItem('productData', JSON.stringify(productData)); 
   }, [productData]);
-  //console.log('productData', productData);
+
 
   // 상품 가격 + 배송비의 총합 계산
   const totalPayment = productData.reduce((acc, item) => {
@@ -24,8 +25,6 @@ export const OrderInfo = () => {
   useEffect(() => {
     setLocalProductData(productData);
   }, [productData]);
-
-  //console.log('productData', productData);
 
   return (
     <>

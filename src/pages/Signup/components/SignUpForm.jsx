@@ -41,7 +41,7 @@ const SignUpForm = ({ onSubmit }) => {
       });
 
       if (formErrors.profile_image) {
-        alert('⚠️ 프로필 이미지를 업로드해주세요!');
+        alert('프로필 이미지를 업로드해주세요');
       }
 
       setLoading(false);
