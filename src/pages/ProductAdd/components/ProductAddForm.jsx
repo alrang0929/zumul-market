@@ -28,7 +28,7 @@ export const ProductAddForm = () => {
       document: '',
       title_image: null,
       uploadedDetailImages: null,
-      sellStatus: false,
+      sellStatus: true,
       uploadedPaths: [],
     },
   });
@@ -86,6 +86,7 @@ export const ProductAddForm = () => {
         </Link>
         <input
           type="file"
+          accept=".jpg, .jpeg, .png"
           ref={(el) => (fileInputRef.current.title_image = el)} // 상세 이미지 파일 입력 참조 저장
           style={{ display: 'none' }}
           onChange={(e) => handleImageUpload(e, 'title_image')}
