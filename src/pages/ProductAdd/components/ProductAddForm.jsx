@@ -56,16 +56,20 @@ export const ProductAddForm = () => {
         let uploadedPaths = getValues('uploadedPaths') || [];
         const uploadedThumbnails = getValues('uploadedThumbnails') || [];
         const uploadedDetailImages = getValues('uploadedDetailImages') || [];
-        
-        uploadedPaths = [...uploadedPaths, ...uploadedThumbnails, ...uploadedDetailImages];
-        
+
+        console.log('📌 업로드된 썸네일 파일:', uploadedThumbnails);
+        console.log('📌 업로드된 상세 이미지 파일:', uploadedDetailImages);
+        uploadedPaths = [
+          ...uploadedPaths,
+          ...uploadedThumbnails,
+          ...uploadedDetailImages,
+        ];
 
         console.log('✅ 최종 업로드 경로:', uploadedPaths);
         console.log('유저정보 확인', user);
 
         // ✅ onSubmit에 최종 데이터 전달
-        onSubmit(user,{ ...data}, uploadedPaths , options, navigator,);
-
+        onSubmit({...data}, uploadedPaths, options, navigator, user);
       })}
     >
       <h3>상품 등록</h3>
@@ -117,19 +121,29 @@ export const ProductAddForm = () => {
           control={control}
           rules={{
             required: '상품명을 입력해주세요',
-            minLength: { value: 5, message: '상품명은 최소 5자 이상 입력해야 합니다' },
-            maxLength: { value: 20, message: '상품명은 최대 20자까지 입력 가능합니다' },
+            minLength: {
+              value: 5,
+              message: '상품명은 최소 5자 이상 입력해야 합니다',
+            },
+            maxLength: {
+              value: 20,
+              message: '상품명은 최대 20자까지 입력 가능합니다',
+            },
           }}
           render={({ field, fieldState }) => (
             <>
-            <InputBox
-              {...field}
-              type="text"
-              placeholder="상품명을 입력해주세요"
-              className={fieldState.error ? 'error' : ''}
+              <InputBox
+                {...field}
+                type="text"
+                placeholder="상품명을 입력해주세요"
+                className={fieldState.error ? 'error' : ''}
               />
-              {fieldState.error && <span className="error-message">{fieldState.error.message}</span>}
-              </>
+              {fieldState.error && (
+                <span className="error-message">
+                  {fieldState.error.message}
+                </span>
+              )}
+            </>
           )}
         />
       </div>
@@ -167,8 +181,12 @@ export const ProductAddForm = () => {
           rules={{ required: '판매 종료 날짜를 입력해주세요' }}
           render={({ field, fieldState }) => (
             <>
-            <InputBox {...field} type="date" placeholder="판매 종료 날짜" />
-            {fieldState.error && <span className="error-message">{fieldState.error.message}</span>}
+              <InputBox {...field} type="date" placeholder="판매 종료 날짜" />
+              {fieldState.error && (
+                <span className="error-message">
+                  {fieldState.error.message}
+                </span>
+              )}
             </>
           )}
         />

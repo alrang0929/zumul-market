@@ -3,6 +3,7 @@ import { optimizeImage } from './optimizeImage';
 
 export const uploadFile = async ({ file, type, bucket}) => {
   try {
+    console.log(file);
     // 최적화 이미지 확인
     const optimizedFile = await optimizeImage(file);
     // 파일 이름 생성

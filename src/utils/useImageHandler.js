@@ -22,7 +22,7 @@ export const useImageHandler = (setValue) => {
     }
 
     const imageUrl = URL.createObjectURL(file);
-    //console.log(`업로드된 파일: ${file.name}, URL: ${imageUrl}`);
+    console.log(`업로드된 파일: ${file.name}, URL: ${imageUrl}`);
 
     setValue(type, file); // React Hook Form에 저장
     setPreviewImage((prev) => ({ ...prev, [type]: imageUrl })); // 미리보기 이미지 업데이트

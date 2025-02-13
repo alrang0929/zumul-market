@@ -5,17 +5,15 @@ import supabase from '../supabaseClient';
 
 export const onSubmit = async (
   data,
-  navigator,
-  options,
   uploadedPaths,
+  options,
+  navigator,
   user
 ) => {
   const userId = user.id; // user 정보를 통해 userId 가져오기
 
   try {
-    //console.log('Form Data:', data);
-    //console.log('Options:', options);
-    //console.log('Uploaded Paths:', uploadedPaths);
+    console.log('Form Data:', data);
 
     // 대표 이미지 업로드
     const imagePath = await uploadFile({

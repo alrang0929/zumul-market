@@ -24,10 +24,14 @@ export const MultiImageForm = ({ setValue, getValues, name, id }) => {
 
       if (filteredFiles.length > 0) {
         const currentPaths = getValues(name) || [];
-        const newPaths = [...currentPaths, ...filteredFiles];
+        const newFiles = filteredFiles.filter(file => file instanceof File); // 파일만 저장
+        const newPaths = [...currentPaths, ...newFiles];
+      
+        console.log(`📌 저장된 ${name}:`, newPaths); // 디버깅용 로그 추가
+      
         setValue(name, newPaths);
-        //console.log(`업로드된 ${name}:`, newPaths);
       }
+      
     }
   };
 
