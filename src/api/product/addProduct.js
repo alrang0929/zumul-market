@@ -13,6 +13,10 @@ export const onSubmit = async (
   const userId = user.id; // user 정보를 통해 userId 가져오기
 
   try {
+    //console.log('Form Data:', data);
+    //console.log('Options:', options);
+    //console.log('Uploaded Paths:', uploadedPaths);
+
     // 대표 이미지 업로드
     const imagePath = await uploadFile({
       userId: userId,

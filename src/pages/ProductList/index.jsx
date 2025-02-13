@@ -9,8 +9,10 @@ import { useProductsQuery } from '../../stores/product/useInfiniteProduct';
 export const ProductListPage = () => {
   const menu = ['낮은 가격순', '높은 가격순', '신상품순'];
   const [selectedFilter, setSelectedFilter] = useState(null);
-  const { data, fetchNextPage, hasNextPage, totalCount } =
-    useProductsQuery();
+  const { data, fetchNextPage, hasNextPage, totalCount } = useProductsQuery();
+  console.log('Product List Data:', data);
+  console.log('Total Count from useProductsQuery:', totalCount);
+
   const observerRef = useRef();
 
   const handleFilterChange = (filterValue) => {
@@ -46,10 +48,7 @@ export const ProductListPage = () => {
           className="title-wrap"
           style={{ display: 'flex', justifyContent: 'space-between' }}
         >
-          <CountSubTitle
-            count={totalCount}
-            subTitle={'개의 작품이 있습니다'}
-          />
+          <CountSubTitle totalCount={totalCount} subTitle={'개의 작품이 있습니다'} />
           <FilterMenu menu={menu} onFilterChange={handleFilterChange} />
         </div>
         <ProductThumbCard selectdata={products} selectFilter={selectedFilter} />
