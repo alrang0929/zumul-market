@@ -116,16 +116,19 @@ export const ProductAddForm = () => {
           control={control}
           rules={{
             required: '상품명을 입력해주세요',
-            minLength: 5,
-            maxLength: 20,
+            minLength: { value: 5, message: '상품명은 최소 5자 이상 입력해야 합니다' },
+            maxLength: { value: 20, message: '상품명은 최대 20자까지 입력 가능합니다' },
           }}
           render={({ field, fieldState }) => (
+            <>
             <InputBox
               {...field}
               type="text"
               placeholder="상품명을 입력해주세요"
               className={fieldState.error ? 'error' : ''}
-            />
+              />
+              {fieldState.error && <span className="error-message">{fieldState.error.message}</span>}
+              </>
           )}
         />
       </div>
@@ -161,8 +164,11 @@ export const ProductAddForm = () => {
           name="sell_end"
           control={control}
           rules={{ required: '판매 종료 날짜를 입력해주세요' }}
-          render={({ field }) => (
+          render={({ field, fieldState }) => (
+            <>
             <InputBox {...field} type="date" placeholder="판매 종료 날짜" />
+            {fieldState.error && <span className="error-message">{fieldState.error.message}</span>}
+            </>
           )}
         />
       </div>
