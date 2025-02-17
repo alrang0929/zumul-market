@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import SubTitle from '../../../common/SubTitle';
 import './styles/order_info.scss';
 import { useFormContext } from 'react-hook-form';
@@ -8,23 +8,11 @@ import { OrderButton } from './OrderButton';
 export const OrderInfo = () => {
   const { watch } = useFormContext();
   const productData = watch('productData') || [];
-  const [localProductData, setLocalProductData] = useState([]);
-
-  // useQuery에 맞춰 수정
-  useEffect(() => {
-    setLocalProductData(productData);
-    localStorage.setItem('productData', JSON.stringify(productData)); 
-  }, [productData]);
-
 
   // 상품 가격 + 배송비의 총합 계산
   const totalPayment = productData.reduce((acc, item) => {
     return acc + (item.totalPrice || 0) + (item.shippingFee || 0);
   }, 0);
-
-  useEffect(() => {
-    setLocalProductData(productData);
-  }, [productData]);
 
   return (
     <>
@@ -58,7 +46,7 @@ export const OrderInfo = () => {
         </ul>
 
         {/* 총 결제 금액 */}
-        <OrderButton productData={productData}/>
+        <OrderButton productData={productData} />
       </div>
     </>
   );

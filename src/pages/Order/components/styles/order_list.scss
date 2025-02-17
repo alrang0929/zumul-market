@@ -1,5 +1,5 @@
 .order-page {
-  min-height: 50vw;
+  min-height: 40vw;
   line-height: 1.4;
   .order-list {
     .bottom-line {
@@ -56,14 +56,18 @@
           gap: 1rem;
         }
       }
+      
       .option-wrap {
-        width: 10rem;
+        min-width: 12rem;
 
         display: flex;
         flex-direction: column;
         justify-content: center;
         gap: 0.5rem;
         text-align: left;
+      }
+      .total-price{
+        min-width: 10rem;
       }
     }
   }

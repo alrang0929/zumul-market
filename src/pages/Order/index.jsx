@@ -29,7 +29,7 @@ export const OrderPage = () => {
   return (
     <>
       <FormProvider {...methods}>
-        <main className="order-page" style={{ backgroundColor: '#F5F5F5' }}>
+        <div className="order-page" style={{ backgroundColor: '#F5F5F5' }}>
           <DivBox
             style={{ display: 'flex', gap: '0 4rem', padding: '10rem 0' }}
           >
@@ -39,7 +39,7 @@ export const OrderPage = () => {
             />
             <OrderInfo product={products} />
           </DivBox>
-        </main>
+        </div>
       </FormProvider>
     </>
   );

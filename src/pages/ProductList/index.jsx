@@ -10,8 +10,6 @@ export const ProductListPage = () => {
   const menu = ['낮은 가격순', '높은 가격순', '신상품순'];
   const [selectedFilter, setSelectedFilter] = useState(null);
   const { data, fetchNextPage, hasNextPage, totalCount } = useProductsQuery();
-  console.log('Product List Data:', data);
-  console.log('Total Count from useProductsQuery:', totalCount);
 
   const observerRef = useRef();
 
@@ -20,7 +18,7 @@ export const ProductListPage = () => {
   };
 
   useEffect(() => {
-    if (!hasNextPage) return; // 다음 페이지가 없으면 실행하지 않음.
+    if (!hasNextPage) return;
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting) {

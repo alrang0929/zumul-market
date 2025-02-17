@@ -8,8 +8,6 @@ export const useProductsQuery = () => {
     getNextPageParam: (lastPage) => lastPage.nextPage,
   });
 
-  console.log("useInfiniteQuery result:", queryResult);
-
   // totalCount를 첫 번째 페이지에서 가져오기
   const totalCount = queryResult.data?.pages?.[0]?.totalCount ?? 0;
 
