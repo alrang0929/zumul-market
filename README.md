@@ -52,11 +52,11 @@
     - 이커머스 서비스에서는 상품 목록, 버튼, 유저 프로필 등 다양한 UI 요소의 스타일을 일관되게 유지하는 것이 중요
     - SCSS를 활용하여 전역 스타일을 관리하고 Styled-components를 사용하여 컴포넌트 단위의 동적 스타일링을 최적화하여 반복적인 스타일링을 줄이고 유지보수성을 높임
 
-- - - 
-### 핵심 기능
-- **창작자의 기능 강화**: 작품 홍보 및 판매 지원
-- **소통 중심 플랫폼**: 팬들과의 실시간 소통(채팅) 기능 제공
+</br>
 
+- - - 
+
+</br>
 
 ### 실행 방법
 
@@ -89,19 +89,41 @@
     ```
 </details>
 
+</br>
+
+- - - 
+
+</br>
+
 ### 활용방법(프로젝트 예시)
 
-![Image](https://github.com/user-attachments/assets/a79cf771-3df9-4fa4-b7f5-19d7476cec31)
-
-- 회원가입 시 **창작자(판매자)와 팬(소비자, 일반 회원)** 중 하나를 선택하면, 선택한 유형에 따라 **권한과 기능**이 제공됩니다.
 <details>
+ 
+  <summary>로그인/회원가입</summary>
+  
+  <!-- 내용 -->
+  - 회원가입 시 **창작자(판매자)와 팬(소비자, 일반 회원)** 중 하나를 선택하면, 선택한 유형에 따라 **권한과 기능**이 제공됩니다.
+  - 사용자를 팬(Fan)과 창작자(Creator)로 구분하여 권한을 관리
+  - 창작자만 상품 등록 및 판매 관리 페이지 접근 가능
+  - 팬은 상품 검색 및 구매 기능만 이용 가능
+  
+![Image](https://github.com/user-attachments/assets/a79cf771-3df9-4fa4-b7f5-19d7476cec31)
+  
+</details>
+
+
+
+<details>
+ 
   <summary>창작자(판매자)의 상품등록/조회 기능</summary>
+ 
   <!-- 내용 -->
   
-  ##### 핵심 기능
-  - React Hook Form을 활용한 상품 입력 및 유효성 검사
-  - 이미지 업로드 최적화 (WebP 변환 및 Supabase Storage 저장)
-  - 상품 옵션 동적 추가 및 삭제 (useOptionHandler)
+   ##### 📌핵심 기능
+ - React Hook Form을 활용한 상품 입력 및 유효성 검사 적용
+ - 상품 옵션을 동적으로 추가 및 삭제 가능 (useOptionHandler 활용)
+ - 대표 이미지 및 상세 이미지를 WebP 변환 후 Supabase Storage에 저장하여 로딩 최적화
+ - Supabase DB에 상품 데이터 저장 후, 등록 완료 시 창작자 관리 페이지로 이동
 
   ##### 상품 입력 및 유효성 검사
   **상품 등록** 
@@ -110,8 +132,11 @@
 - Supabase DB와 연동하여 상품 등록 및 조회
 
 - Controller로 상품명, 카테고리, 가격, 재고 등의 입력값을 검증
+- 
 ![Image](https://github.com/user-attachments/assets/ccd9dfeb-6418-46f4-83ea-d204eea5768e)
+
 <details>
+ 
   <summary>구현코드</summary>
 
   ``` javascript
@@ -156,9 +181,20 @@ const { handleSubmit, setValue, getValues, control, register } = useForm({
 </details>
      
 </details>
+
 <details>
+ 
   <summary>장바구니/구매 </summary>
+  
   <!-- 내용 -->
+ 
+ ##### 📌핵심 기능
+ 
+- Zustand를 활용하여 장바구니 데이터를 전역 상태로 관리
+- React Query를 활용한 자동 동기화 및 API 요청 최적화 (invalidateQueries() 적용)
+- Supabase Storage를 활용하여 새로고침 시에도 장바구니 데이터 유지
+
+ 
 - 로그인하지 않은 경우: 알림 팝업을 표시
         <img width="2503" alt="Image" src="https://github.com/user-attachments/assets/dd5c2c1d-830c-469d-a89f-1d1f9079a69a" />
     
@@ -166,10 +202,12 @@ const { handleSubmit, setValue, getValues, control, register } = useForm({
 ![Image](https://github.com/user-attachments/assets/0cd2f5b4-3c6a-4b05-a413-525a39891567)
 
 </details>
-<details>
-  <summary>로그인/회원가입</summary>
-  <!-- 내용 -->
-</details>
+
+</br>
+
+- - - 
+
+</br>
 
 
 ### 화면설계/유저 플로우 [이동링크](https://www.figma.com/design/ZuHIjGrhASbvrYKbIHKHXk/%EC%AA%BC%EB%AC%BC%EB%A7%88%EC%BC%93_%ED%99%94%EB%A9%B4%EC%84%A4%EA%B3%84%EC%84%9C_ver241218?node-id=32-99&t=n3FhKS3jvT6imT7Q-1)
